@@ -8,42 +8,42 @@ app.constant('pageSize', 4);
 app.config(function ($routeProvider) {
     // paths are given from index.html, not from app.js
     $routeProvider.when('/', {
-        templateUrl: 'templates/home.html',
+        templateUrl: 'views/home/home.html',
         controller: 'HomeController'
     });
 
     $routeProvider.when('/login', {
-        templateUrl: 'templates/login.html',
+        templateUrl: 'views/login/login.html',
         controller: 'LoginController'
     });
 
     $routeProvider.when('/register', {
-        templateUrl: 'templates/register.html',
+        templateUrl: 'views/register/register.html',
         controller: 'RegisterController'
     });
 
     $routeProvider.when('/user/ads/publish', {
-        templateUrl: 'templates/user/publish-new-ad.html',
+        templateUrl: 'views/User/publish-new-ad/publish-new-ad.html',
         controller: 'UserPublishNewAdController'
     });
 
     $routeProvider.when('/user/ads', {
-        templateUrl: 'templates/user/user-ads.html',
+        templateUrl: 'views/User/user-ads/user-ads.html',
         controller: 'UserAdsController'
     });
 
     $routeProvider.when('/user/ads/edit/:id', {
-        templateUrl: 'templates/user/edit-ad.html',
+        templateUrl: 'views/User/edit-ad/edit-ad.html',
         controller: 'UserEditAdController'
     });
 
     $routeProvider.when('/user/ads/delete/:id', {
-        templateUrl: 'templates/user/delete-ad.html',
+        templateUrl: 'views/User/delete-ad/delete-ad.html',
         controller: 'UserDeleteAdController'
     });
 
     $routeProvider.when('/user/profile', {
-        templateUrl: 'templates/user/edit-profile.html',
+        templateUrl: 'views/User/edit-profile/edit-profile.html',
         controller: 'UserEditProfileController'
     });
 
