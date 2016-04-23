@@ -2,7 +2,7 @@
 
 var app = angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap.pagination']);
 
-app.constant('baseServiceUrl', 'http://softuni-ads.azurewebsites.net');
+app.constant('baseServiceUrl', 'http://softuni-issue-tracker.azurewebsites.net/');
 app.constant('pageSize', 4);
 
 app.config(function ($routeProvider) {
@@ -52,6 +52,28 @@ app.config(function ($routeProvider) {
     );
 
 });
+
+app.config(['$routeProvider', '$httpProvider', function($routeProvider, $httpProvider) {
+        // httpProvider pozvoliava da konfigurirame samoto http
+        $httpProvider.interceptors.push(['$q','notifyService', function($q, notifyService) {
+            // tova e global error handling, vmesto na vsiakade da ia obrabotvame s notifier
+            return {
+                'responseError': function(rejection) {
+                    if (rejection.data && rejection.data['error_description']) {
+                        notifyService.showError(rejection.data['error_description']);
+                    }
+                    else if (rejection.data && rejection.data.modelState && rejection.data.ModelState['']){
+                        var errors = rejection.data.ModelState[''];
+                        for (var err in errors){
+                            notifyService.showError(err);
+                        }
+                    }
+
+                    return $q.reject(rejection);
+                }
+            }
+        }]);
+    }])
 
 app.run(function ($rootScope, $location, authService) {
     $rootScope.$on('$locationChangeStart', function (event) {

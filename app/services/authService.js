@@ -3,12 +3,14 @@
 app.factory('authService',
     function ($http, baseServiceUrl) {
         return {
-            // POST api/user/Login
-            login: function(userData, success, error) {
+            //[POST] api/Token
+            login: function(user, success, error) {
+                var loginData = "grant_type=password&username=" + user.username + "&password=" + user.password;
                 var request = {
                     method: 'POST',
-                    url: baseServiceUrl + '/api/user/login',
-                    data: userData
+                    url: BASEURL + 'api/Token',
+                    data: loginData,
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                 };
                 //{
                 //    "access_token": "MkL4mpuBJWenF0VIJq7SpkGVZJPHEuFQ4OQUE0_xg67sJTdqiJ02ZLrQ6Lc0U_5Nzp6vdZLbRHncu13dvnNA4Onf3bW-uUA9BLfH63jMZxIMpszko9Ycs97PkLSNnQlz8BQw8g_325gbfkCVjpfZrQDMEIXG-8bCQ52I6n1M6udcYNYwMcTtjHVvAlNtOXagFYsmK-ZtVgZBo5y4nWE4IkFEJgON8PH1e0I-P6o5O9R-oHYDG1bW3z1rE-eZ6cyqzgtMTAkGy-apRs-H_29jloDAT2FLvhyT3laavx-pZUw6aOMTmBJl3GCJ5Pai-dnYZjMoJW8dgEfbj6K5vObLS_eR25Xcc6CWKAzr3jwvLmZ31FehK8gGEId9DFfmZrT-jZbElsHTQJ7_Hx40jRSbwgK9CjGRRP2gKxlA1ZiI2gMwtdxl4QV5B3jiELHs0myJKvzeEX8wAHv4UMsn5BcNLfMcJgBDUIw7Cgh87c4WLB0",
@@ -24,17 +26,22 @@ app.factory('authService',
                 }).error(error);
             },
 
-            // POST api/user/Register
-            register: function(userData, success, error) {
+            //POST api/Account/Register
+            register: function(user, success, error) {
                 var request = {
                     method: 'POST',
-                    url: baseServiceUrl + '/api/user/register',
-                    data: userData
+                    url: baseServiceUrl + 'api/Account/Register',
+                    data: {
+                        'Name': user.name,
+                        'Email': user.email,
+                        'Password' : user.password,
+                        'ConfirmPassword': user.confirmPassword
+                    },
+                    headers: {
+                        ContentType: "application/x-www-form-urlencoded"
+                    }
                 };
-                $http(request).success(function(data) {
-                    sessionStorage['currentUser'] = JSON.stringify(data);
-                    success(data);
-                }).error(error);
+                $http(request).success(success).error(error);
             },
 
             // POST api/user/Logout
@@ -42,7 +49,7 @@ app.factory('authService',
                 //var request = {
                 //    method: 'POST',
                 //    url: baseServiceUrl + '/api/user/logout'
-                //    //data: userData
+                //    //data: user
                 //};
                 //{
                 //    "message": "Logout successful."
@@ -86,12 +93,12 @@ app.factory('authService',
             },
 
             // PUT api/user/Profile
-            editUserProfile: function(userData, success, error) {
+            editUserProfile: function(user, success, error) {
                 var request = {
                     method: 'PUT',
                     url: baseServiceUrl + '/api/user/Profile',
                     headers: this.getAuthHeaders(),
-                    data: userData
+                    data: user
                 };
                 //{
                 //    "message": "User profile edited successfully."

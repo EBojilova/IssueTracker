@@ -181,3 +181,11 @@ ul.sidebar-menu li a, ul.sidebar-menu li a:focus {
 .btn {
     margin-bottom: 5px;
 }
+
+span.err {
+    color: darkred;
+}
+
+input.ng-invalid {
+    background: pink;
+}
