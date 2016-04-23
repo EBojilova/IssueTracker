@@ -1,0 +1,63 @@
+<!--ads.numItems e parviat obekt v masiva koito izvikva zaiavkata Get All Adds-->
+<!--ng-model="adsParams.startPage promenia StartPage v HomeController-->
+<!--adsParams.pageSize- default constatn, zadadena v app.js i izpolzvana v HomeController-->
+<!--ng-change="reloadAds(), pravi se zaiavka ot HomeController s novite adsParams-->
+<pagination total-items="ads.numItems"
+            ng-model="adsParams.startPage"
+            items-per-page="adsParams.pageSize"
+            ng-change="reloadAds()"
+            max-size="9"
+            boundary-links="true">
+</pagination>
+
+<img src="images/loading.gif" alt="Loading..." ng-hide="ready">
+
+<ul class="ads" ng-cloak>
+
+	<!--{-->
+	<!--"id": 10539,-->
+	<!--"title": "Chair",-->
+	<!--"text": "Leather president chair. Not possible to upload correct picture",-->
+	<!--"date": "2016-04-17T17:38:38.3500000",-->
+	<!--"imageDataUrl": "data:image/png;base64,iVBORw0KG…………..”-->
+	<!--"categoryName": "Business",-->
+	<!--"townName": "Sofia",-->
+	<!--"status": "WaitingApproval"-->
+	<!--}-->
+
+	<!--chrez data-id ste mojem da izvarshvame edit i delete-->
+	<li  ng-repeat="ad in ads.ads" class="box row" data-id="{{ad.id}}">
+		<h1 >{{ad.title}}</h1>
+		<div class="col-md-8">
+			<div><strong class="col-md-2">Date:</strong> {{ad.date | date:'dd-MMM-yyyy'}}</div>
+			<div><strong class="col-md-2">Text:</strong> {{ad.text}}</div>
+			<div><strong class="col-md-2">Category:</strong> {{ad.categoryName}}</div>
+			<div><strong class="col-md-2">Town:</strong> {{ad.townName}}</div>
+			<!--<div ng-if='ad.imageDataUrl'>-->
+			<strong class="col-md-2">Image: </strong>
+			<div class="image-box">
+				<img class="ad-image" src="images/defaultImg.png" ng-src="{{ad.imageDataUrl}}" />
+			</div>
+			<!--</div>-->
+		</div>
+		<div class="col-md-4">
+			<!--1 Inactive-->
+			<!--2 Waiting Approval-->
+			<!--3 Published-->
+			<!--4 Rejected-->
+			<div><strong>Status:</strong> {{ad.status}}</div>
+			<div class="form-group" ng-if="ad.status != 'Inactive'">
+					<button type="submit" class="btn btn-primary col-md-7" ng-click="submitForDeactivateAd(ad)">Deactivate</button>
+			</div>
+			<div class="form-group" ng-if="ad.status == 'Inactive'">
+				<a href="#/user/ads/edit/{{ad.id}}" class="btn btn-primary col-md-7">Edit</a>
+				<button type="submit" class="btn btn-primary col-md-7" ng-click="submitForPublishAgainAd(ad)">Publish Again</button>
+				<a href="#/user/ads/delete/{{ad.id}}" type="submit" class="btn btn-primary col-md-7">Delete</a>
+			</div>
+		</div>
+	</li>
+</ul>
+
+<div ng-if="ads.ads.length==0" class="box no-data">
+	No ads found.
+</div>

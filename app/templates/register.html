@@ -1,0 +1,115 @@
+<div class="box">
+	<form name="registerForm" class="form-horizontal" autocomplete="off">
+		<fieldset>
+			<div class="row">
+				<div class="col-md-6 col-md-offset-3">
+					<legend>Register</legend>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="registerUsername" class="col-md-3 control-label">Username:</label>
+				<div class="col-md-9">
+					<input type="text" class="form-control" ng-model="user.username" id="registerUsername"
+					       required="required" placeholder="Username">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="registerPassword" class="col-md-3 control-label">Password:</label>
+				<div class="col-md-9">
+					<input type="password" class="form-control" ng-minlength="4" ng-maxlength="100"
+					       ng-model="user.password" id="registerPassword" required="required"
+					       placeholder="Password">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="registerConfirmPassword" class="col-md-3 control-label">Confirm password:</label>
+				<div class="col-md-9">
+					<input type="password" class="form-control" ng-minlength="4" ng-maxlength="100"
+					       ng-model="user.confirmPassword" id="registerConfirmPassword" required="required"
+					       placeholder="Confirm password">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="registerName" class="col-md-3 control-label">Name:</label>
+				<div class="col-md-9">
+					<input type="text" class="form-control" ng-model="user.name" id="registerName"
+					       required="required" placeholder="Name">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="inputEmail" class="col-md-3 control-label">Email:</label>
+				<div class="col-md-9">
+					<input type="email" class="form-control" ng-model="user.email" id="inputEmail"
+					       required="required" placeholder="Email">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="inputPhone" class="col-md-3 control-label">Phone:</label>
+				<div class="col-md-9">
+					<input type="tel" class="form-control" ng-model="user.phone" id="inputPhone"
+					       required="required" placeholder="Phone">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="inputTown" class="col-md-3 control-label">Town:</label>
+				<div class="col-md-9">
+					<select class="form-control" id="inputTown" ng-model="user.townId">
+						<option value="null">(None)</option>
+						<option ng-repeat="town in towns" value="{{town.id}}">{{town.name}}</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="col-md-9 col-lg-offset-3">
+					<button type="reset" class="btn btn-default">Cancel</button>
+					<button type="submit" class="btn btn-primary"
+					        ng-disabled="registerForm.$invalid || user.password != user.confirmPassword"
+					        ng-click="register(user)">Register
+					</button>
+				</div>
+			</div>
+		</fieldset>
+	</form>
+	<!--TODO: keep how it was done in svn-->
+	<!--<h2>Register</h2>-->
+	<!--<p>-->
+	<!--<label for="username">Username:</label>-->
+	<!--<input type="text" id="username" ng-model="user.username" required />-->
+	<!--</p>-->
+	<!--<p>-->
+	<!--<label for="password">Password:</label>-->
+	<!--<input type="password" id="password" ng-model="user.password" required />-->
+	<!--</p>-->
+	<!--<p>-->
+	<!--<label for="confirmPassword">Confirm password:</label>-->
+	<!--<input type="password" id="confirmPassword" ng-model="user.confirmPassword" required />-->
+	<!--</p>-->
+	<!--<p>-->
+	<!--<label for="name">Name:</label>-->
+	<!--<input type="text" id="name" ng-model="user.name" required />-->
+	<!--</p>-->
+	<!--<p>-->
+	<!--<label for="email">Email:</label>-->
+	<!--<input type="text" id="email" ng-model="user.email" required />-->
+	<!--</p>-->
+	<!--<p>-->
+	<!--<label for="phone">Phone:</label>-->
+	<!--<input type="text" id="phone" ng-model="user.phone" required />-->
+	<!--</p>-->
+	<!--<p>-->
+	<!--<label for="town">Town:</label>-->
+	<!--<select id="town" ng-model="user.townId">-->
+	<!--<option value="null">(None)</option>-->
+	<!--<option ng-repeat="town in towns" value="{{town.id}}">{{town.name}}</option>-->
+	<!--</select>-->
+	<!--&lt;!&ndash;<div class="form-group">&ndash;&gt;-->
+	<!--&lt;!&ndash;<label for="inputTown">Town</label>&ndash;&gt;-->
+	<!--&lt;!&ndash;<select id="inputTown" ng-model="selected" ng-options="town.id as town.name for town in towns" ></select>&ndash;&gt;-->
+	<!--&lt;!&ndash;</div>&ndash;&gt;-->
+	<!--</p>-->
+	<!--<p>-->
+	<!--<a ng-click="register(user)" class="button">Register</a>-->
+	<!--<a href="#/login" class="link">Login</a>-->
+	<!--<p>-->
+</div>

@@ -1,0 +1,73 @@
+<div ng-show="showRightSidebarMenu">
+
+    <div ng-show="!showStatuses">
+        <div class="box">
+            <h2>Categories</h2>
+            <ul class="sidebar-menu">
+                <li class="special"
+                    ng-class="{'selected' : selectedCategoryId == null}"
+                    ng-click="categoryClicked(null)">
+                    All
+                </li>
+                <li ng-repeat="category in categories"
+                    ng-click="categoryClicked(category.id)"
+                    ng-class="{'selected' : selectedCategoryId == category.id}">
+                    {{category.name}}
+                </li>
+            </ul>
+        </div>
+
+        <div class="box">
+            <h2>Towns</h2>
+            <ul class="sidebar-menu">
+                <li class="special"
+                    ng-class="{'selected' : selectedTownId == null}"
+                    ng-click="townClicked(null)">
+                    All
+                </li>
+                <!--selectedTownId idva ot RightSidebarController-->
+                <!-- ste e selected, samo ako e izpalneno uslovieto{test: obj.value1 == 'someothervalue'}-->
+                <li ng-repeat="town in towns"
+                    ng-click="townClicked(town.id)"
+                    ng-class="{'selected' : selectedTownId == town.id}">
+                    {{town.name}}
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="box" ng-show="showStatuses">
+        <h2>Statuses</h2>
+        <!--1 Inactive-->
+        <!--2 Waiting Approval-->
+        <!--3 Published-->
+        <!--4 Rejected-->
+        <ul class="sidebar-menu">
+            <li class="special"
+                ng-class="{'selected' : selectedStatus == null}"
+                ng-click="statusClicked(null)">
+                All
+            </li>
+            <!--selectedStatus idva ot RightSidebarController-->
+            <!-- ste e selected, samo ako e izpalneno uslovieto{test: obj.value1 == 'someothervalue'}-->
+            <li ng-class="{'selected' : selectedStatus == 'Inactive'}"
+                ng-click="statusClicked('Inactive')">
+                Inactive
+            </li>
+            <li ng-class="{'selected' : selectedStatus == 'Published'}"
+                ng-click="statusClicked('Published')">
+                Published
+            </li>
+            <li ng-class="{'selected' : selectedStatus == 'WaitingApproval'}"
+                ng-click="statusClicked('WaitingApproval')">
+                Waiting Approval
+            </li>
+            <li ng-class="{'selected' : selectedStatus == 'Rejected'}"
+                ng-click="statusClicked('Rejected')">
+                Rejected
+            </li>
+        </ul>
+    </div>
+
+</div>

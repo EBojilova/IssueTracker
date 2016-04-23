@@ -1,0 +1,48 @@
+<div class="box">
+    <form name="loginForm" class="form-horizontal" autocomplete="off">
+        <fieldset>
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+                    <legend>Login:</legend>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="loginUsername" class="col-md-3 control-label">Username:</label>
+                <div class="col-md-9">
+                    <input type="text" class="form-control" id="loginUsername" ng-model="userData.username"
+                           placeholder="Username">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="loginPassword" class="col-md-3 control-label">Password:</label>
+                <div class="col-md-9">
+                    <input type="password" class="form-control" ng-minlength="4" ng-maxlength="100"
+                           id="loginPassword" ng-model="userData.password"
+                           placeholder="Password">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-9 col-md-offset-3">
+                    <button type="reset" class="btn btn-default">Cancel</button>
+                    <button type="submit" class="btn btn-primary" ng-disabled="loginForm.$invalid"
+                            ng-click="login(userData)">Login
+                    </button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+    <!--TODO: keep how it was done in svn-->
+    <!--<h2>Login</h2>-->
+    <!--<p>-->
+    <!--<label for="username">Username:</label>-->
+    <!--<input type="text" id="username" ng-model="userData.username" required />-->
+    <!--</p>-->
+    <!--<p>-->
+    <!--<label for="password">Password:</label>-->
+    <!--<input type="password" id="password" ng-model="userData.password" required />-->
+    <!--</p>-->
+    <!--<p>-->
+    <!--<a ng-click="login(userData)" class="button">Login</a>-->
+    <!--<a href="#/register" class="link">Register</a>-->
+    <!--<p>-->
+</div>
