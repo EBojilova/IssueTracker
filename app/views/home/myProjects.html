@@ -1,0 +1,34 @@
+<!--ads.numItems e parviat obekt v masiva koito izvikva zaiavkata Get All Adds-->
+<!--ng-model="adsParams.startPage promenia StartPage v HomeController-->
+<!--adsParams.pageSize- default constatn, zadadena v app.js i izpolzvana v HomeController-->
+<!--ng-change="reloadAds(), pravi se zaiavka ot HomeController s novite adsParams-->
+<pagination total-items="ads.numItems"
+            ng-model="adsParams.startPage"
+            items-per-page="adsParams.pageSize"
+            ng-change="reloadAds()"
+            max-size="9"
+            boundary-links="true">
+</pagination>
+
+<img src="images/loading.gif" alt="Loading..." ng-hide="ready">
+
+<ul class="ads" ng-cloak>
+    <li ng-repeat="ad in ads.ads" class="box" data-id="{{ad.id}}">
+        <h1>{{ad.title}}</h1>
+        <div><strong class="col-md-2">Date:</strong> {{ad.date | date:'dd-MMM-yyyy'}}</div>
+        <div><strong class="col-md-2">Text:</strong> {{ad.text}}</div>
+        <div><strong class="col-md-2">Name:</strong> {{ad.ownerName}}</div>
+        <div><strong class="col-md-2">Email:</strong> {{ad.ownerEmail}}</div>
+        <div><strong class="col-md-2">Phone:</strong> {{ad.ownerPhone}}</div>
+        <!--<div ng-if='ad.imageDataUrl'>-->
+        <strong class="col-md-2">Image: </strong>
+        <div class="image-box">
+            <img class="ad-image" src="images/defaultImg.png" ng-src="{{ad.imageDataUrl}}" />
+        </div>
+        <!--</div>-->
+    </li>
+</ul>
+
+<div ng-if="ads.ads.length==0" class="box no-data">
+    No ads found.
+</div>
