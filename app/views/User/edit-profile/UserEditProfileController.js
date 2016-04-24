@@ -5,14 +5,11 @@ app.controller('UserEditProfileController', ['$scope', '$rootScope', '$location'
         $rootScope.pageTitle = "Edit User Profile";
 
         //window.scrollTo(0, 0);
-        authService.getUserProfile(
-            function success(data) {
-                $scope.user = data;
-            },
-            function error(err) {
-                notifyService.showError("Cannot load your profile", err);
-            }
-        );
+        authService.setCurrentUser(function success(data) {
+            $scope.user = data;
+        }, function error(err) {
+            notifyService.showError("Cannot load your profile", err);
+        });
 
 
         $scope.towns = townsService.getTowns();

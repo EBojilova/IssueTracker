@@ -12,13 +12,24 @@ app.factory('notifyService',
                 );
             },
             showError: function(msg, serverError) {
-                // Collect errors to display from the server response
                 var errors = [];
+                if (serverError && serverError.Message) {
+                    errors.push(serverError.Message);
+                }
                 if (serverError && serverError.error_description) {
                     errors.push(serverError.error_description);
                 }
-                if (serverError && serverError.modelState) {
-                    var modelStateErrors = serverError.modelState;
+                //{
+                //    "Message": "The request is invalid.",
+                //    "ModelState": {
+                //    "": [
+                //        "Name helen@abv.bg is already taken.",
+                //        "Email 'helen@abv.bg' is already taken."
+                //    ]
+                //}
+                //}
+                if (serverError && serverError.ModelState) {
+                    var modelStateErrors = serverError.ModelState;
                     for (var propertyName in modelStateErrors) {
                         var errorMessages = modelStateErrors[propertyName];
                         var trimmedName = propertyName.substr(propertyName.indexOf('.') + 1);

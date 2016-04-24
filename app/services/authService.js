@@ -3,6 +3,25 @@
 app.factory('authService',
     function ($http, baseServiceUrl) {
         return {
+            //POST api/Account/Register
+            register: function(user, success, error) {
+                var request = {
+                    method: 'POST',
+                    url: baseServiceUrl + 'api/Account/Register',
+                    data: {
+                        'Name': user.name,
+                        'Email': user.email,
+                        'Password' : user.password,
+                        'ConfirmPassword': user.confirmPassword
+                    },
+                    headers: {
+                        ContentType: "application/x-www-form-urlencoded"
+                    }
+                };
+                // 200 OK
+                $http(request).success(success).error(error);
+            },
+
             //[POST] api/Token
             login: function(user, success, error) {
                 var loginData = "grant_type=password&username=" + user.username + "&password=" + user.password;
@@ -21,75 +40,76 @@ app.factory('authService',
                 //    ".expires": "Sun, 16 Apr 2017 17:36:04 GMT"
                 //}
                 $http(request).success(function(data) {
-                    sessionStorage['currentUser'] = JSON.stringify(data);
+                    sessionStorage['access_token'] = JSON.stringify(data);
+                    this.setCurrentUser(success, error);
+                }).error(error);
+            },
+
+            // POST 'api/Account/Logout'
+            logout: function() {
+                //var request = {
+                //    method: 'POST',
+                //    url: baseServiceUrl + 'api/Account/Logout',
+                //    headers: this.getAuthHeaders()
+                //};
+                //200 OK
+                //$http(request).success(function(data) {
+                //    delete sessionStorage['access_token'];
+                //    success(data);
+                //}).error(error);
+                delete sessionStorage['access_token'];
+                delete sessionStorage['current_user'];
+            },
+
+            // GET 'users/me'
+            setCurrentUser: function (success, error) {
+                var request = {
+                    method: 'GET',
+                    url: baseServiceUrl + 'users/me',
+                    headers: this.getAuthHeaders()
+                };
+                //{
+                //    "Id": "e0e672ee-9382-4860-98be-cfa68743a20a",
+                //    "Username": "admin@softuni.bg",
+                //    "isAdmin": true
+                //}
+                $http(request).success(function(data) {
+                    sessionStorage['current_user'] = JSON.stringify(data);
                     success(data);
                 }).error(error);
             },
 
-            //POST api/Account/Register
-            register: function(user, success, error) {
-                var request = {
-                    method: 'POST',
-                    url: baseServiceUrl + 'api/Account/Register',
-                    data: {
-                        'Name': user.name,
-                        'Email': user.email,
-                        'Password' : user.password,
-                        'ConfirmPassword': user.confirmPassword
-                    },
-                    headers: {
-                        ContentType: "application/x-www-form-urlencoded"
-                    }
-                };
-                $http(request).success(success).error(error);
+            getCurrentUser : function() {
+                var userObject = sessionStorage['current_user'];
+                if (userObject) {
+                    return JSON.parse(sessionStorage['current_user']);
+                }
             },
 
-            // POST api/user/Logout
-            logout: function() {
-                //var request = {
-                //    method: 'POST',
-                //    url: baseServiceUrl + '/api/user/logout'
-                //    //data: user
-                //};
-                //{
-                //    "message": "Logout successful."
-                //}
-                //$http(request).success(function(data) {
-                //    delete sessionStorage['currentUser'];
-                //    success(data);
-                //}).error(error);
-                delete sessionStorage['currentUser'];
+            isAnonymous : function() {
+                return sessionStorage['access_token'] == undefined;
             },
 
-            // PUT api/user/ChangePassword
-            changeUserPassword: function(user, success, error) {
-                var request = {
-                    method: 'PUT',
-                    url: baseServiceUrl + '/api/user/ChangePassword',
-                    headers: this.getAuthHeaders(),
-                    data: user
-                };
-                //{
-                //    "message": "Password changed successfully."
-                //}
-                $http(request).success(success).error(error);
+            isLoggedIn : function() {
+                return sessionStorage['access_token'] != undefined;
             },
 
-            // GET api/user/Profile
-            // TODO: I keep in session storage current user already, and I think I do not need this function
-            getUserProfile: function( success, error) {
-                var request = {
-                    method: 'GET',
-                    url: baseServiceUrl + '/api/user/Profile',
-                    headers: this.getAuthHeaders()
-                };
-                //{
-                //    "name": "EB",
-                //    "email": "abv2003@yahoo.co.uk",
-                //    "phoneNumber": "023456",
-                //    "townId": 1
-                //}
-                $http(request).success(success).error(error);
+            isNormalUser : function() {
+                var currentUser = this.getCurrentUser();
+                return (currentUser != undefined) && (!currentUser.isAdmin);
+            },
+
+            isAdmin : function() {
+                var currentUser = this.getCurrentUser();
+                return (currentUser != undefined) && (currentUser.isAdmin);
+            },
+
+            getAuthHeaders : function() {
+                var headers = {};
+                if (this.isLoggedIn()) {
+                    headers['Authorization'] = 'Bearer ' + sessionStorage['access_token'];
+                }
+                return headers;
             },
 
             // PUT api/user/Profile
@@ -106,38 +126,18 @@ app.factory('authService',
                 $http(request).success(success).error(error);
             },
 
-            getCurrentUser : function() {
-                var userObject = sessionStorage['currentUser'];
-                if (userObject) {
-                    return JSON.parse(sessionStorage['currentUser']);
-                }
-            },
-
-            isAnonymous : function() {
-                return sessionStorage['currentUser'] == undefined;
-            },
-
-            isLoggedIn : function() {
-                return sessionStorage['currentUser'] != undefined;
-            },
-
-            isNormalUser : function() {
-                var currentUser = this.getCurrentUser();
-                return (currentUser != undefined) && (!currentUser.isAdmin);
-            },
-
-            isAdmin : function() {
-                var currentUser = this.getCurrentUser();
-                return (currentUser != undefined) && (currentUser.isAdmin);
-            },
-
-            getAuthHeaders : function() {
-                var headers = {};
-                var currentUser = this.getCurrentUser();
-                if (currentUser) {
-                    headers['Authorization'] = 'Bearer ' + currentUser.access_token;
-                }
-                return headers;
+            // PUT api/user/ChangePassword
+            changeUserPassword: function(user, success, error) {
+                var request = {
+                    method: 'PUT',
+                    url: baseServiceUrl + '/api/user/ChangePassword',
+                    headers: this.getAuthHeaders(),
+                    data: user
+                };
+                //{
+                //    "message": "Password changed successfully."
+                //}
+                $http(request).success(success).error(error);
             }
         }
     }

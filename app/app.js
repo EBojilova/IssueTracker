@@ -53,27 +53,21 @@ app.config(function ($routeProvider) {
 
 });
 
-app.config(['$routeProvider', '$httpProvider', function($routeProvider, $httpProvider) {
-        // httpProvider pozvoliava da konfigurirame samoto http
-        $httpProvider.interceptors.push(['$q','notifyService', function($q, notifyService) {
-            // tova e global error handling, vmesto na vsiakade da ia obrabotvame s notifier
-            return {
-                'responseError': function(rejection) {
-                    if (rejection.data && rejection.data['error_description']) {
-                        notifyService.showError(rejection.data['error_description']);
-                    }
-                    else if (rejection.data && rejection.data.modelState && rejection.data.ModelState['']){
-                        var errors = rejection.data.ModelState[''];
-                        for (var err in errors){
-                            notifyService.showError(err);
-                        }
-                    }
-
-                    return $q.reject(rejection);
+app.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
+    // httpProvider pozvoliava da konfigurirame samoto http
+    $httpProvider.interceptors.push(['$q', 'notifyService', function ($q, notifyService) {
+        // tova e global error handling, vmesto na vsiakade da ia obrabotvame s notifier
+        return {
+            'responseError': function (rejection) {
+                if (rejection.data) {
+                    notifyService.showError('Error!', rejection.data);
                 }
+
+                return $q.reject(rejection);
             }
-        }]);
-    }])
+        }
+    }]);
+}]);
 
 app.run(function ($rootScope, $location, authService) {
     $rootScope.$on('$locationChangeStart', function (event) {
@@ -81,21 +75,20 @@ app.run(function ($rootScope, $location, authService) {
             // Authorization check: anonymous site visitors cannot access user routes
             $location.path("/");
         }
-        if ($location.path().indexOf("/user/ads/edit") != -1 ||
-            $location.path().indexOf("/user/ads/delete") != -1 ||
-            $location.path().indexOf("/user/ads/publish") != -1 ||
-            $location.path().indexOf("/user/profile") != -1) {
-            $rootScope.showRightSidebarMenu = false;
-        }
-        else {
-            $rootScope.showRightSidebarMenu = true;
-
-            if ($location.path().indexOf("/user/ads") != -1) {
-                $rootScope.showStatuses = true;
-            }
-            else {
-                $rootScope.showStatuses = false;
-            }
-        }
     });
 });
+app.run(['$rootScope', '$location', 'authService',
+    function ($rootScope, $location, authService) {
+        $rootScope.$on('$routeChangeStart', function (event, route, prev) {
+            if (route.access) {
+                if (route.access.requiresLoggedUser && !authService.isLoggedIn()) {
+                    $location.path(prev.$$route.originalPath);
+                }
+                if (route.access.requiresAdmin && !authService.isAdmin()) {
+                    $location.path(prev.$$route.originalPath);
+                }
+            } else {
+                $location.path('/');
+            }
+        });
+    }]);
