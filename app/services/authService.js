@@ -4,14 +4,14 @@ app.factory('authService',
     function ($http, baseServiceUrl) {
         return {
             //POST api/Account/Register
-            register: function(user, success, error) {
+            register: function (user, success) {
                 var request = {
                     method: 'POST',
                     url: baseServiceUrl + 'api/Account/Register',
                     data: {
                         'Name': user.name,
                         'Email': user.email,
-                        'Password' : user.password,
+                        'Password': user.password,
                         'ConfirmPassword': user.confirmPassword
                     },
                     headers: {
@@ -19,15 +19,18 @@ app.factory('authService',
                     }
                 };
                 // 200 OK
-                $http(request).success(success).error(error);
+                $http(request).success(function (data) {
+                    sessionStorage['access_token'] = JSON.stringify(data);
+                    success(data);
+                });
             },
 
             //[POST] api/Token
-            login: function(user, success, error) {
+            login: function (user, success) {
                 var loginData = "grant_type=password&username=" + user.username + "&password=" + user.password;
                 var request = {
                     method: 'POST',
-                    url: BASEURL + 'api/Token',
+                    url: baseServiceUrl + 'api/Token',
                     data: loginData,
                     headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                 };
@@ -39,14 +42,16 @@ app.factory('authService',
                 //    ".issued": "Sat, 16 Apr 2016 17:36:04 GMT",
                 //    ".expires": "Sun, 16 Apr 2017 17:36:04 GMT"
                 //}
-                $http(request).success(function(data) {
-                    sessionStorage['access_token'] = JSON.stringify(data);
-                    this.setCurrentUser(success, error);
-                }).error(error);
+                var __this=this;
+                $http(request).success(function (data) {
+                    sessionStorage['access_token'] = data.access_token;
+                    // ste izpalnim sucess chak sled kato setnem sessionStorage['current_user']
+                    _this.setCurrentUser(success);
+                });
             },
 
             // POST 'api/Account/Logout'
-            logout: function() {
+            logout: function () {
                 //var request = {
                 //    method: 'POST',
                 //    url: baseServiceUrl + 'api/Account/Logout',
@@ -62,7 +67,7 @@ app.factory('authService',
             },
 
             // GET 'users/me'
-            setCurrentUser: function (success, error) {
+            setCurrentUser: function (success) {
                 var request = {
                     method: 'GET',
                     url: baseServiceUrl + 'users/me',
@@ -73,47 +78,47 @@ app.factory('authService',
                 //    "Username": "admin@softuni.bg",
                 //    "isAdmin": true
                 //}
-                $http(request).success(function(data) {
+                $http(request).success(function (data) {
                     sessionStorage['current_user'] = JSON.stringify(data);
                     success(data);
-                }).error(error);
+                });
             },
 
-            getCurrentUser : function() {
+            getCurrentUser: function () {
                 var userObject = sessionStorage['current_user'];
                 if (userObject) {
                     return JSON.parse(sessionStorage['current_user']);
                 }
             },
 
-            isAnonymous : function() {
+            isAnonymous: function () {
                 return sessionStorage['access_token'] == undefined;
             },
 
-            isLoggedIn : function() {
+            isLoggedIn: function () {
                 return sessionStorage['access_token'] != undefined;
             },
 
-            isNormalUser : function() {
+            isNormalUser: function () {
                 var currentUser = this.getCurrentUser();
                 return (currentUser != undefined) && (!currentUser.isAdmin);
             },
 
-            isAdmin : function() {
+            isAdmin: function () {
                 var currentUser = this.getCurrentUser();
                 return (currentUser != undefined) && (currentUser.isAdmin);
             },
 
-            getAuthHeaders : function() {
+            getAuthHeaders: function () {
                 var headers = {};
                 if (this.isLoggedIn()) {
                     headers['Authorization'] = 'Bearer ' + sessionStorage['access_token'];
                 }
                 return headers;
             },
-
+            //TODO:
             // PUT api/user/Profile
-            editUserProfile: function(user, success, error) {
+            editUserProfile: function (user, success, error) {
                 var request = {
                     method: 'PUT',
                     url: baseServiceUrl + '/api/user/Profile',
@@ -127,7 +132,7 @@ app.factory('authService',
             },
 
             // PUT api/user/ChangePassword
-            changeUserPassword: function(user, success, error) {
+            changeUserPassword: function (user, success, error) {
                 var request = {
                     method: 'PUT',
                     url: baseServiceUrl + '/api/user/ChangePassword',

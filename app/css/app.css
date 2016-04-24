@@ -183,9 +183,11 @@ ul.sidebar-menu li a, ul.sidebar-menu li a:focus {
 }
 
 span.err {
-    color: darkred;
+    color: #FF5555;
+    font-weight: bold;
 }
 
 input.ng-invalid {
-    background: pink;
+    background: lightsalmon;
+    border: #507E32 1px solid;
 }

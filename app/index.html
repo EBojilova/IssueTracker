@@ -3,36 +3,39 @@
 <html ng-app="app" ng-controller="AppController">
 
 <head>
-    <!-- Load CSS files -->
-    <link rel="stylesheet" href="css/bootstrap.css" />
-    <link rel="stylesheet" href="css/bootstrap-theme.css" />
-    <link rel="stylesheet" href="css/app.css" />
+	<!-- Load CSS files -->
+	<link rel="stylesheet" href="css/bootstrap.css"/>
+	<link rel="stylesheet" href="css/bootstrap-theme.css"/>
+	<link rel="stylesheet" href="css/app.css"/>
 
-    <meta charset="utf-8">
-    <title>Ads</title>
+	<meta charset="utf-8">
+	<title>Ads</title>
 </head>
 
 <body>
 
 <header id="app-header">
-    <div ng-include="'templates/partial/header.html'"></div>
+	<div ng-include="'templates/partial/header.html'"></div>
 </header>
 
 <div id='app-content'>
-    <div class='col-md-2 sidebar'>
-        <div ng-include="'templates/partial/left-sidebar.html'"></div>
-    </div>
+	<!--<div class='col-md-2 sidebar'>-->
+		<!--<div ng-include="'templates/partial/left-sidebar.html'"></div>-->
+	<!--</div>-->
 
-    <div class='col-md-8' ng-view>
-    </div>
-    <!-- TODO:tuka podavame kontroler, tai kato ne e obvarzano tova menu s url, po-dobre e da go napravim s direktivi-->
-    <div class='col-md-2 sidebar' ng-controller="RightSidebarController">
-        <div ng-include="'views/right-sidebar/right-sidebar.html'"></div>
-    </div>
+	<div ng-view></div>
+	<!--&lt;!&ndash; TODO:tuka podavame kontroler, tai kato ne e obvarzano tova menu s url, po-dobre e da go napravim s direktivi&ndash;&gt;-->
+	<!--<div class='col-md-2 sidebar' ng-controller="RightSidebarController">-->
+		<!--<div ng-include="'views/right-sidebar/right-sidebar.html'"></div>-->
+	<!--</div>-->
 </div>
 
-<footer id="app-footer">
-    &copy; 2014 by Software University Foundation, No Rights Reserved
+<footer id="app-footer" class="navbar-fixed-bottom">
+	<div class="row">
+		<div class="col-sm-4">Author: Elena Bojilova</div>
+		<div class="col-sm-4">Project's <a href="https://github.com/EBojilova/IssueTracker">Github</a></div>
+		<div class="col-sm-4">Powered by Angularjs</div>
+	</div>
 </footer>
 
 <!-- Load app libraries -->

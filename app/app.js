@@ -6,20 +6,15 @@ app.constant('baseServiceUrl', 'http://softuni-issue-tracker.azurewebsites.net/'
 app.constant('pageSize', 4);
 
 app.config(function ($routeProvider) {
-    // paths are given from index.html, not from app.js
+    // paths are given from index.html path, not from app.js path
     $routeProvider.when('/', {
-        templateUrl: 'views/home/home.html',
-        controller: 'HomeController'
+        templateUrl: 'views/Public/public.html',
+        controller: 'PublicController'
     });
 
-    $routeProvider.when('/login', {
-        templateUrl: 'views/login/login.html',
-        controller: 'LoginController'
-    });
-
-    $routeProvider.when('/register', {
-        templateUrl: 'views/register/register.html',
-        controller: 'RegisterController'
+    $routeProvider.when('/dashboard', {
+        //templateUrl: 'views/User/publish-new-ad/publish-new-ad.html',
+        //controller: 'UserPublishNewAdController'
     });
 
     $routeProvider.when('/user/ads/publish', {

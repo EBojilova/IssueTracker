@@ -7,21 +7,23 @@ app.controller('PublicController', ['$scope', '$rootScope', '$location', 'authSe
         $scope.register = function (user) {
             authService.register(user,
                 function success() {
-                    notifyService.showInfo("User registered successfully.Please login!");
-                    $location.path("/");
+                    notifyService.showInfo("User registered successfully.");
+                    //After registration, the user is automatically logged in and is redirected to the dashboard.
+                    var userLoginData = {'username': user.email, 'password': user.password};
+                    this.login(userLoginData);
                 }
                 // we have global error handling in app.js
                 //function error(err) {
                 //    notifyService.showError("User registration failed", err);
                 //}
-            );
+            )
         };
-        
+
         $scope.login = function (user) {
             authService.login(user,
                 function success() {
                     notifyService.showInfo("Login successful");
-                    $location.path("/");
+                    $location.path("/dashboard");
                 }
                 // we have global error handling in app.js
                 //function error(err) {
