@@ -1,6 +1,12 @@
 Issue Tracker<span ng-if="pageTitle"> &ndash; {{pageTitle}}</span>
 
 <div ng-if="authService.isLoggedIn()" class="user-area">
-  <span>{{authService.getCurrentUser().username}}</span>
-  <a ng-click="logout()" class="link">Logout</a>
+
+	<strong>Username: </strong>{{authService.getCurrentUser().Username}}<span class="admin-header"
+	                                                                          ng-if="authService.getCurrentUser().isAdmin"> (is Admin)</span>
+	<span ng-if="authService.getCurrentUser().isAdmin">
+		<span><a href="#/projects" class="link">All projects </a></span>
+		<span><a href="#/projects/add" class="link">Add new project </a></span>
+	</span>
+	<a ng-click="logout()" class="link">Logout</a>
 </div>

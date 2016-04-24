@@ -184,13 +184,17 @@ ul.sidebar-menu li a, ul.sidebar-menu li a:focus {
 
 /*login/register validations css*/
 span.err {
-    color: #FF5555;
+    color: royalblue;
     font-weight: bold;
 }
 
 input.ng-invalid {
     background: lightsalmon;
     border: #507E32 1px solid;
+}
+
+.snowflake{
+    color: #FF5555;
 }
 
 /*tables css*/
@@ -206,7 +210,7 @@ td {
 }
 
 td.columnA {
-    width: 30%;
+    width: 25%;
 }
 
 td.columnB {
@@ -216,4 +220,8 @@ td.columnB {
 /*alingn content to header and footer at sides*/
 #app-content {
     margin: 0px 5px 0px 5px;
+}
+
+.admin-header{
+    color: royalblue;
 }

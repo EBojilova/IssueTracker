@@ -3,7 +3,7 @@
 var app = angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap.pagination']);
 
 app.constant('baseServiceUrl', 'http://softuni-issue-tracker.azurewebsites.net/');
-app.constant('pageSize', 4);
+app.constant('pageSize', 9);
 
 app.config(function ($routeProvider) {
     // paths are given from index.html path, not from app.js path
