@@ -19,23 +19,11 @@
 </header>
 
 <div id='app-content'>
-	<!--<div class='col-md-2 sidebar'>-->
-		<!--<div ng-include="'templates/partial/left-sidebar.html'"></div>-->
-	<!--</div>-->
-
 	<div ng-view></div>
-	<!--&lt;!&ndash; TODO:tuka podavame kontroler, tai kato ne e obvarzano tova menu s url, po-dobre e da go napravim s direktivi&ndash;&gt;-->
-	<!--<div class='col-md-2 sidebar' ng-controller="RightSidebarController">-->
-		<!--<div ng-include="'views/right-sidebar/right-sidebar.html'"></div>-->
-	<!--</div>-->
 </div>
 
 <footer id="app-footer" class="navbar-fixed-bottom">
-	<div class="row">
-		<div class="col-sm-4">Author: Elena Bojilova</div>
-		<div class="col-sm-4">Project's <a href="https://github.com/EBojilova/IssueTracker">Github</a></div>
-		<div class="col-sm-4">Powered by Angularjs</div>
-	</div>
+	<div ng-include="'templates/partial/footer.html'"></div>
 </footer>
 
 <!-- Load app libraries -->
@@ -61,7 +49,9 @@
 <script src="views/home/homeService.js"></script>
 <script src="views/home/HomeController.js"></script>
 
-<script src="views/right-sidebar/RightSidebarController.js"></script>
+<script src="views/allProjects/allProjectService.js"></script>
+<script src="views/allProjects/AllProjectsController.js"></script>
+
 <script src="views/User/publish-new-ad/UserPublishNewAdController.js"></script>
 <script src="views/User/user-ads/UserAdsController.js"></script>
 <script src="views/User/edit-ad/UserEditAdController.js"></script>
