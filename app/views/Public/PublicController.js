@@ -23,7 +23,10 @@ app.controller('PublicController', ['$scope', '$rootScope', '$location', 'authSe
             authService.login(user,
                 function success() {
                     notifyService.showInfo("Login successful");
-                    $location.path("/dashboard");
+                    authService.setCurrentUser(function success() {
+                        notifyService.showInfo("Current user saved");
+                        $location.path("/dashboard");
+                    });
                 }
                 // we have global error handling in app.js
                 //function error(err) {

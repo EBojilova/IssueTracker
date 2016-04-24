@@ -42,11 +42,9 @@ app.factory('authService',
                 //    ".issued": "Sat, 16 Apr 2016 17:36:04 GMT",
                 //    ".expires": "Sun, 16 Apr 2017 17:36:04 GMT"
                 //}
-                var __this=this;
                 $http(request).success(function (data) {
                     sessionStorage['access_token'] = data.access_token;
-                    // ste izpalnim sucess chak sled kato setnem sessionStorage['current_user']
-                    _this.setCurrentUser(success);
+                    success(data);
                 });
             },
 
