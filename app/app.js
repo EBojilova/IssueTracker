@@ -13,8 +13,11 @@ app.config(function ($routeProvider) {
     });
 
     $routeProvider.when('/dashboard', {
-        //templateUrl: 'views/User/publish-new-ad/publish-new-ad.html',
-        //controller: 'UserPublishNewAdController'
+        templateUrl: 'views/home/home.html',
+        controller: 'HomeController',
+        access: {
+            requiresLoggedUser: true
+        }
     });
 
     $routeProvider.when('/user/ads/publish', {

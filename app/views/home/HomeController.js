@@ -5,11 +5,11 @@ app.controller('HomeController', ['$scope', '$rootScope', 'homeService', 'notify
         $rootScope.pageTitle = "Dashboard";
 
         //PROJECTS
-        // Params, moje da sadarjat 2 parametara:  startPage, pageSize
+        // Params, moje da sadarjat 2 parametara:  pageSize={pageSize}&pageNumber={pageNumber}
         // promeniat se v taga pagination v htmla
         // default parameters
         $scope.projectsParams = {
-            'startPage': 1,
+            'pageNumber': 1,
             'pageSize': pageSize
         };
 
@@ -30,11 +30,11 @@ app.controller('HomeController', ['$scope', '$rootScope', 'homeService', 'notify
 
 
         //ISSUES
-        // Params, moje da sadarjat 2 parametara:  startPage, pageSize
+        // Params, moje da sadarjat 2 parametara:  pageSize={pageSize}&pageNumber={pageNumber}
         // promeniat se v taga pagination v htmla
         // default parameters
         $scope.issuesParams = {
-            'startPage': 1,
+            'pageNumber': 1,
             'pageSize': pageSize
         };
 
@@ -46,6 +46,8 @@ app.controller('HomeController', ['$scope', '$rootScope', 'homeService', 'notify
                 function success(data) {
                     $scope.issues = data;
                     $scope.issuesLoaded=true;
+                    // TODO: there is bug in the REST service and always TotalCount is 0
+                    $scope.issuesCount = data.TotalPages * $scope.issuesParams.pageSize;
                 }
             );
         };

@@ -182,6 +182,7 @@ ul.sidebar-menu li a, ul.sidebar-menu li a:focus {
     margin-bottom: 5px;
 }
 
+/*login/register validations css*/
 span.err {
     color: #FF5555;
     font-weight: bold;
@@ -190,4 +191,29 @@ span.err {
 input.ng-invalid {
     background: lightsalmon;
     border: #507E32 1px solid;
+}
+
+/*tables css*/
+table {
+    width: 100%;
+}
+
+td {
+    max-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+td.columnA {
+    width: 30%;
+}
+
+td.columnB {
+    width: 70%;
+}
+
+/*alingn content to header and footer at sides*/
+#app-content {
+    margin: 0px 5px 0px 5px;
 }

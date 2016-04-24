@@ -7,7 +7,7 @@ app.factory('homeService', ['$http', 'baseServiceUrl', 'authService',
             getUserIssues: function (params, success, error) {
                 var request = {
                     method: 'GET',
-                    url: baseServiceUrl + 'issues/me?orderBy=DueDate des',
+                    url: baseServiceUrl + 'issues/me?orderBy=DueDate desc',
                     headers: authService.getAuthHeaders(),
                     params: params
                 };
@@ -25,7 +25,7 @@ app.factory('homeService', ['$http', 'baseServiceUrl', 'authService',
                 var id = authService.getCurrentUser().Id;
                 var request = {
                     method: 'GET',
-                    url: baseServiceUrl + 'projects?filter=Lead.Id=' + id,
+                    url: baseServiceUrl + 'projects?filter=Lead.Id="' + id + '"',
                     headers: authService.getAuthHeaders(),
                     params: params
                 };

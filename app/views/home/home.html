@@ -1,9 +1,11 @@
-<div class="row">
-	<div class="col-md-5 col-md-offset-1">
-		<div ng-include="'views/Public/register.html'"></div>
+<img src="images/loading.gif" alt="Loading..." ng-hide="projectsLoaded && issuesLoaded">
+
+<div class="row" ng-cloak>
+	<div class="col-md-5">
+		<div ng-include="'views/home/myProjects.html'"></div>
 	</div>
 
-	<div class="col-md-5">
-		<div ng-include="'views/Public/login.html'"></div>
+	<div class="col-md-7">
+		<div ng-include="'views/home/myIssues.html'"></div>
 	</div>
 </div>
