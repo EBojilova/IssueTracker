@@ -1,19 +1,19 @@
-<!--ads.numItems e parviat obekt v masiva koito izvikva zaiavkata Get All Adds-->
-<!--ng-model="adsParams.startPage promenia StartPage v HomeController-->
-<!--adsParams.pageSize- default constatn, zadadena v app.js i izpolzvana v HomeController-->
-<!--ng-change="reloadAds(), pravi se zaiavka ot HomeController s novite adsParams-->
-<pagination total-items="ads.numItems"
-            ng-model="adsParams.startPage"
-            items-per-page="adsParams.pageSize"
-            ng-change="reloadAds()"
+<!--projects.TotalCount e parviat obekt v masiva koito izvikva zaiavkata Get All Adds-->
+<!--ng-model="projectsParams.startPage promenia StartPage v HomeController-->
+<!--projectsParams.pageSize- default constatn, zadadena v app.js i izpolzvana v HomeController-->
+<!--ng-change="reloadProjects(), pravi se zaiavka ot HomeController s novite projectsParams-->
+<pagination total-items="projects.TotalCount"
+            ng-model="projectsParams.startPage"
+            items-per-page="projectsParams.pageSize"
+            ng-change="reloadProjects()"
             max-size="9"
             boundary-links="true">
 </pagination>
 
 <img src="images/loading.gif" alt="Loading..." ng-hide="ready">
 
-<ul class="ads" ng-cloak>
-    <li ng-repeat="ad in ads.ads" class="box" data-id="{{ad.id}}">
+<ul class="projects" ng-cloak>
+    <li ng-repeat="ad in projects.Projects" class="box" data-id="{{ad.id}}">
         <h1>{{ad.title}}</h1>
         <div><strong class="col-md-2">Date:</strong> {{ad.date | date:'dd-MMM-yyyy'}}</div>
         <div><strong class="col-md-2">Text:</strong> {{ad.text}}</div>
@@ -29,6 +29,6 @@
     </li>
 </ul>
 
-<div ng-if="ads.ads.length==0" class="box no-data">
-    No ads found.
+<div ng-if="projects.Projects.length==0" class="box no-data">
+    No projects found.
 </div>

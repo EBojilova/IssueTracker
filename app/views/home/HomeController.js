@@ -2,52 +2,56 @@
 
 app.controller('HomeController', ['$scope', '$rootScope', 'homeService', 'notifyService', 'pageSize',
     function ($scope, $rootScope, homeService, notifyService, pageSize) {
-        $rootScope.pageTitle = "Home";
+        $rootScope.pageTitle = "Dashboard";
 
-        // Params, moje da sadarjat 4 parametara: categoryID, townId, startPage, pageSize
-        // api/Ads?CategoryId={CategoryId}&TownId={TownId}&StartPage={StartPage}&PageSize={PageSize}
+        //PROJECTS
+        // Params, moje da sadarjat 2 parametara:  startPage, pageSize
+        // promeniat se v taga pagination v htmla
+        // default parameters
+        $scope.projectsParams = {
+            'startPage': 1,
+            'pageSize': pageSize
+        };
+
+        $scope.reloadProjects = function () {
+            // $scope.projectsLoaded is used for loading circle in home.html
+            $scope.projectsLoaded=false;
+            homeService.getUserProjects(
+                $scope.projectsParams,
+                function success(data) {
+                    $scope.projects = data;
+                    $scope.projectsLoaded=true;
+                }
+            );
+        };
+
+        //parvia pat ste se izpalni samo s default parameters
+        $scope.reloadProjects();
+
+
+        //ISSUES
+        // Params, moje da sadarjat 2 parametara:  startPage, pageSize
+        // promeniat se v taga pagination v htmla
         // default parameters
         $scope.issuesParams = {
             'startPage': 1,
             'pageSize': pageSize
         };
 
-        $scope.reloadAds = function () {
-            // $scope.ready is used for loading circle in home.html
-            $scope.ready=false;
-            homeService.getAds(
+        $scope.reloadIssues = function () {
+            // $scope.issuesLoaded is used for loading circle in home.html
+            $scope.issuesLoaded=false;
+            homeService.getUserIssues(
                 $scope.issuesParams,
                 function success(data) {
                     $scope.issues = data;
-                    $scope.ready=true;
-                },
-                function error(err) {
-                    notifyService.showError("Cannot load issues", err);
+                    $scope.issuesLoaded=true;
                 }
             );
         };
 
-        //parvia pat ste se izpalni samo s default parameters-vij naj-otogre
-        $scope.reloadAds();
+        //parvia pat ste se izpalni samo s default parameters
+        $scope.reloadIssues();
 
-        // parametrite se promeniat kakto sledva:
-
-        // pageSize e constant v app.js ,i.e      app.constant('pageSize', 4);
-
-        // ng-model="issuesParams.startPage" se izvarshva promainata na startPage v home.html v pegination taga
-
-        // This event is sent by RightSideBarController when the current category is changed
-        $scope.$on("categorySelectionChanged", function (event, selectedCategoryId) {
-            $scope.issuesParams.categoryId = selectedCategoryId;
-            $scope.issuesParams.startPage = 1;
-            $scope.reloadAds();
-        });
-
-        // This event is sent by RightSideBarController when the current town is changed
-        $scope.$on("townSelectionChanged", function (event, selectedTownId) {
-            $scope.issuesParams.townId = selectedTownId;
-            $scope.issuesParams.startPage = 1;
-            $scope.reloadAds();
-        });
     }]
 );
