@@ -17,7 +17,7 @@ app.factory('homeService', ['$http', 'baseServiceUrl', 'authService',
                 //    "TotalCount": 0
                 //}
 
-                $http(request).success(success).error(error);
+                $http(request).success(success);
             },
 
             //[GET] projects?pageSize={pageSize}&pageNumber={pageNumber}&filter=Lead.Id={id}
@@ -35,7 +35,7 @@ app.factory('homeService', ['$http', 'baseServiceUrl', 'authService',
                 //    "TotalCount": 8
                 //}
 
-                $http(request).success(success).error(error);
+                $http(request).success(success);
             }
         }
     }]

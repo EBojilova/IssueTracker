@@ -6,7 +6,7 @@
 	<div class="pull-right">
 		<form class="form-inline">
 			<div class="form-group">
-				<label for="sort">Sort by:</label>
+				<label for="sort">Sort by: </label>
 				<select class="form-control" ng-model="sort" id="sort">
 					<option value="">Not Sorted</option>
 					<option value="Name">Name</option>
@@ -14,14 +14,20 @@
 				</select>
 			</div>
 			<div class="form-group">
-				<label for="search">Search</label>
-				<input type="text" class="form-control" id="search" placeholder="Search criteria">
+				<label for="search">Search: </label>
+				<input type="text" class="form-control" id="search" ng-model="search" placeholder="Search criteria">
+				<div class="input-group">
+					<span class="input-group-addon" id="basic-addon1">@</span>
+					<input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
+				</div>
 			</div>
+			<h6 >Showing <strong class="royal">{{filtered.length}}</strong> projects</h6>
+			<h6><strong>Scroll</strong> table <strong>body</strong> to see <strong>listed projects</strong></h6>
 		</form>
 	</div>
 
 	<h2>All Projects</h2>
-	<table class="table table-hover">
+	<table class="table table-hover" id="filter">
 		<thead>
 		<tr>
 			<th>Name</th>
@@ -32,7 +38,7 @@
 		</tr>
 		</thead>
 		<tbody>
-		<tr ng-repeat="project in projects.Projects">
+		<tr ng-repeat="project in filtered =(projects | orderBy: sort | filter:search)">
 			<td><a href="#/projects/{{project.Id}}" class="link">{{ project.Name }}</a></td>
 			<td class="columnA">{{ project.Lead.Username }}<span class="admin-header" ng-if="project.Lead.isAdmin"> (is Admin)</span>
 			</td>
@@ -42,16 +48,4 @@
 		</tr>
 		</tbody>
 	</table>
-
-	<!--projects.TotalCount e parviat obekt v masiva koito izvikva zaiavkata Get All Projects-->
-	<!--ng-model="projectsParams.startPage promenia StartPage v HomeController-->
-	<!--projectsParams.pageSize- default constatn, zadadena v app.js i izpolzvana v HomeController-->
-	<!--ng-change="reloadProjects(), pravi se zaiavka ot HomeController s novite projectsParams-->
-	<pagination total-items="projects.TotalCount"
-	            ng-model="projectsParams.pageNumber"
-	            items-per-page="projectsParams.pageSize"
-	            ng-change="reloadProjects()"
-	            max-size="12"
-	            boundary-links="true">
-	</pagination>
 </div>

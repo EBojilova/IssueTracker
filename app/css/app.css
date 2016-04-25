@@ -194,7 +194,7 @@ input.ng-invalid {
     border: #507E32 1px solid;
 }
 
-.snowflake{
+.snowflake {
     color: #FF5555;
 }
 
@@ -220,20 +220,21 @@ td.columnB {
 
 /*alingn content to header and footer at sides*/
 #app-content {
+    padding-top: 50px;
     margin: 0px 5px 0px 5px;
 }
 
-/*header username css*/
-.admin-header{
+/*royal wording- i.e. admin in header username css*/
+.royal {
     color: royalblue;
 }
 
-header a{
+header a {
     font-weight: bold;
 }
 
 /*loading image to be centerd withi the div*/
-img.loading{
+img.loading {
     position: absolute;
     margin: auto;
     top: 0;
@@ -249,6 +250,29 @@ img.avatar {
 }
 
 /*sort box in all Projects*/
-#sort-box{
+#sort-box {
     margin-bottom: 10px;
 }
+
+/*table fixed header slider*/
+table#filter tr {
+    width: 100%;
+    display: inline-table;
+    table-layout: fixed;
+}
+
+table#filter {
+    /*Select the height of the table*/
+    height: 400px;
+    /*Firefox Bad Effect*/
+    display: -moz-groupbox;
+}
+
+table#filter tbody {
+    overflow-y: scroll;
+    /*Select the height of the body*/
+    height: 350px;
+    width: 100%;
+    position: absolute;
+}
+
