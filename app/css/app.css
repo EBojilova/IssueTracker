@@ -247,3 +247,8 @@ img.loading{
 img.avatar {
     border-radius: 5px;
 }
+
+/*sort box in all Projects*/
+#sort-box{
+    margin-bottom: 10px;
+}

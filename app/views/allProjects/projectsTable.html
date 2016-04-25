@@ -3,7 +3,7 @@
 		No Projects found.
 	</div>
 
-	<div class="box">
+	<div class="pull-right">
 		<form class="form-inline">
 			<div class="form-group">
 				<label for="sort">Sort by:</label>
@@ -25,7 +25,7 @@
 		<thead>
 		<tr>
 			<th>Name</th>
-			<th>Lead</th>
+			<th class="columnA">Lead</th>
 			<th>Description</th>
 			<th>Labels</th>
 			<th>Priorities</th>
@@ -34,7 +34,7 @@
 		<tbody>
 		<tr ng-repeat="project in projects.Projects">
 			<td><a href="#/projects/{{project.Id}}" class="link">{{ project.Name }}</a></td>
-			<td>{{ project.Lead.Username }}<span class="admin-header" ng-if="project.Lead.isAdmin"> (is Admin)</span>
+			<td class="columnA">{{ project.Lead.Username }}<span class="admin-header" ng-if="project.Lead.isAdmin"> (is Admin)</span>
 			</td>
 			<td>{{ project.Description }}</td>
 			<td><span ng-repeat="label in project.Labels">{{label.Name}}, </span></td>
