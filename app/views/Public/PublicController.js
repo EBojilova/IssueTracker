@@ -10,12 +10,16 @@ app.controller('PublicController', ['$scope', '$rootScope', '$location', 'authSe
                     notifyService.showInfo("User registered successfully.");
                     //After registration, the user is automatically logged in and is redirected to the dashboard.
                     var userLoginData = {'username': user.email, 'password': user.password};
-                    this.login(userLoginData);
+                    authService.login(userLoginData,
+                        function success() {
+                            notifyService.showInfo("Login successful");
+                            authService.setCurrentUser(function success() {
+                                notifyService.showInfo("Current user saved");
+                                $location.path("/dashboard");
+                            });
+                        })
                 }
                 // we have global error handling in app.js
-                //function error(err) {
-                //    notifyService.showError("User registration failed", err);
-                //}
             )
         };
 
@@ -29,9 +33,6 @@ app.controller('PublicController', ['$scope', '$rootScope', '$location', 'authSe
                     });
                 }
                 // we have global error handling in app.js
-                //function error(err) {
-                //    notifyService.showError("Login failed", err);
-                //}
             );
         };
     }]

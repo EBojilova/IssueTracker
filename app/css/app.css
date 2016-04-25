@@ -149,6 +149,7 @@ ul.sidebar-menu li a, ul.sidebar-menu li a:focus {
 
 .no-data {
     font-size: 18px;
+    color: royalblue;
 }
 
 .image-box {
@@ -185,7 +186,7 @@ ul.sidebar-menu li a, ul.sidebar-menu li a:focus {
 /*login/register validations css*/
 span.err {
     color: royalblue;
-    font-weight: bold;
+    /*font-weight: bold;*/
 }
 
 input.ng-invalid {
@@ -222,6 +223,21 @@ td.columnB {
     margin: 0px 5px 0px 5px;
 }
 
+/*header username css*/
 .admin-header{
     color: royalblue;
+}
+
+header a{
+    font-weight: bold;
+}
+
+/*loading image*/
+img{
+    position: absolute;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }
