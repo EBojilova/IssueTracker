@@ -1,41 +1,23 @@
 'use strict';
 
-app.factory('homeService', ['$http', 'baseServiceUrl', 'authService',
+app.factory('allProjectsService', ['$http', 'baseServiceUrl', 'authService',
     function ($http, baseServiceUrl, authService) {
         return {
-            //[GET] Issues/me?pageSize={pageSize}&pageNumber={pageNumber}&orderBy={by}
-            getUserIssues: function (params, success, error) {
+            //[GET] projects?filter=&pageSize=4&pageNumber=1
+            getUserProjects: function (params, success) {
                 var request = {
                     method: 'GET',
-                    url: baseServiceUrl + 'issues/me?orderBy=DueDate desc',
+                    url: baseServiceUrl + 'projects?filter=',
                     headers: authService.getAuthHeaders(),
                     params: params
                 };
                 //{
-                //    "TotalPages": 1,
-                //    "Issues": [],
-                //    "TotalCount": 0
-                //}
-
-                $http(request).success(success).error(error);
-            },
-
-            //[GET] projects?pageSize={pageSize}&pageNumber={pageNumber}&filter=Lead.Id={id}
-            getUserProjects: function (params, success, error) {
-                var id = authService.getCurrentUser().Id;
-                var request = {
-                    method: 'GET',
-                    url: baseServiceUrl + 'projects?filter=Lead.Id="' + id + '"',
-                    headers: authService.getAuthHeaders(),
-                    params: params
-                };
-                //{
-                //    "TotalPages": 2,
+                //    "TotalPages": 86,
                 //    "Projects": [],
-                //    "TotalCount": 8
+                //    "TotalCount": 342
                 //}
 
-                $http(request).success(success).error(error);
+                $http(request).success(success);
             }
         }
     }]

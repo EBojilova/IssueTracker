@@ -3,7 +3,7 @@
 var app = angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap.pagination']);
 
 app.constant('baseServiceUrl', 'http://softuni-issue-tracker.azurewebsites.net/');
-app.constant('pageSize', 9);
+app.constant('pageSize', 8);
 
 app.config(function ($routeProvider) {
     // paths are given from index.html path, not from app.js path
@@ -17,6 +17,15 @@ app.config(function ($routeProvider) {
         controller: 'HomeController',
         access: {
             requiresLoggedUser: true
+        }
+    });
+
+    $routeProvider.when('/projects', {
+        templateUrl: 'views/allProjects/all-projects.html',
+        controller: 'AllProjectsController',
+        access: {
+            requiresLoggedUser: true,
+            requiresAdmin: true
         }
     });
 

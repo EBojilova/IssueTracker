@@ -232,12 +232,18 @@ header a{
     font-weight: bold;
 }
 
-/*loading image*/
-img{
+/*loading image to be centerd withi the div*/
+img.loading{
     position: absolute;
     margin: auto;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
+    width: 100px;
+}
+
+/*foother avatar*/
+img.avatar {
+    border-radius: 5px;
 }

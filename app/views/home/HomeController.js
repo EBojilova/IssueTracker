@@ -54,6 +54,5 @@ app.controller('HomeController', ['$scope', '$rootScope', 'homeService', 'notify
 
         //parvia pat ste se izpalni samo s default parameters
         $scope.reloadIssues();
-
     }]
 );
