@@ -3,7 +3,7 @@ Issue Tracker<span ng-if="pageTitle"> &ndash; {{pageTitle}}</span>
 <div ng-if="authService.isLoggedIn()" class="user-area">
 	<span>
 		<strong>Username: </strong>{{authService.getCurrentUser().Username}}
-		<span class="royal" ng-if="authService.getCurrentUser().isAdmin"> (is Admin)</span>
+		<span class="royal" ng-if="authService.isAdmin()"> (is Admin)</span>
 	</span>
 
 	<span ng-if="authService.getCurrentUser().isAdmin">

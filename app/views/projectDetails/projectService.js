@@ -11,7 +11,7 @@ app.factory('projectService', ['$http', 'baseServiceUrl', 'authService',
                     $http(request).success(success);
                 },
 
-                getProjectIssues: function getProjectIssues(projectId) {
+                getProjectIssues: function getProjectIssues(projectId, success) {
                     var request = {
                         method: 'GET',
                         url: baseServiceUrl + 'projects/' + projectId + '/Issues',

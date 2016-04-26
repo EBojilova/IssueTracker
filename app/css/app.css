@@ -220,7 +220,7 @@ td.columnB {
 
 /*alingn content to header and footer at sides*/
 #app-content {
-    padding-top: 50px;
+    /*padding-top: 50px;*/
     margin: 0px 5px 0px 5px;
 }
 

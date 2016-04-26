@@ -1,7 +1,7 @@
 app.controller('ProjectController', [
-    '$scope', '$routeParams', 'projectService',
-    function ($scope, $routeParams, projectService) {
-
+    '$scope', '$rootScope', '$routeParams', 'projectService',
+    function ($scope, $rootScope, $routeParams, projectService) {
+        $rootScope.pageTitle = "Project Details";
         function getProjectById(id) {
             projectService.getProjectById(id,
                 function success(data) {
@@ -30,9 +30,27 @@ app.controller('ProjectController', [
         }
 
         function getProjectIssues(projectId) {
+            $scope.issuesLoaded = false;
             projectService.getProjectIssues(projectId,
                 function success(data) {
-                        $scope.projectIssues = data;
+                    $scope.projectIssues = data;
+                    $scope.issuesLoaded = true;
+
+                    //authors and assignees are needed for selection filters
+                    $scope.authors = [];
+                    $scope.assignees = [];
+                    var hashAuthors = {};
+                    var hashAssignee = {};
+                    issues.data.forEach(function(issue){
+                        if (!hashAuthors[issue.Author.Username]){
+                            hashAuthors[issue.Author.Username] = true;
+                            $scope.authors.push([issue.Author.Username, issue.Author.Id]);
+                        }
+                        if (!hashAssignee[issue.Assignee.Username]){
+                            hashAssignee[issue.Assignee.Username]=true;
+                            $scope.assignees.push([issue.Assignee.Username, issue.Assignee.Id]);
+                        }
+                    });
                     //[{
                     //        "Id": 31,
                     //        "Title": "hopes up",
@@ -55,8 +73,8 @@ app.controller('ProjectController', [
                     //        "Labels": [],
                     //        "AvailableStatuses": []
                     //    }, ....]
-                    }
-                )
+                }
+            )
         }
 
         getProjectById($routeParams.id);

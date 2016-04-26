@@ -1,7 +1,8 @@
-<div class="col-md-7">
-    <!--TODO:-->
-    <div ng-issues-filters></div>
-    <table class="table table-hover">
+<div class="box">
+    <div ng-include="'views/projectDetails/templates/issuesFilters.html'"></div>
+
+    <h2>Project's Issues</h2>
+    <table class="table table-hover" id="filter">
         <thead>
         <tr>
             <th>Title</th>
@@ -12,10 +13,10 @@
         </thead>
         <tbody>
 
-        <tr ng-repeat="issue in projectIssues
+        <tr ng-repeat="issue in filtered =( projectIssues
             |filter:{Status: {Id:statusFilter||'!!'}}
             |filter: {Assignee: {Id: assigneeFilter||'!!'}}
-            |filter: {Author: {Id: authorFilter||'!!'}}">
+            |filter: {Author: {Id: authorFilter||'!!'}})">
             <td><a href="#issues/{{issue.Id}}">{{issue.Title}}</a></td>
             <td>{{issue.Description}}</td>
             <td>{{issue.DueDate|date}}</td>
@@ -23,4 +24,13 @@
         </tr>
         </tbody>
     </table>
+
+    <!--NO DATA FOUND-->
+    <div ng-if="projectIssues.length==0" class="box no-data">
+        No Issues found.
+    </div>
+
 </div>
+
+
+

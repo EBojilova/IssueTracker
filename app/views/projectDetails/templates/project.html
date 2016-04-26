@@ -1,4 +1,12 @@
-<div class="jumbotron container">
-    <div ng-project-info></div>
-    <div ng-project-issues-table></div>
+<img src="images/ajax_loader_blue_512.gif" alt="Loading..." ng-hide="issuesLoaded" class="loading">
+
+
+<div class="row" ng-cloak>
+    <div class="col-md-3">
+        <div ng-include="'views/projectDetails/templates/projectDetails.html'"></div>
+    </div>
+
+    <div class="col-md-9">
+        <div ng-include="'views/projectDetails/templates/issuesTable.html'"></div>
+    </div>
 </div>
