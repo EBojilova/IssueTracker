@@ -1,11 +1,11 @@
 app.controller('ProjectController', [
-    '$scope', '$routeParams', 'projectService', 'authService', 'notifyService',
-    function ($scope, $routeParams, projectService, authService, notifyService) {
+    '$scope', '$routeParams', 'projectService',
+    function ($scope, $routeParams, projectService) {
 
         function getProjectById(id) {
             projectService.getProjectById(id,
-                function success(project) {
-                    $scope.project = project.data;
+                function success(data) {
+                    $scope.project = data;
                     //{
                     //    "Id": 2,
                     //    "Name": "new",
@@ -26,41 +26,38 @@ app.controller('ProjectController', [
                     //    {
                     //        "Id": 1, "Name": "Low"
                     //    }]}
-                    //TODO:
-                    authService.setProjectLeader($scope.project.Id,
-                        function success() {
-                            $scope.isProjectLeader = authService.isProjectLeader();
-                        }
-                    );
                 })
-        };
+        }
 
-        getProjectIssues = function (projectId) {
-            projectService.getProjectIssues(projectId)
-                .then(
-                    function success(issues) {
-                        $scope.projectIssues = issues.data;
-                        //console.log(issues.data);
-                        $scope.authors = [];
-                        $scope.assignees = [];
-                        var hashAuthors = {};
-                        var hashAssignee = {};
-                        issues.data.forEach(function (issue) {
-                            if (!hashAuthors[issue.Author.Username]) {
-                                hashAuthors[issue.Author.Username] = true;
-                                $scope.authors.push([issue.Author.Username, issue.Author.Id]);
-                            }
-                            if (!hashAssignee[issue.Assignee.Username]) {
-                                hashAssignee[issue.Assignee.Username] = true;
-                                $scope.assignees.push([issue.Assignee.Username, issue.Assignee.Id]);
-                            }
-                        });
-                    },
-                    function error(err) {
-                        notifyService.showError('Cannot load issues for this project', err);
+        function getProjectIssues(projectId) {
+            projectService.getProjectIssues(projectId,
+                function success(data) {
+                        $scope.projectIssues = data;
+                    //[{
+                    //        "Id": 31,
+                    //        "Title": "hopes up",
+                    //        "IssueKey": "1-1",
+                    //        "Description": "work work",
+                    //        "DueDate": "2016-04-23T00:00:00",
+                    //        "Project": {"Id": 2, "Name": "new"},
+                    //        "Author": {
+                    //            "Id": "13410e44-e9c9-456f-a58d-4e2815db856e",
+                    //            "Username": "echo@eee",
+                    //            "isAdmin": true
+                    //        },
+                    //        "Assignee": {
+                    //            "Id": "1cf0c4f9-73a3-4344-b4a5-1d3ad8d33abf",
+                    //            "Username": "saivanov@mail.bg",
+                    //            "isAdmin": false
+                    //        },
+                    //        "Priority": {"Id": 130,"Name": "Urgent3"},
+                    //        "Status": {"Id": 1,"Name": "Closed"  },
+                    //        "Labels": [],
+                    //        "AvailableStatuses": []
+                    //    }, ....]
                     }
                 )
-        };
+        }
 
         getProjectById($routeParams.id);
         getProjectIssues($routeParams.id);

@@ -82,6 +82,14 @@ app.factory('authService',
                 });
             },
 
+            getAuthHeaders: function () {
+                var headers = {};
+                if (this.isLoggedIn()) {
+                    headers['Authorization'] = 'Bearer ' + sessionStorage['access_token'];
+                }
+                return headers;
+            },
+
             getCurrentUser: function () {
                 var userObject = sessionStorage['current_user'];
                 if (userObject) {
@@ -107,13 +115,12 @@ app.factory('authService',
                 return (currentUser != undefined) && (currentUser.isAdmin);
             },
 
-            getAuthHeaders: function () {
-                var headers = {};
-                if (this.isLoggedIn()) {
-                    headers['Authorization'] = 'Bearer ' + sessionStorage['access_token'];
-                }
-                return headers;
+            isProjectLeader: function (projectLeaderId) {
+                var currentUser = this.getCurrentUser();
+                return (currentUser != undefined) && (currentUser.Id == projectLeaderId);
             },
+
+
             //TODO:
             // PUT api/user/Profile
             editUserProfile: function (user, success, error) {
