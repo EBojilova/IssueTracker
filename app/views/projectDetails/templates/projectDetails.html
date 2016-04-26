@@ -1,12 +1,11 @@
 <div class="box">
-	<h2>Project</h2>
-
-	<div ng-if="authService.isAdmin()||authService.isProjectLeader(project.Lead.Id)">
-		<a class="btn btn-primary" href="#projects/edit/{{project.Id}}">Edit</a>
-		<a class="btn btn-primary" href="#projects/add-issue/{{project.Id}}">Add Issue</a>
+	<div class="pull-right">
+		<div ng-if="authService.isAdmin()||authService.isProjectLeader(project.Lead.Id)">
+			<a class="btn btn-primary" href="#projects/edit/{{project.Id}}">Edit</a>
+			<a class="btn btn-primary" href="#projects/add-issue/{{project.Id}}">Add Issue</a>
+		</div>
 	</div>
-
-
+	<h2>Project</h2>
 	<strong>Name:</strong>
 	<p class="overflow">{{project.Name}}</p>
 
@@ -17,16 +16,36 @@
 	<p class="overflow">{{project.Lead.Username}}<span class="royal" ng-if="project.Lead.isAdmin"> (is Admin)</span></p>
 
 	<strong>Labels:</strong>
-	<p><span ng-repeat="label in project.Labels">{{label.Name}}{{$last ? '' : ', '}}</span></p>
+	<p class="overflow"><span ng-repeat="label in project.Labels">{{label.Name}}{{$last ? '' : ', '}}</span></p>
 
 	<strong>Priorities:</strong>
 	<p class="overflow"><span ng-repeat="priority in project.Priorities">{{priority.Name}}{{$last ? '' : ', '}}</span></p>
 
 	<strong>Description:</strong>
-	<p>
-		<textarea>{{project.Description}}</textarea>
-	</p>
+	<!-- Trigger the modal with a button -->
+	<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal">Show Description
+	</button>
 
+	<!-- Modal -->
+	<div id="myModal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Description</h4>
+				</div>
+				<div class="modal-body">
+					<p><span class="overflow">{{project.Description}}</span></p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
 
 
 </div>

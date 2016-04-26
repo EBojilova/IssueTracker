@@ -10,7 +10,6 @@ app.controller('AllProjectsController', ['$scope', '$rootScope', 'allProjectsSer
             $scope.projectsLoaded=false;
             allProjectsService.getUserProjects(
                 function success(data) {
-                    console.log(data.length);
                     $scope.projects = data;
                     $scope.projectsLoaded=true;
                 }
