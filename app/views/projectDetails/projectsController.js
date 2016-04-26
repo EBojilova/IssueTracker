@@ -1,7 +1,7 @@
 app.controller('ProjectController', [
     '$scope', '$rootScope', '$routeParams', 'projectService',
     function ($scope, $rootScope, $routeParams, projectService) {
-        $rootScope.pageTitle = "Project Details";
+        $rootScope.pageTitle = "Project's Details";
         function getProjectById(id) {
             projectService.getProjectById(id,
                 function success(data) {
@@ -41,7 +41,7 @@ app.controller('ProjectController', [
                     $scope.assignees = [];
                     var hashAuthors = {};
                     var hashAssignee = {};
-                    issues.data.forEach(function(issue){
+                    data.forEach(function(issue){
                         if (!hashAuthors[issue.Author.Username]){
                             hashAuthors[issue.Author.Username] = true;
                             $scope.authors.push([issue.Author.Username, issue.Author.Id]);

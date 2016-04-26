@@ -30,7 +30,7 @@
 		<thead>
 		<tr>
 			<th>Name</th>
-			<th class="columnA">Lead</th>
+			<th >Lead</th>
 			<th>Description</th>
 			<th>Labels</th>
 			<th>Priorities</th>
@@ -39,7 +39,7 @@
 		<tbody>
 		<tr ng-repeat="project in filtered =(projects | orderBy: sort | filter:search)">
 			<td><a href="#/projects/{{project.Id}}" class="link">{{ project.Name }}</a></td>
-			<td class="columnA">{{ project.Lead.Username }}<span class="royal" ng-if="project.Lead.isAdmin"> (is Admin)</span>
+			<td >{{ project.Lead.Username }}<span class="royal" ng-if="project.Lead.isAdmin"> (is Admin)</span>
 			</td>
 			<td>{{ project.Description }}</td>
 			<td><span ng-repeat="label in project.Labels">{{label.Name}}{{$last ? '' : ', '}} </span></td>

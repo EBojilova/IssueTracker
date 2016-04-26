@@ -1,7 +1,8 @@
 <div class="box">
-    <div ng-include="'views/projectDetails/templates/issuesFilters.html'"></div>
+    <div ng-issues-filters></div>
 
-    <h2>Project's Issues</h2>
+    <h2>Issues:</h2>
+	<!--TODO:format table columns width-->
     <table class="table table-hover" id="filter">
         <thead>
         <tr>
@@ -9,6 +10,7 @@
             <th>Description</th>
             <th>Due Date</th>
             <th>Assignee</th>
+            <th>Status</th>
         </tr>
         </thead>
         <tbody>
@@ -21,14 +23,10 @@
             <td>{{issue.Description}}</td>
             <td>{{issue.DueDate|date}}</td>
             <td>{{issue.Assignee.Username}}</td>
+            <td>{{issue.Status.Name}}</td>
         </tr>
         </tbody>
     </table>
-
-    <!--NO DATA FOUND-->
-    <div ng-if="projectIssues.length==0" class="box no-data">
-        No Issues found.
-    </div>
 
 </div>
 
