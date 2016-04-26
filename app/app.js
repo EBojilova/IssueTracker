@@ -8,12 +8,12 @@ app.constant('pageSize', 8);
 app.config(function ($routeProvider) {
     // paths are given from index.html path, not from app.js path
     $routeProvider.when('/', {
-        templateUrl: 'views/public/public.html',
+        templateUrl: 'views/public/templates/public.html',
         controller: 'PublicController'
     });
 
     $routeProvider.when('/dashboard', {
-        templateUrl: 'views/home/home.html',
+        templateUrl: 'views/home/templates/home.html',
         controller: 'HomeController',
         access: {
             requiresLoggedUser: true
@@ -21,11 +21,27 @@ app.config(function ($routeProvider) {
     });
 
     $routeProvider.when('/projects', {
-        templateUrl: 'views/allProjects/all-projects.html',
+        templateUrl: 'views/allProjects/templates/all-projects.html',
         controller: 'AllProjectsController',
         access: {
             requiresLoggedUser: true,
             requiresAdmin: true
+        }
+    });
+
+    $routeProvider.when('/projects/:id', {
+        controller: 'ProjectController',
+        templateUrl: 'views/projectDetails/templates/project.html',
+        access: {
+            requiresLoggedUser: true
+        }
+    });
+
+    $routeProvider.when('/projects/edit/:id', {
+        controller: 'ProjectEditController',
+        templateUrl: 'views/editProject/project-edit.html',
+        access: {
+            requiresLoggedUser: true
         }
     });
 

@@ -263,7 +263,7 @@ table#filter tr {
 
 table#filter {
     /*Select the height of the table*/
-    height: 400px;
+    height: 380px;
     /*Firefox Bad Effect*/
     display: -moz-groupbox;
 }

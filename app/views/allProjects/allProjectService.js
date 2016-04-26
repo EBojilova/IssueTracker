@@ -8,7 +8,7 @@ app.factory('allProjectsService', ['$http', 'baseServiceUrl', 'authService',
                 var request = {
                     method: 'GET',
                     url: baseServiceUrl + 'projects',
-                    headers: authService.getAuthHeaders(),
+                    headers: authService.getAuthHeaders()
                 };
                 //{
                 //
