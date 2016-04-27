@@ -22,8 +22,10 @@
 	<p class="overflow"><span ng-repeat="priority in project.Priorities">{{priority.Name}}{{$last ? '' : ', '}}</span></p>
 
 	<strong>Description:</strong>
+	<div class="text-area">{{project.Description}}</div>
+
 	<!-- Trigger the modal with a button -->
-	<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal">Show Description
+	<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal">Show Full Description
 	</button>
 
 	<!-- Modal -->
