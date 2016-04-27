@@ -1,15 +1,17 @@
-<div class="pull-right">
+<div class="pull-right" id="statuses-box">
 
-	<p><strong>Status: <span class="royal">{{issue.Status.Name}}</span></strong></p>
+		<p><strong>Status: <span class="royal">{{issue.Status.Name}}</span></strong></p>
 
-	<div class="table" ng-if="issue.AvailableStatuses.length&&(authService.isAdmin()||isProjectLeader||isAssignee)">
-		<h6>Can change Status to:</h6>
-		<p ng-repeat="status in issue.AvailableStatuses">
+		<div class="form-group"
+		     ng-if="issue.AvailableStatuses.length&&(authService.isAdmin()||isProjectLeader||isAssignee)">
+			<label for="authorSelect">Can change Status to:</label>
+			<select class="form-control" id="authorSelect">
+				<option value="{{issue.Status.Id}}" selected>{{issue.Status.Name}}</option>
+				<option ng-repeat="status in issue.AvailableStatuses" value="{{status.Id}}"
+				        ng-click="changeStatus(status.Id)">{{status.Name}}
+				</option>
+			</select>
+		</div>
 
-				<button class="btn btn-primary btn-sm" ng-click="changeStatus(status.Id)" role="button">{{status.Name}}
-				</button>
-
-		</p>
-	</div>
 </div>
 

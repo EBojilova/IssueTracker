@@ -1,15 +1,15 @@
 <div class="box">
-	<div ng-include="'views/issueDetails/templates/statucesTable.html'"></div>
-	<h2>Issue</h2>
 
-	<div ng-if="authService.isAdmin()||isProjectLeader">
-		<a class="btn btn-primary"  href="#issues/edit/{{issue.Id}}">Edit</a>
+	<div ng-if="authService.isAdmin()||isProjectLeader" class="pull-right" id="edit-issue">
+		<a class="btn btn-primary" href="#issues/edit/{{issue.Id}}">Edit</a>
 	</div>
 
+	<h2>Issue</h2>
 
 	<strong>Title:</strong>
 	<p class="overflow">{{issue.Title}}</p>
 
+	<div ng-include="'views/issueDetails/templates/statucesTable.html'"></div>
 	<strong>DueDate:</strong>
 	<p class="overflow">{{issue.DueDate|date}}</p>
 
@@ -17,7 +17,8 @@
 	<p class="overflow">{{issue.Priority.Name}}</p>
 
 	<strong>Issue’s Assignee:</strong>
-	<p class="overflow">{{issue.Assignee.Username}}<span class="royal" ng-if="issue.Assignee.isAdmin"> (is Admin)</span></p>
+	<p class="overflow">{{issue.Assignee.Username}}<span class="royal" ng-if="issue.Assignee.isAdmin"> (is Admin)</span>
+	</p>
 
 	<strong>Author:</strong>
 	<p class="overflow">{{issue.Author.Username}}<span class="royal" ng-if="issue.Author.isAdmin"> (is Admin)</span></p>
@@ -29,8 +30,31 @@
 	<p><span ng-repeat="label in issue.Labels">{{label.Name}}{{$last ? '' : ', '}}</span></p>
 
 	<strong>Description:</strong>
-	<p class="overflow">{{issue.Description}}</p>
+	<!-- Trigger the modal with a button -->
+	<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal">Show Full
+		Description
+	</button>
 
+	<!-- Modal -->
+	<div id="myModal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
 
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Description</h4>
+				</div>
+				<div class="modal-body">
+					<p><span class="overflow">{{issue.Description}}</span></p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<div class="text-area">{{issue.Description}}</div>
 </div>
 
