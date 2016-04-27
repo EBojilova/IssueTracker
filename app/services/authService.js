@@ -115,11 +115,6 @@ app.factory('authService',
                 return (currentUser != undefined) && (currentUser.isAdmin);
             },
 
-            isProjectLeader: function (projectLeaderId) {
-                var currentUser = this.getCurrentUser();
-                return (currentUser != undefined) && (currentUser.Id == projectLeaderId);
-            },
-
 
             //TODO:
             // PUT api/user/Profile

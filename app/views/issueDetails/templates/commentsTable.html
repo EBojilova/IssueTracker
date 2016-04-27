@@ -1,0 +1,38 @@
+<div class="box">
+    <!--FILTERS-->
+    <div ng-comments-filters></div>
+
+    <h2>Comments:</h2>
+	<!--TODO:format table columns width-->
+    <table class="table" id="filter">
+        <tbody>
+        <tr>
+            <td>
+                <div ng-if="isProjectLeader||isAssignee" class="form-group" id="add-comment-field">
+                    <form action="" name="commentsForm">
+                        <label for="comment-field">Leave comment:</label>
+                        <textarea ng-model="newComment.text" class="form-control" id="comment-field" minlength="2" placeholder="Type text here..." required></textarea>
+                        <button ng-disabled="commentsForm.$invalid" class="btn btn-primary form-control" ng-click="addComment(newComment.text)">Add New Comment</button>
+                    </form>
+                </div>
+            </td>
+        </tr>
+
+        <tr ng-repeat="comment in filtered =( comments|filter:search)">
+            <td>
+                <div class="panel panel-success">
+                    <div class="panel-heading">{{comment.Author.Username}} - {{comment.CreatedOn|date}}</div>
+                    <div class="panel-body">
+                        {{comment.Text}}
+                    </div>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+
+

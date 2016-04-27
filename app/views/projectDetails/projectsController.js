@@ -6,6 +6,8 @@ app.controller('ProjectController', [
             projectService.getProjectById(id,
                 function success(data) {
                     $scope.project = data;
+                    // TODO: check parse JSON for ===
+                    $scope.isProjectLeader = $scope.project.Lead.Id === authService.getCurrentUser().Id;
                     //{
                     //    "Id": 2,
                     //    "Name": "new",

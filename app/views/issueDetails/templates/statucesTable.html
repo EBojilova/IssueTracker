@@ -1,0 +1,15 @@
+<div class="pull-right">
+
+	<p><strong>Status: <span class="royal">{{issue.Status.Name}}</span></strong></p>
+
+	<div class="table" ng-if="issue.AvailableStatuses.length&&(authService.isAdmin()||isProjectLeader||isAssignee)">
+		<h6>Can change Status to:</h6>
+		<p ng-repeat="status in issue.AvailableStatuses">
+
+				<button class="btn btn-primary btn-sm" ng-click="changeStatus(status.Id)" role="button">{{status.Name}}
+				</button>
+
+		</p>
+	</div>
+</div>
+

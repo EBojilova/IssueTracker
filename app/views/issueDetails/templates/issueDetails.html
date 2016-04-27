@@ -1,0 +1,36 @@
+<div class="box">
+	<div ng-include="'views/issueDetails/templates/statucesTable.html'"></div>
+	<h2>Issue</h2>
+
+	<div ng-if="authService.isAdmin()||isProjectLeader">
+		<a class="btn btn-primary"  href="#issues/edit/{{issue.Id}}">Edit</a>
+	</div>
+
+
+	<strong>Title:</strong>
+	<p class="overflow">{{issue.Title}}</p>
+
+	<strong>DueDate:</strong>
+	<p class="overflow">{{issue.DueDate|date}}</p>
+
+	<strong>Priority:</strong>
+	<p class="overflow">{{issue.Priority.Name}}</p>
+
+	<strong>Issue’s Assignee:</strong>
+	<p class="overflow">{{issue.Assignee.Username}}<span class="royal" ng-if="issue.Assignee.isAdmin"> (is Admin)</span></p>
+
+	<strong>Author:</strong>
+	<p class="overflow">{{issue.Author.Username}}<span class="royal" ng-if="issue.Author.isAdmin"> (is Admin)</span></p>
+
+	<strong>From project:</strong>
+	<p class="overflow">{{issue.Project.Name}}</p>
+
+	<strong>Labels:</strong>
+	<p><span ng-repeat="label in issue.Labels">{{label.Name}}{{$last ? '' : ', '}}</span></p>
+
+	<strong>Description:</strong>
+	<p class="overflow">{{issue.Description}}</p>
+
+
+</div>
+

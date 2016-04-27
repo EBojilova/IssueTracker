@@ -1,6 +1,6 @@
 <div class="box">
 	<div class="pull-right">
-		<div ng-if="authService.isAdmin()||authService.isProjectLeader(project.Lead.Id)">
+		<div ng-if="authService.isAdmin()||isProjectLeader">
 			<a class="btn btn-primary" href="#projects/edit/{{project.Id}}">Edit</a>
 			<a class="btn btn-primary" href="#projects/add-issue/{{project.Id}}">Add Issue</a>
 		</div>

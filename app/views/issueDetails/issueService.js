@@ -1,8 +1,8 @@
-app.factory('issuePageService', ['$http', 'baseServiceUrl', 'authService',
+app.factory('issueService', ['$http', 'baseServiceUrl', 'authService',
     function ($http, baseServiceUrl, authService) {
 
         return {
-            getIssueById: function getIssueById(issueId) {
+            getIssueById: function getIssueById(issueId, success) {
                 var request = {
                     method: 'GET',
                     url: baseServiceUrl + 'Issues/' + issueId,
@@ -11,8 +11,7 @@ app.factory('issuePageService', ['$http', 'baseServiceUrl', 'authService',
                 $http(request).success(success);
             },
 
-            changeIssueStatus: function changeIssueStatus(issueId, statusId) {
-                var deferred = $q.defer();
+            changeIssueStatus: function changeIssueStatus(issueId, statusId, success) {
                 var request = {
                     method: 'PUT',
                     url: baseServiceUrl + 'Issues/' + issueId + '/changestatus?statusid=' + statusId,
@@ -21,8 +20,7 @@ app.factory('issuePageService', ['$http', 'baseServiceUrl', 'authService',
                 $http(request).success(success);
             },
 
-            getIssueComments: function getIssueComments(issueId) {
-                var deferred = $q.defer();
+            getIssueComments: function getIssueComments(issueId, success) {
                 var request = {
                     method: 'GET',
                     url: baseServiceUrl + 'Issues/' + issueId + '/comments',
@@ -31,8 +29,7 @@ app.factory('issuePageService', ['$http', 'baseServiceUrl', 'authService',
                 $http(request).success(success);
             },
 
-            addComment: function addComment(comment, issueId) {
-                var deferred = $q.defer();
+            addComment: function addComment(comment, issueId, success) {
                 var request = {
                     method: 'POST',
                     url: baseServiceUrl + 'Issues/' + issueId + '/comments',
