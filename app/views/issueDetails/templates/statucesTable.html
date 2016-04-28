@@ -1,7 +1,4 @@
-<div class="pull-right" id="statuses-box">
-
-	<p><strong>Status: <span class="royal">{{issue.Status.Name}}</span></strong></p>
-
+<div class="pull-right">
 	<!-- Extra small button group -->
 	<div class="btn-group" ng-if="issue.AvailableStatuses.length&&(authService.isAdmin()||isProjectLeader||isAssignee)">
 		<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true"
@@ -13,6 +10,11 @@
 			</li>
 		</ul>
 	</div>
-
 </div>
 
+<div class="pull-right" id="status">
+
+	<strong>Status: </strong>
+	<p><strong><span class="royal">{{issue.Status.Name}} </span></strong></p>
+
+</div>

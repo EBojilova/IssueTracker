@@ -29,7 +29,7 @@ app.factory('issueService', ['$http', 'baseServiceUrl', 'authService',
                 $http(request).success(success);
             },
 
-            addComment: function addComment(comment, issueId, success) {
+            addCommentToIssue: function addComment(comment, issueId, success) {
                 var request = {
                     method: 'POST',
                     url: baseServiceUrl + 'Issues/' + issueId + '/comments',

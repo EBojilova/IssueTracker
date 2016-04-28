@@ -1,12 +1,29 @@
 <div class="box">
 	<!--FILTERS-->
+	<div class="row">
+		<div class="box-row">
+			<div ng-comments-filters></div>
 
-	<div ng-comments-filters></div>
+			<h2>Comments:</h2>
+		</div>
+	</div>
 
-	<h2>Comments:</h2>
-	<br/>
-	<hr/>
-
+	<form name="addCommentForm" ng-if="isProjectLeader || isAssignee">
+		<div class="form-group">
+			<label for="addComment">Add comment</label>
+			<textarea class="form-control" id="addComment" ng-model="issueComment.Text" required="required" name="message" placeholder="Write your message here..."></textarea>
+			<span ng-show="addCommentForm.$valid">&nbsp</span>
+			<span ng-show="addCommentForm.message.$error.required" class="err"><span class="snowflake">*</span>Required</span>
+			<span ng-show="addCommentForm.message.$error.minlength" class="err"><span class="snowflake">*</span>Minimum 2 characters</span>
+			<span ng-show="addCommentForm.message.$error.maxlength" class="err"><span class="snowflake">*</span>Maximum 1000 characters</span>
+			<div class="text-right">
+				<button class="btn btn-primary"
+				        ng-disabled="addCommentForm.$invalid"
+				        ng-click="addComment(issueComment)">Add Comment
+				</button>
+			</div>
+		</div>
+	</form>
 
 	<div ng-repeat="comment in filtered =( comments|filter:search)">
 		<div class="panel panel-success">
@@ -16,27 +33,6 @@
 	</div>
 </div>
 
-<div class="box" name="commentsForm" ng-if="isProjectLeader||isAssignee">
-	<form action="">
-		<div class="form-group">
-			<label for="comment-field">Leave comment:</label>
-						<textarea ng-model="newComment.text" class="form-control" id="comment-field" ng-minlength="2"
-						          ng-maxlength="1000" placeholder="Type text here..." required
-						          name="message"></textarea>
-						<span ng-show="commentsForm.message.$error.required" class="err"><span
-								class="snowflake">*</span>Required</span>
-						<span ng-show="commentsForm.message.$error.minlength" class="err"><span
-								class="snowflake">*</span>Minimum 2 characters</span>
-						<span ng-show="commentsForm.message.$error.maxlength" class="err"><span
-								class="snowflake">*</span>Maximum 1000 characters</span>
-		</div>
-
-		<button ng-disabled="commentsForm.$invalid" class="btn btn-primary"
-		        ng-click="addComment(newComment)">Add New Comment
-		</button>
-
-	</form>
-</div>
 
 
 

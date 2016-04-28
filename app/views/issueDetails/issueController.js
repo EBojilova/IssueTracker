@@ -2,7 +2,7 @@ app.controller('IssueController', [
     '$scope', '$rootScope', '$routeParams', '$location', 'issueService', 'authService', 'projectService',
     function ($scope, $rootScope, $routeParams, $location, issueService, authService, projectService) {
         $rootScope.pageTitle = "Issues's Details";
-        //$scope.newComment = {};
+        $scope.issueComment = {};
 
         function getIssue() {
             issueService.getIssueById($routeParams.id,
@@ -85,12 +85,10 @@ app.controller('IssueController', [
         }
 
         $scope.addComment = function (comment) {
-            console.log(comment);
-            issueService.addComment(comment, $routeParams.id,
+            issueService.addCommentToIssue(comment, $routeParams.id,
                 function success(data) {
-                    //$scope.newComment = {};
                     $scope.comments = data;
-                    // TODO: new comment does not show immediately
+                    $scope.issueComment.Text = null;
                 }
             );
             //    [

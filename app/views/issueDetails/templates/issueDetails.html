@@ -1,7 +1,7 @@
 <div class="box">
 
 	<div ng-if="authService.isAdmin()||isProjectLeader" class="pull-right" id="edit-issue">
-		<a class="btn btn-primary" href="#issues/edit/{{issue.Id}}">Edit</a>
+		<a class="btn btn-primary" href="#issues/edit/{{issue.Id}}">Edit Issue</a>
 	</div>
 
 	<h2>Issue</h2>
@@ -9,7 +9,7 @@
 	<strong>Title:</strong>
 	<p class="overflow">{{issue.Title}}</p>
 
-	<div ng-include="'views/issueDetails/templates/statucesTable.html'"></div>
+	<div ng-include="'views/issueDetails/templates/statucesTable.html'" ></div>
 	<strong>DueDate:</strong>
 	<p class="overflow">{{issue.DueDate|date}}</p>
 

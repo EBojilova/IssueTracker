@@ -13,6 +13,7 @@
 					       required="required" placeholder="Username" name="name">
 				</div>
 				<div class="col-md-9 col-md-offset-3">
+					<span ng-show="registerForm.name.$valid"><span class="royal">Correct input</span></span>
 					<span ng-show="registerForm.name.$error.required" class="err"><span class="snowflake">*</span>Required</span>
 				</div>
 			</div>
@@ -24,6 +25,7 @@
 					       placeholder="Password" name="pass">
 				</div>
 				<div class="col-md-9 col-md-offset-3">
+					<span ng-show="registerForm.pass.$valid"><span class="royal">Correct input</span></span>
 					<span ng-show="registerForm.pass.$error.required" class="err"><span class="snowflake">*</span>Required</span>
 					<span ng-show="registerForm.pass.$error.minlength" class="err"><span class="snowflake">*</span>Minimum 6 characters</span>
 					<span ng-show="registerForm.pass.$error.maxlength" class="err"><span class="snowflake">*</span>Maximum 100 characters</span>
@@ -37,6 +39,7 @@
 					       placeholder="Confirm password" name="confirmPass">
 				</div>
 				<div class="col-md-9 col-md-offset-3">
+					<span ng-show="registerForm.confirmPass.$valid&&user.password == user.confirmPassword"><span class="royal">Correct input</span></span>
 					<span ng-show="registerForm.confirmPass.$error.required" class="err"><span class="snowflake">*</span>Required</span>
 					<span ng-show="user.password != user.confirmPassword" class="err"><span class="snowflake">*</span>Must match the previous entry</span>
 				</div>
@@ -48,6 +51,7 @@
 					       required="required" placeholder="Email" name="email">
 				</div>
 				<div class="col-md-9 col-md-offset-3">
+					<span ng-show="registerForm.email.$valid"><span class="royal">Correct input</span></span>
 					<span ng-show="registerForm.email.$error.required" class="err"><span class="snowflake">*</span>Required</span>
 					<span ng-show="registerForm.email.$error.email" class="err"><span class="snowflake">*</span>Not a valid email address</span>
 				</div>
