@@ -53,6 +53,14 @@ app.config(function ($routeProvider) {
         }
     });
 
+    $routeProvider.when('/projects/add-issue/:id', {
+        controller: 'AddIssueController',
+        templateUrl: 'views/addIssue/templates/add-issue.html',
+        access: {
+            requiresLoggedUser: true
+        }
+    })
+
     $routeProvider.when('/user/ads/publish', {
         templateUrl: 'views/User/publish-new-ad/publish-new-ad.html',
         controller: 'UserPublishNewAdController'
