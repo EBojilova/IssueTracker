@@ -34,7 +34,7 @@ app.factory('issueService', ['$http', 'baseServiceUrl', 'authService',
                     method: 'POST',
                     url: baseServiceUrl + 'Issues/' + issueId + '/comments',
                     headers: authService.getAuthHeaders(),
-                    data: {'Text': comment}
+                    data: comment
                 };
                 $http(request).success(success);
             }

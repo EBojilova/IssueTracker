@@ -320,7 +320,16 @@ body {
     overflow-x: hidden;
 }
 
-select option{
+option, .green{
     background-color: #E2F0D9;
 }
 
+.gray{
+    color: whitesmoke;
+}
+
+.panel-body{
+    display: inline-block;
+    width: 100%;
+    height: auto;
+}

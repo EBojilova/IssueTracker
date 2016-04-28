@@ -85,6 +85,7 @@ app.controller('IssueController', [
         }
 
         $scope.addComment = function (comment) {
+            console.log(comment);
             issueService.addComment(comment, $routeParams.id,
                 function success(data) {
                     //$scope.newComment = {};

@@ -1,36 +1,45 @@
 <div class="box">
-    <!--FILTERS-->
-    <div ng-comments-filters></div>
+	<!--FILTERS-->
 
-    <h2>Comments:</h2>
-	<!--TODO:format table columns width-->
-    <table class="table">
-        <tbody>
-        <tr ng-if="isProjectLeader||isAssignee" >
-            <td>
-                <div class="form-group" id="add-comment-field">
-                    <form action="" name="commentsForm">
-                        <label for="comment-field">Leave comment:</label>
-                        <textarea ng-model="newComment.text" class="form-control" id="comment-field" minlength="2" placeholder="Type text here..." required></textarea>
-                        <button ng-disabled="commentsForm.$invalid" class="btn btn-primary form-control" ng-click="addComment(newComment.text)">Add New Comment</button>
-                    </form>
-                </div>
-            </td>
-        </tr>
+	<div ng-comments-filters></div>
 
-        <tr ng-repeat="comment in filtered =( comments|filter:search)">
-            <td>
-                <div class="panel panel-success">
-                    <div class="panel-heading">{{comment.Author.Username}} - {{comment.CreatedOn|date}}</div>
-                    <div class="panel-body">
-                        {{comment.Text}}
-                    </div>
-                </div>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+	<h2>Comments:</h2>
+	<br/>
+	<hr/>
+
+
+	<div ng-repeat="comment in filtered =( comments|filter:search)">
+		<div class="panel panel-success">
+			<div class="panel-heading">{{comment.Author.Username}} - {{comment.CreatedOn|date}}</div>
+			<div class="panel-body"><p>{{comment.Text}}</p></div>
+		</div>
+	</div>
 </div>
+
+<div class="box" name="commentsForm" ng-if="isProjectLeader||isAssignee">
+	<form action="">
+		<div class="form-group">
+			<label for="comment-field">Leave comment:</label>
+						<textarea ng-model="newComment.text" class="form-control" id="comment-field" ng-minlength="2"
+						          ng-maxlength="1000" placeholder="Type text here..." required
+						          name="message"></textarea>
+						<span ng-show="commentsForm.message.$error.required" class="err"><span
+								class="snowflake">*</span>Required</span>
+						<span ng-show="commentsForm.message.$error.minlength" class="err"><span
+								class="snowflake">*</span>Minimum 2 characters</span>
+						<span ng-show="commentsForm.message.$error.maxlength" class="err"><span
+								class="snowflake">*</span>Maximum 1000 characters</span>
+		</div>
+
+		<button ng-disabled="commentsForm.$invalid" class="btn btn-primary"
+		        ng-click="addComment(newComment)">Add New Comment
+		</button>
+
+	</form>
+</div>
+
+
+
 
 
 

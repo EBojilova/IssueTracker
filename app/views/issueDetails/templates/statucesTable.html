@@ -1,17 +1,18 @@
 <div class="pull-right" id="statuses-box">
 
-		<p><strong>Status: <span class="royal">{{issue.Status.Name}}</span></strong></p>
+	<p><strong>Status: <span class="royal">{{issue.Status.Name}}</span></strong></p>
 
-		<div class="form-group"
-		     ng-if="issue.AvailableStatuses.length&&(authService.isAdmin()||isProjectLeader||isAssignee)">
-			<label for="authorSelect">Can change Status to:</label>
-			<select class="form-control" id="authorSelect">
-				<option value="{{issue.Status.Id}}" selected>{{issue.Status.Name}}</option>
-				<option ng-repeat="status in issue.AvailableStatuses" value="{{status.Id}}"
-				        ng-click="changeStatus(status.Id)">{{status.Name}}
-				</option>
-			</select>
-		</div>
+	<!-- Extra small button group -->
+	<div class="btn-group" ng-if="issue.AvailableStatuses.length&&(authService.isAdmin()||isProjectLeader||isAssignee)">
+		<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true"
+		        aria-expanded="false">
+			Change Status<span class="caret"></span>
+		</button>
+		<ul class="dropdown-menu">
+			<li ng-repeat="status in issue.AvailableStatuses" ng-click="changeStatus(status.Id)"><a>{{status.Name}}</a>
+			</li>
+		</ul>
+	</div>
 
 </div>
 
