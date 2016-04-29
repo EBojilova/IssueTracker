@@ -1,29 +1,14 @@
-app.factory('addIssueService', ['$http', 'baseServiceUrl',
-    function ($http, baseServiceUrl) {
+app.factory('addIssueService', ['$http', 'baseServiceUrl', 'authService',
+    function ($http, baseServiceUrl, authService) {
 
         return {
             addIssue: function addIssue(issue) {
-                var dataLabels = '';
-                issue.Labels.forEach(function (l, index) {
-                    dataLabels += '&labels[' + index + '].Name=' + l.trim();
-                });
-
-                var data = 'Title=' + issue.Title +
-                    '&Description=' + issue.Description +
-                    '&DueDate=' + issue.DueDate +
-                    '&ProjectId=' + issue.ProjectId +
-                    '&AssigneeId=' + issue.AssigneeId +
-                    '&PriorityId=' + issue.PriorityId +
-                    dataLabels;
 
                 var request = {
                     method: 'POST',
                     url: baseServiceUrl + 'issues/',
-                    data: data,
-                    headers: {
-                        Authorization: 'Bearer ' + sessionStorage.access_token,
-                        'Content-Type': 'application/x-www-form-urlencoded'
-                    }
+                    headers: authService.getAuthHeaders(),
+                    data: issue
                 };
 
                 $http(request).success(success);

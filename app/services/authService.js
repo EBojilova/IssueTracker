@@ -116,9 +116,18 @@ app.factory('authService',
             },
 
 
+            getAllUsers: function getAllUsers(success) {
+                var request = {
+                    method: 'GET',
+                    url: BASEURL + 'Users/',
+                    headers: this.getAuthHeaders()
+                };
+                $http(request).success(success);
+            },
+
             //TODO:
             // PUT api/user/Profile
-            editUserProfile: function (user, success, error) {
+            editUserProfile: function (user, success) {
                 var request = {
                     method: 'PUT',
                     url: baseServiceUrl + '/api/user/Profile',
@@ -128,11 +137,11 @@ app.factory('authService',
                 //{
                 //    "message": "User profile edited successfully."
                 //}
-                $http(request).success(success).error(error);
+                $http(request).success(success);
             },
 
             // PUT api/user/ChangePassword
-            changeUserPassword: function (user, success, error) {
+            changeUserPassword: function (user, success) {
                 var request = {
                     method: 'PUT',
                     url: baseServiceUrl + '/api/user/ChangePassword',
@@ -142,7 +151,7 @@ app.factory('authService',
                 //{
                 //    "message": "Password changed successfully."
                 //}
-                $http(request).success(success).error(error);
+                $http(request).success(success);
             }
         }
     }

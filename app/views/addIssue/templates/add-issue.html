@@ -79,11 +79,11 @@
 			<div class="form-group">
 				<label for="issuelabels" class="col-md-3 control-label">Labels:</label>
 				<div class="col-md-9">
-					<input type="text" class="form-control" ng-model="issue.Title" id="issueLabels"
-					       required="required" placeholder="Title" name="labels">
+					<!--ng-list used, the separator, default value is ", "-->
+					<input type="text" class="form-control" ng-model="issue.Title" id="issueLabels" ng-list
+					       required="required" placeholder="Labels, separated by comma" name="labels">
 				</div>
 				<div class="col-md-9 col-md-offset-3">
-					<span class="royal">Labels should be separated by <strong>comma</strong></span>
 					<span ng-show="issueForm.labels.$valid"><span class="royal">Correct input</span></span>
 					<span ng-show="issueForm.labels.$error.required" class="err"><span class="snowflake">*</span>Required</span>
 				</div>
@@ -93,7 +93,7 @@
 				<div class="col-md-9 col-lg-offset-3">
 					<button type="submit" class="btn btn-primary col-md-3"
 					        ng-disabled="issueForm.$invalid || issue.password != issue.confirmPassword"
-					        ng-click="addIssue(issue)">Add Issue
+					        ng-click="sumbitIssueForAdding(issue)">Add Issue
 					</button>
 				</div>
 			</div>
