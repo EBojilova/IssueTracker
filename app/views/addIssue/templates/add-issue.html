@@ -1,0 +1,102 @@
+<div class="box">
+	<form name="issueForm" class="form-horizontal" autocomplete="off">
+		<fieldset>
+			<div class="row">
+				<div class="col-md-6 col-md-offset-3">
+					<legend>Add Issue</legend>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="issueTitle" class="col-md-3 control-label">Title:</label>
+				<div class="col-md-9">
+					<input type="text" class="form-control" ng-model="issue.Title" id="issueTitle"
+					       required="required" placeholder="Title" name="title">
+				</div>
+				<div class="col-md-9 col-md-offset-3">
+					<span ng-show="issueForm.title.$valid"><span class="royal">Correct input</span></span>
+					<span ng-show="issueForm.title.$error.required" class="err"><span class="snowflake">*</span>Required</span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="issuePassword" class="col-md-3 control-label">Description:</label>
+				<div class="col-md-9">
+					<input type="text" class="form-control" ng-minlength="2" ng-maxlength="1000"
+					       ng-model="issue.Description" id="issuePassword" required="required"
+					       placeholder="Description" name="description">
+				</div>
+				<div class="col-md-9 col-md-offset-3">
+					<span ng-show="issueForm.description.$valid"><span class="royal">Correct input</span></span>
+					<span ng-show="issueForm.description.$error.required" class="err"><span class="snowflake">*</span>Required</span>
+					<span ng-show="issueForm.description.$error.minlength" class="err"><span class="snowflake">*</span>Minimum 2 characters</span>
+					<span ng-show="issueForm.description.$error.maxlength" class="err"><span class="snowflake">*</span>Maximum 1000 characters</span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="issueDueDate" class="col-md-3 control-label">Due Date:</label>
+				<div class="col-md-9">
+					<input type="datetime-local" id="issueDueDate" class="form-control" ng-model="issue.DueDate"
+					       required name="time">
+				</div>
+				<div class="col-md-9 col-md-offset-3">
+					<span ng-show="registerForm.time.$valid"><span class="royal">Correct input</span></span>
+					<span ng-show="registerForm.time.$error.required" class="err"><span class="snowflake">*</span>Required</span>
+					<span ng-show="registerForm.time.$error.datetime-local" class="err"><span class="snowflake">*</span>Not valid date or time. Example for valid input: 04/30/2016 06:53 PM</span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="issueAssignee" class="col-md-3 control-label">Assignee:</label>
+				<div class="col-md-9">
+					<!--FILTER-->
+					<form>
+						<div class="input-group">
+							<input type="text" class="form-control" placeholder="Search..."
+							       aria-describedby="basic-addon1"
+							       ng-model="search"/>
+							<span class="input-group-addon"
+							      id="basic-addon1"><span>class="glyphicon glyphicon-search"></span></span>
+						</div>
+						<h6>Showing <strong class="royal">{{filtered.length}}</strong> persons</h6>
+					</form>
+					<!--FILTER-->
+					<select class="form-control" id="issueAssignee" ng-model="issue.AssigneeId" required>
+						<option value="">Choose Assignee</option>
+						<option ng-repeat="user in filtered=(users|orderBy:'Username'|filter: search)"
+						        value="{{user.Id}}">
+							{{user.Username}}
+						</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="priority" class="col-md-3 control-label">Priority:</label>
+				<div class="col-md-9">
+					<select class="form-control" id="priority" ng-model="issue.PriorityId" required>
+						<option value="">Choose priority</option>
+						<option ng-repeat="pr in projectPriorities" value="{{pr.Id}}">{{pr.Name}}</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="issuelabels" class="col-md-3 control-label">Labels:</label>
+				<div class="col-md-9">
+					<input type="text" class="form-control" ng-model="issue.Title" id="issueLabels"
+					       required="required" placeholder="Title" name="labels">
+				</div>
+				<div class="col-md-9 col-md-offset-3">
+					<span class="royal">Labels should be separated by <strong>comma</strong></span>
+					<span ng-show="issueForm.labels.$valid"><span class="royal">Correct input</span></span>
+					<span ng-show="issueForm.labels.$error.required" class="err"><span class="snowflake">*</span>Required</span>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="col-md-9 col-lg-offset-3">
+					<button type="submit" class="btn btn-primary col-md-3"
+					        ng-disabled="issueForm.$invalid || issue.password != issue.confirmPassword"
+					        ng-click="addIssue(issue)">Add Issue
+					</button>
+				</div>
+			</div>
+		</fieldset>
+	</form>
+</div>
