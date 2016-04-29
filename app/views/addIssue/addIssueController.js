@@ -5,13 +5,15 @@ app.controller('AddIssueController', [
 
         $scope.today=new Date();
         $scope.maxDueDay=new Date().setMonth($scope.today.getMonth()+6);
-
+        $scope.usersLoaded=false;
         authService.getAllUsers(function success(data) {
             $scope.users = data;
+            $scope.usersLoaded=true;
         });
 
         projectService.getProjectById($routeParams.id,
             function success(data) {
+                $scope.project=data;
                 $scope.projectPriorities = data.Priorities;
             });
 

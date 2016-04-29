@@ -20,7 +20,7 @@
             |filter:{Status: {Id:statusFilter||'!!'}}
             |filter: {Assignee: {Id: assigneeFilter||'!!'}}
             |filter: {Author: {Id: authorFilter||'!!'}})">
-            <td><a href="#issues/{{issue.Id}}">{{issue.Title}}</a></td>
+            <td><a href="#issues/{{issue.Id}}" class="link">{{issue.Title}}</a></td>
             <td>{{issue.Description}}</td>
             <td>{{issue.DueDate|date}}</td>
             <td>{{issue.Assignee.Username}}</td>

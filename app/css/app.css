@@ -127,7 +127,6 @@ ul.sidebar-menu li a, ul.sidebar-menu li a:focus {
     color: royalblue;
 }
 
-
 .btn {
     margin-bottom: 5px;
 }
@@ -138,9 +137,14 @@ span.err {
     /*font-weight: bold;*/
 }
 
-input.ng-invalid, textarea.ng-invalid {
+/*select menus in inputs*/
+input.ng-invalid, textarea.ng-invalid, select.ng-invalid {
     background: lightsalmon;
     border: #507E32 1px solid;
+}
+
+option{
+    background-color: #E2F0D9;
 }
 
 .snowflake {
@@ -261,15 +265,15 @@ body {
 }
 
 /*keeps distane between status and Change status button*/
-#status{
+#status {
     margin-right: 10px;
 }
 
-textarea.form-control{
+textarea.form-control {
     height: 100px;
 }
 
-.box-row{
+.box-row {
     padding: 0 10px;
     margin: 0 5px;
 }
