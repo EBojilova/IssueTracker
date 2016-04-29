@@ -115,16 +115,6 @@ app.factory('authService',
                 return (currentUser != undefined) && (currentUser.isAdmin);
             },
 
-
-            getAllUsers: function getAllUsers(success) {
-                var request = {
-                    method: 'GET',
-                    url: baseServiceUrl + 'Users/',
-                    headers: this.getAuthHeaders()
-                };
-                $http(request).success(success);
-            },
-
             //TODO:
             // PUT api/user/Profile
             editUserProfile: function (user, success) {

@@ -1,6 +1,6 @@
 app.controller('ProjectController', [
-    '$scope', '$rootScope', '$routeParams', 'projectService',
-    function ($scope, $rootScope, $routeParams, projectService) {
+    '$scope', '$rootScope', '$routeParams', 'projectService','authService',
+    function ($scope, $rootScope, $routeParams, projectService, authService) {
         $rootScope.pageTitle = "Project's Details";
         function getProjectById(id) {
             projectService.getProjectById(id,

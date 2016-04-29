@@ -2,6 +2,7 @@ app.factory('addIssueService', ['$http', 'baseServiceUrl', 'authService',
     function ($http, baseServiceUrl, authService) {
 
         return {
+
             addIssue: function addIssue(issue, success) {
 
                 var request = {

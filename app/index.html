@@ -7,6 +7,8 @@
 	<link rel="stylesheet" href="css/bootstrap.css"/>
 	<link rel="stylesheet" href="css/bootstrap-theme.css"/>
 	<link rel="stylesheet" href="css/app.css"/>
+	<!--TODO atuocomplete-->
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css" />
 
 	<meta charset="utf-8">
 	<title>Issue Tracker</title>
@@ -34,17 +36,21 @@
 <script src="lib/jquery.noty/jquery.noty.js"></script>
 <script src="lib/bootstrap/bootstrap-3.1.1.js"></script>
 <script src="lib/ui.bootstrap/ui.bootstrap.pagination-0.12.0.js"></script>
+<!--TODO autocomplete-->
+<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 
 <!-- Load app source code: main script, services, controllers, etc. -->
 <script src="app.js"></script>
 <script src="AppController.js"></script>
 
-<script src="services/adsServices.js"></script>
+
 <script src="services/authService.js"></script>
 <script src="services/notifyService.js"></script>
-<script src="services/userService.js"></script>
 
 <script src="views/public/PublicController.js"></script>
+
+<script src="views/autocomlete/autocompleteController.js"></script>
+<script src="views/autocomlete/autocompleteService.js"></script>
 
 <script src="views/home/homeService.js"></script>
 <script src="views/home/HomeController.js"></script>

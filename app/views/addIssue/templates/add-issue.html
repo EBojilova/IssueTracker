@@ -1,9 +1,7 @@
-<img src="images/ajax_loader_blue_512.gif" alt="Loading..." ng-hide="usersLoaded" class="loading">
-
 <div class="row" ng-cloak>
 	<div class="col-md-10 col-md-offset-1">
 		<div class="box ">
-			<form name="issueForm" class="form-horizontal" autocomplete="off">
+			<form name="issueForm" class="form-horizontal" ng-controller="AutocompleteController">
 				<fieldset>
 					<div class="form-group">
 						<label for="issueTitle" class="col-md-3 control-label">Title:</label>
@@ -45,30 +43,32 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="issueAssignee" class="col-md-3 control-label">Assignee:</label>
-						<div class="col-md-4">
+						<label for="assignee" class="col-md-3 control-label">Assignee:</label>
+						<!--<div class="col-md-4">-->
 							<!--FILTER-->
-							<form>
-								<div class="input-group">
-									<input type="text" class="form-control" placeholder="Search For Assignee..."
-									       aria-describedby="basic-addon1"
-									       ng-model="search"/>
-									<span class="input-group-addon" id="basic-addon1"><span
-											class="glyphicon glyphicon-search"></span></span>
-								</div>
-								<span>Showing <strong class="royal">{{filtered.length}}</strong> persons</span>
-							</form>
+							<!--<form>-->
+								<!--<div class="input-group">-->
+									<!--<input type="text" class="form-control" placeholder="Search For Assignee..."-->
+									       <!--aria-describedby="basic-addon1"-->
+									       <!--ng-model="search"/>-->
+									<!--<span class="input-group-addon" id="basic-addon1"><span-->
+											<!--class="glyphicon glyphicon-search"></span></span>-->
+								<!--</div>-->
+								<!--<span>Showing <strong class="royal">{{filtered.length}}</strong> persons</span>-->
+							<!--</form>-->
 							<!--FILTER-->
-						</div>
-						<div class="col-md-4">
-							<select class="form-control" id="issueAssignee" ng-model="issue.AssigneeId"
-							        required="required" name="assignee">
-								<option value="">Choose Assignee from Search matches...</option>
-								<option ng-repeat="user in filtered=(users|orderBy:'Username'|filter: search)"
-								        value="{{user.Id}}">
-									{{user.Username}}
-								</option>
-							</select>
+						<!--</div>-->
+						<div class="col-md-9">
+							<input type="text" class="form-control" ng-model="issue.AssigneeId" ng-keyup="autocompleteAssignees()" id="assignee"
+							       required="required" placeholder="Type part of  Assignee mail..." name="assignee">
+							<!--<select class="form-control" id="issueAssignee" ng-model="issue.AssigneeId"-->
+							        <!--required="required" name="assignee">-->
+								<!--<option value="">Choose Assignee from Search matches...</option>-->
+								<!--<option ng-repeat="user in filtered=(users|orderBy:'Username'|filter: search)"-->
+								        <!--value="{{user.Id}}">-->
+									<!--{{user.Username}}-->
+								<!--</option>-->
+							<!--</select>-->
 							<span ng-show="issueForm.assignee.$valid"><span class="royal">Correct input</span></span>
 							<span ng-show="issueForm.assignee.$error.required" class="err"><span
 									class="snowflake">*</span>Required</span>
@@ -91,7 +91,7 @@
 						<label for="issuelabels" class="col-md-3 control-label">Labels:</label>
 						<div class="col-md-9">
 							<!--ng-list used, the separator, default value is ", "-->
-							<input type="text" class="form-control" ng-model="issue.Labels" id="issueLabels" ng-list
+							<input type="text" class="form-control" ng-model="issue.Labels" ng-keyup="autocompleteLabels()" id="issueLabels" ng-list
 							       required="required" placeholder="Labels, separated by comma..." name="labels">
 							<span ng-show="issueForm.labels.$valid"><span class="royal">Correct input</span></span>
 							<span ng-show="issueForm.labels.$error.required" class="err"><span
