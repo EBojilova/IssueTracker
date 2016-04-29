@@ -23,7 +23,7 @@
 	<strong>Author:</strong>
 	<p class="overflow">{{issue.Author.Username}}<span class="royal" ng-if="issue.Author.isAdmin"> (is Admin)</span></p>
 
-	<strong>From project:</strong>
+	<strong>From project: <a href="#/projects/{{issue.Project.Id}}" class="btn btn-default btn-sm">Go To Project</a></strong>
 	<p class="overflow">{{issue.Project.Name}}</p>
 
 	<strong>Labels:</strong>

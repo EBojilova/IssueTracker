@@ -119,7 +119,7 @@ app.factory('authService',
             getAllUsers: function getAllUsers(success) {
                 var request = {
                     method: 'GET',
-                    url: BASEURL + 'Users/',
+                    url: baseServiceUrl + 'Users/',
                     headers: this.getAuthHeaders()
                 };
                 $http(request).success(success);

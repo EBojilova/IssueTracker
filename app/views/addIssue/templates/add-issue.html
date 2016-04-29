@@ -18,10 +18,10 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="issuePassword" class="col-md-3 control-label">Description:</label>
+				<label for="issueDescription" class="col-md-3 control-label">Description:</label>
 				<div class="col-md-9">
 					<input type="text" class="form-control" ng-minlength="2" ng-maxlength="1000"
-					       ng-model="issue.Description" id="issuePassword" required="required"
+					       ng-model="issue.Description" id="issueDescription" required="required"
 					       placeholder="Description" name="description">
 				</div>
 				<div class="col-md-9 col-md-offset-3">
@@ -35,12 +35,14 @@
 				<label for="issueDueDate" class="col-md-3 control-label">Due Date:</label>
 				<div class="col-md-9">
 					<input type="datetime-local" id="issueDueDate" class="form-control" ng-model="issue.DueDate"
-					       required name="time">
+					       required="required" min="{{today | date: 'yyyy-MM-ddTHH:mm:ss'}}" max="{{maxDueDay | date: 'yyyy-MM-ddTHH:mm:ss'}}"  name="timeAndDate">
 				</div>
 				<div class="col-md-9 col-md-offset-3">
-					<span ng-show="registerForm.time.$valid"><span class="royal">Correct input</span></span>
-					<span ng-show="registerForm.time.$error.required" class="err"><span class="snowflake">*</span>Required</span>
-					<span ng-show="registerForm.time.$error.datetime-local" class="err"><span class="snowflake">*</span>Not valid date or time. Example for valid input: 04/30/2016 06:53 PM</span>
+					<span ng-show="issueForm.timeAndDate.$valid"><span class="royal">Correct input</span></span>
+					<span ng-show="issueForm.timeAndDate.$error.required" class="err">
+						<span class="snowflake">*</span>Required
+						<span class="snowflake">*</span>Allowed 6 months period from today
+						<span class="snowflake">*</span>Example for valid input: 04/30/2016 06:53 PM</span>
 				</div>
 			</div>
 			<div class="form-group">
@@ -52,8 +54,7 @@
 							<input type="text" class="form-control" placeholder="Search..."
 							       aria-describedby="basic-addon1"
 							       ng-model="search"/>
-							<span class="input-group-addon"
-							      id="basic-addon1"><span>class="glyphicon glyphicon-search"></span></span>
+							<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-search"></span></span>
 						</div>
 						<h6>Showing <strong class="royal">{{filtered.length}}</strong> persons</h6>
 					</form>
@@ -80,7 +81,7 @@
 				<label for="issuelabels" class="col-md-3 control-label">Labels:</label>
 				<div class="col-md-9">
 					<!--ng-list used, the separator, default value is ", "-->
-					<input type="text" class="form-control" ng-model="issue.Title" id="issueLabels" ng-list
+					<input type="text" class="form-control" ng-model="issue.Labels" id="issueLabels" ng-list
 					       required="required" placeholder="Labels, separated by comma" name="labels">
 				</div>
 				<div class="col-md-9 col-md-offset-3">

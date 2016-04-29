@@ -1,9 +1,12 @@
 app.controller('AddIssueController', [
-    '$scope', '$rootScope', '$routeParams', '$location', 'addIssueService', 'projectService',
-    function ($scope, $rootScope, $routeParams, $location, addIssueService, projectService) {
+    '$scope', '$rootScope', '$routeParams', '$location', 'addIssueService', 'projectService', 'authService','notifyService',
+    function ($scope, $rootScope, $routeParams, $location, addIssueService, projectService, authService, notifyService) {
         $rootScope.pageTitle = "Add Issue";
 
-        authService.getAllUsers( function success(data) {
+        $scope.today=new Date();
+        $scope.maxDueDay=new Date().setMonth($scope.today.getMonth()+6);
+
+        authService.getAllUsers(function success(data) {
             $scope.users = data;
         });
 
@@ -24,8 +27,8 @@ app.controller('AddIssueController', [
             issue.ProjectId = $routeParams.id;
             issue.Labels = convertLabelstoObject(issue.Labels);
 
-            addIssueService.addIssue(issue)
-                .then(function success() {
+            addIssueService.addIssue(issue,
+                function success() {
                     notifyService.showInfo("Issue successful added!");
                     $location.path('/projects/' + $routeParams.id);
                 })
