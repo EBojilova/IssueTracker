@@ -23,12 +23,13 @@ app.controller('AddIssueController', [
 
         $scope.sumbitIssueForAdding = function addIssue(issue) {
             issue.ProjectId = $routeParams.id;
-            
+
             // TODO: ng-model is not updating on outocomplete
             autocompleteService.getUserByUserName($("#assignee").val(),
                 function success(data) {
                     if (data[0]) {
-                        issue.Labels = convertLabelstoObject(issue.Labels);
+                        var labels=$("#labels").html().split(',');
+                        issue.Labels = convertLabelstoObject(labels);
                         issue.AssigneeId = data[0].Id;
                         addIssueService.addIssue(issue,
                             function success() {

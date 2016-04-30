@@ -60,7 +60,7 @@
 						<!--</div>-->
 						<div class="col-md-9">
 							<input type="text" class="form-control" ng-model="issue.AssigneeId" ng-keyup="autocompleteAssignees()" id="assignee"
-							       required="required" placeholder="Type part of  Assignee mail..." name="assignee">
+							       required="required" placeholder="Type part of  Assignee email..." name="assignee">
 							<!--<select class="form-control" id="issueAssignee" ng-model="issue.AssigneeId"-->
 							        <!--required="required" name="assignee">-->
 								<!--<option value="">Choose Assignee from Search matches...</option>-->
@@ -88,21 +88,20 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="issuelabels" class="col-md-3 control-label">Labels:</label>
-						<div class="col-md-9">
-							<!--ng-list used, the separator, default value is ", "-->
-							<input type="text" class="form-control" ng-model="issue.Labels" ng-keyup="autocompleteLabels()" id="issueLabels" ng-list
-							       required="required" placeholder="Labels, separated by comma..." name="labels">
-							<span ng-show="issueForm.labels.$valid"><span class="royal">Correct input</span></span>
-							<span ng-show="issueForm.labels.$error.required" class="err"><span
-									class="snowflake">*</span>Required</span>
-						</div>
+						<tag-manager tags="tags" autocomplete="allTags"></tag-manager>
+						<!--<label for="newLabel" class="col-md-3 control-label">Labels:</label>-->
+						<!--<div class="col-md-9">-->
+							<!--<tag-manager tags="tags" autocomplete="allTags"></tag-manager>-->
+							<!--<span ng-show="joinedLabels"><span class="royal">Correct input</span></span>-->
+							<!--<span ng-show="!joinedLabels" class="err"><span-->
+									<!--class="snowflake">*</span>Required</span>-->
+						<!--</div>-->
 					</div>
 
 					<div class="form-group">
 						<div class="col-md-9 col-lg-offset-3">
 							<button type="submit" class="btn btn-primary"
-							        ng-disabled="issueForm.$invalid || issue.password != issue.confirmPassword"
+							        ng-disabled="issueForm.$invalid || !joinedLabels"
 							        ng-click="sumbitIssueForAdding(issue)">Add Issue
 							</button>
 							<a href="#/projects/{{project.Id}}" class="btn btn-default ">Go To Project</a></strong>
@@ -114,3 +113,18 @@
 	</div>
 </div>
 
+<!--<div class="panel-body">-->
+	<!--<div class="row">-->
+		<!--<div class="col-md-12">-->
+
+			<!--<tag-manager tags="tags" autocomplete="allTags"></tag-manager>-->
+			<!--<hr>-->
+			<!--<h3>Current Tags</h3>-->
+			<!--<ul class="list-unstyled">-->
+				<!--<li ng-repeat="tag in tags">{{tag}}</li>-->
+			<!--</ul>-->
+
+		<!--</div>-->
+
+	<!--</div>-->
+<!--</div>&lt;!&ndash;/panel-body&ndash;&gt;-->

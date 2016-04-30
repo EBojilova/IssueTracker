@@ -277,3 +277,19 @@ textarea.form-control {
     padding: 0 10px;
     margin: 0 5px;
 }
+
+/*Labels autocomplete*/
+.tags {
+    margin-bottom: 5px;
+}
+
+.tags .tag {
+    display: inline-block;
+    margin-right: 5px;
+    font-size: 13px;
+}
+
+.tag .close {
+    font-size: 14px;
+    margin-left: 5px;
+}
