@@ -17,16 +17,8 @@ app.controller('AutocompleteController', ['$scope', 'autocompleteService',
 
         // LABELS autocomplete
         //http://www.bootply.com/346BqhKUJy
-        var availableLabels = $("#labels").html();
-        if (availableLabels) {
-            $scope.tags = availableLabels.split(',').filter(function (e) {
-                return e
-            });
-        }
-        else {
-            $scope.tags = [];
-        }
-        $scope.joinedLabels = $scope.tags.join();
+        //$scope.tags i
+        //$scope.joinedLabels sa definirani v parent controller
 
         autocompleteService.getAvailableLabels(function success(data) {
             $scope.allTags = [];

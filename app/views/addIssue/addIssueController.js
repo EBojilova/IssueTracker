@@ -4,12 +4,15 @@ app.controller('AddIssueController', [
         $rootScope.pageTitle = "Add Issue";
 
         $scope.today = new Date();
-        $scope.maxDueDay = new Date().setMonth($scope.today.getMonth() + 6);
+        $scope.maxDueDay = new Date().setMonth($scope.today.getMonth() + 12);
 
         projectService.getProjectById($routeParams.id,
             function success(data) {
                 $scope.project = data;
                 $scope.projectPriorities = data.Priorities;
+                // needed for autocomplete controller
+                $scope.tags = [];
+                $scope.joinedLabels = '';
             });
 
         function convertLabelstoObject(inputArray) {

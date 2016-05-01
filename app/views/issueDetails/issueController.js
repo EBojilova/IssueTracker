@@ -10,10 +10,26 @@ app.controller('IssueController', [
                 function success(data) {
                     $scope.issue = data;
                     $scope.isAssignee = $scope.issue.Assignee.Id === authService.getCurrentUser().Id;
-                    //$scope.currentIssueLabels = [];
-                    //data.Labels.forEach(function (label) {
-                    //    $scope.currentIssueLabels.push(label.Name);
-                    //});
+                    //{
+                    //    "Id": 9,
+                    //    "Title": "issue problem 6",
+                    //    "IssueKey": "123adfj-9",
+                    //    "Description": "na red 212",
+                    //    "DueDate": "2015-05-23T00:00:00",
+                    //    "Project": {"Id": 1, "Name": "viksataaa"},
+                    //    "Author": {
+                    //        "Id": "e0e672ee-9382-4860-98be-cfa68743a20a",
+                    //        "Username": "admin@softuni.bg",
+                    //        "isAdmin": true},
+                    //    "Assignee": {
+                    //        "Id": "e0e672ee-9382-4860-98be-cfa68743a20a",
+                    //        "Username": "admin@softuni.bg",
+                    //        "isAdmin": true},
+                    //    "Priority": {"Id": 2,"Name": "Urgent"},
+                    //    "Status": {"Id": 1,"Name": "Closed"},
+                    //    "Labels": [],
+                    //    "AvailableStatuses": []
+                    //}
                     projectService.getProjectById($scope.issue.Project.Id,
                         function success(data) {
                             $scope.project = data;
@@ -42,26 +58,6 @@ app.controller('IssueController', [
                         })
                 }
             );
-            //{
-            //    "Id": 9,
-            //    "Title": "issue problem 6",
-            //    "IssueKey": "123adfj-9",
-            //    "Description": "na red 212",
-            //    "DueDate": "2015-05-23T00:00:00",
-            //    "Project": {"Id": 1, "Name": "viksataaa"},
-            //    "Author": {
-            //        "Id": "e0e672ee-9382-4860-98be-cfa68743a20a",
-            //        "Username": "admin@softuni.bg",
-            //        "isAdmin": true},
-            //    "Assignee": {
-            //        "Id": "e0e672ee-9382-4860-98be-cfa68743a20a",
-            //        "Username": "admin@softuni.bg",
-            //        "isAdmin": true},
-            //    "Priority": {"Id": 2,"Name": "Urgent"},
-            //    "Status": {"Id": 1,"Name": "Closed"},
-            //    "Labels": [],
-            //    "AvailableStatuses": []
-            //}
         }
 
         function getComments() {
@@ -105,31 +101,15 @@ app.controller('IssueController', [
             //    ]
         };
 
-        $scope.changeStatus = function (statusId) {
-            issueService.changeIssueStatus($scope.issue.Id, statusId,
-                function success() {
-                    getIssue();
+        $scope.changeStatus = function (status) {
+            $scope.issue.Status = status;
+            issueService.changeIssueStatus($scope.issue.Id, status.Id,
+                function success(data) {
+                    $scope.issue.AvailableStatuses = data;
+                    //getIssue();
                 }
             );
-            //{
-            //    "Id": 9,
-            //    "Title": "issue problem 6",
-            //    "IssueKey": "123adfj-9",
-            //    "Description": "na red 212",
-            //    "DueDate": "2015-05-23T00:00:00",
-            //    "Project": {"Id": 1, "Name": "viksataaa"},
-            //    "Author": {
-            //        "Id": "e0e672ee-9382-4860-98be-cfa68743a20a",
-            //        "Username": "admin@softuni.bg",
-            //        "isAdmin": true},
-            //    "Assignee": {
-            //        "Id": "e0e672ee-9382-4860-98be-cfa68743a20a",
-            //        "Username": "admin@softuni.bg",
-            //        "isAdmin": true},
-            //    "Priority": {"Id": 2,"Name": "Urgent"},
-            //    "Status": {"Id": 4,"Name": "StoppedProgress"},
-            //    "Labels": [{ "Id": 293,"Name": "Label103",.....}],
-            //    "AvailableStatuses": [{"Id": 3,"Name": "InProgress"},{ "Id": 1, "Name": "Closed"}] }
+            //   [{"Id": 3,"Name": "InProgress"},{ "Id": 1, "Name": "Closed"}] }
         };
 
         getIssue();

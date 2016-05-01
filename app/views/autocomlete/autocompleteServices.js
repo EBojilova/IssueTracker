@@ -11,11 +11,11 @@ app.factory('autocompleteService', ['$http', 'baseServiceUrl', 'authService',
                 };
                 $http(request).success(success);
             },
-
+            //?filter=Username=="admin@softuni.bg"
             getUserByUserName: function getAllUsers(username,success) {
                 var request = {
                     method: 'GET',
-                    url: baseServiceUrl + 'Users/?filter=Username.Contains("'+username+'")',
+                    url: baseServiceUrl + 'Users/?filter=Username==("'+username+'")',
                     headers: authService.getAuthHeaders()
                 };
                 $http(request).success(success);

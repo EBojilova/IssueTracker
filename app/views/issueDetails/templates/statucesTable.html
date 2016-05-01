@@ -6,7 +6,7 @@
 			Change Status<span class="caret"></span>
 		</button>
 		<ul class="dropdown-menu">
-			<li ng-repeat="status in issue.AvailableStatuses" ng-click="changeStatus(status.Id)"><a>{{status.Name}}</a>
+			<li ng-repeat="status in issue.AvailableStatuses" ng-click="changeStatus(status)"><a>{{status.Name}}</a>
 			</li>
 		</ul>
 	</div>

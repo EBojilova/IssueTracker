@@ -1,36 +1,37 @@
 app.controller('EditIssueController', [
-    '$scope','$rootScope', '$routeParams', '$location', 'editIssueService', 'issueService', 'projectService', 'notifyService',
-    function ($scope,$rootScope, $routeParams, $location, editIssueService, issueService, projectService, notifyService) {
+    '$scope', '$rootScope', '$routeParams', '$location', 'editIssueService', 'issueService', 'projectService', 'notifyService','autocompleteService',
+    function ($scope, $rootScope, $routeParams, $location, editIssueService, issueService, projectService, notifyService,autocompleteService) {
         $rootScope.pageTitle = "Edit Issue";
 
-        projectService.getProjectById($routeParams.id,
-            function success(data) {
-                $scope.project = data;
-                $scope.projectPriorities = data.Priorities;
-            });
-
-
         issueService.getIssueById($routeParams.id, function success(issue) {
+            $scope.oldIssueId=issue.Id;
             $scope.issue = {
-                Title : issue.Title,
-                Description : issue.Description,
-                DueDate : new Date(issue.DueDate),
-                ProjectId : parseInt(issue.Project.Id),
-                AssigneeId : issue.Assignee.Username,
+                Title: issue.Title,
+                Description: issue.Description,
+                DueDate: new Date(issue.DueDate),
+                ProjectId: parseInt(issue.Project.Id),
+                AssigneeId: issue.Assignee.Username,
                 PriorityId: issue.Priority.Id
             };
 
-            $scope.today = new Date(issue.DueDate);
-            $scope.maxDueDay = new Date().setMonth($scope.today.getMonth() + 6);
+            $scope.today = new Date();
+            $scope.maxDueDay = new Date().setMonth($scope.today.getMonth() + 12);
 
-            var currentLabels = [];
+            // needed for autocomplete controller
+            $scope.tags = [];
             issue.Labels.forEach(function (label) {
-                currentLabels.push(label.Name);
+                $scope.tags.push(label.Name);
             });
-            var jonedLabels=currentLabels.join();
-            $('#labels').html(jonedLabels);
+            $scope.joinedLabels = $scope.tags.join();
+
+            projectService.getProjectById($scope.issue.ProjectId,
+                function success(data) {
+                    $scope.project = data;
+                    $scope.projectPriorities = data.Priorities;
+                });
 
         });
+
 
         function convertLabelstoObject(inputArray) {
             var outputArrayAsJson = [];
@@ -40,8 +41,8 @@ app.controller('EditIssueController', [
             return outputArrayAsJson;
         }
 
-        $scope.submitIssueForEditing = function () {
-
+        $scope.submitIssueForEditing = function (issue) {
+            console.log('here');
             // TODO: ng-model is not updating on autocomplete
             autocompleteService.getUserByUserName($("#assignee").val(),
                 function success(data) {
@@ -49,6 +50,7 @@ app.controller('EditIssueController', [
                         var labels = $("#labels").html().split(',');
                         issue.Labels = convertLabelstoObject(labels);
                         issue.AssigneeId = data[0].Id;
+                        issue.PriorityId=$("#priority").val();
                         editIssueService.editIssue(issue, $routeParams.id,
                             function success(data) {
                                 notifyService.showInfo("Issue successful edited!");
