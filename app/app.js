@@ -69,6 +69,14 @@ app.config(function ($routeProvider) {
         }
     });
 
+    $routeProvider.when('/projects/add', {
+        controller: 'AddProjectController',
+        templateUrl: 'views/addProject/templates/add-project.html',
+        access: {
+            requiresAdmin: true
+        }
+    });
+
     //TODO: remove old code
 
     $routeProvider.when('/user/ads/publish', {

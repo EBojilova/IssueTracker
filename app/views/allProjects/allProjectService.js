@@ -10,9 +10,6 @@ app.factory('allProjectsService', ['$http', 'baseServiceUrl', 'authService',
                     url: baseServiceUrl + 'projects',
                     headers: authService.getAuthHeaders()
                 };
-                //{
-                //
-                //}
 
                 $http(request).success(success);
             }

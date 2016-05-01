@@ -9,7 +9,7 @@ app.controller('AutocompleteController', ['$scope', 'autocompleteService',
             });
         });
 
-        $scope.autocompleteAssignees = function () {
+        $scope.autocompleteUsers = function () {
             $("#assignee").autocomplete({
                 source: $scope.users
             });

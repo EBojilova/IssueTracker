@@ -1,0 +1,14 @@
+<label for="newPriority" class="col-md-3 control-label">Priorities:</label>
+<div class="col-md-9 " >
+	<div class="priorities" id="newPriority">
+		<div class="priority label label-success"><a class="add" href ng-click="add('Low')">Add</a> <strong>Low</strong> <a class="close" href ng-click="remove('Low')">×</a></div>
+		<div class="priority label label-info"><a class="add" href ng-click="add('Normal')">Add</a> <strong>Normal</strong> <a class="close" href ng-click="remove('Normal')">×</a></div>
+		<div class="priority label label-warning"><a class="add" href ng-click="add('High')">Add</a> <strong>High</strong> <a class="close" href ng-click="remove('High')">×</a></div>
+		<div class="priority label label-danger"><a class="add" href ng-click="add('Urgent')">Add</a> <strong>Urgent</strong> <a class="close" href ng-click="remove('Urgent')">×</a></div>
+	</div>
+</div>
+
+<div class="col-md-9 col-md-offset-3">
+	<span><strong>Chosen Priorities: </strong><span id="priorities" class="royal">{{joinedPriorities}}</span></span>
+	<span ng-show="!joinedPriorities.length" class="err"><span class="snowflake">*</span>Required</span>
+</div>

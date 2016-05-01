@@ -47,8 +47,7 @@ app.controller('EditIssueController', [
             autocompleteService.getUserByUserName($("#assignee").val(),
                 function success(data) {
                     if (data[0]) {
-                        var labels = $("#labels").html().split(',');
-                        issue.Labels = convertLabelstoObject(labels);
+                        issue.Labels = convertLabelstoObject( $scope.tags);
                         issue.AssigneeId = data[0].Id;
                         issue.PriorityId=$("#priority").val();
                         editIssueService.editIssue(issue, $routeParams.id,
