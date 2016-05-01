@@ -231,7 +231,7 @@ table#filter tbody {
     text-overflow: ellipsis;
 }
 
-.overflow {
+.overflow, p {
     word-wrap: break-word;
 }
 

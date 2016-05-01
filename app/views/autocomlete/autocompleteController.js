@@ -17,12 +17,20 @@ app.controller('AutocompleteController', ['$scope', 'autocompleteService',
 
         // LABELS autocomplete
         //http://www.bootply.com/346BqhKUJy
-        $scope.tags = [];
+        var availableLabels = $("#labels").html();
+        if (availableLabels) {
+            $scope.tags = availableLabels.split(',').filter(function (e) {
+                return e
+            });
+        }
+        else {
+            $scope.tags = [];
+        }
+        $scope.joinedLabels = $scope.tags.join();
+
         autocompleteService.getAvailableLabels(function success(data) {
-            //$scope.availableLabels = [];
             $scope.allTags = [];
             data.forEach(function (element) {
-                //$scope.availableLabels.push(element.Name);
                 $scope.allTags.push(element.Name);
             });
         });
@@ -37,10 +45,10 @@ app.controller('AutocompleteController', ['$scope', 'autocompleteService',
         // adds the new tag to the array
         $scope.add = function () {
             // if not dupe, add it
-            if ($scope.tags.indexOf($scope.newValue) == -1) {
-                $scope.tags.push($('#newLabel').val());
+            var tag = $('#newLabel').val();
+            if (tag && $scope.tags.indexOf(tag) == -1) {
+                $scope.tags.push(tag);
                 $scope.joinedLabels = $scope.tags.join();
-                console.log($scope.joinedLabels);
             }
             $scope.newValue = "";
         };

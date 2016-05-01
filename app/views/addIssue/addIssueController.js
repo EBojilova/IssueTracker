@@ -28,7 +28,7 @@ app.controller('AddIssueController', [
             autocompleteService.getUserByUserName($("#assignee").val(),
                 function success(data) {
                     if (data[0]) {
-                        var labels=$("#labels").html().split(',');
+                        var labels = $("#labels").html().split(',');
                         issue.Labels = convertLabelstoObject(labels);
                         issue.AssigneeId = data[0].Id;
                         addIssueService.addIssue(issue,
@@ -40,7 +40,6 @@ app.controller('AddIssueController', [
                     else {
                         notifyService.showError('Chosen Assigne does not exists! Please choose Assignee from the list provided.')
                     }
-
                 })
         };
     }

@@ -59,7 +59,17 @@ app.config(function ($routeProvider) {
         access: {
             requiresLoggedUser: true
         }
-    })
+    });
+
+    $routeProvider.when('/issues/edit/:id', {
+        controller: 'EditIssueController',
+        templateUrl: 'views/editIssue/templates/edit-issue.html',
+        access: {
+            requiresLoggedUser: true
+        }
+    });
+
+    //TODO: remove old code
 
     $routeProvider.when('/user/ads/publish', {
         templateUrl: 'views/User/publish-new-ad/publish-new-ad.html',
