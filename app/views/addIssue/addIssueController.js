@@ -12,7 +12,7 @@ app.controller('AddIssueController', [
                 $scope.projectPriorities = data.Priorities;
                 // needed for autocomplete controller
                 $scope.tags = [];
-                $scope.joinedLabels = '';
+                $scope.joinedLabels = $scope.tags.join();
             });
 
         function convertLabelstoObject(inputArray) {

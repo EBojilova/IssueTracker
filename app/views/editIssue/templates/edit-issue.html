@@ -55,10 +55,10 @@
 					<div class="form-group">
 						<label for="priority" class="col-md-3 control-label">Priority:</label>
 						<div class="col-md-4">
-							<select class="form-control" id="priority" ng-model="issue.PriorityId" required="required"
+							<select class="form-control" id="priority"  required="required"
 							        name="priority">
-								<option value="">Choose priority...</option>
-								<option ng-repeat="pr in project.Priorities" value="{{pr.Id}}">{{pr.Name}}</option>
+								<!--<option value="">Choose priority...</option>-->
+								<option ng-repeat="pr in project.Priorities" ng-class="{'selected' : issue.PriorityId == pr.Id}" value="{{pr.Id}}">{{pr.Name}}</option>
 							</select>
 							<span ng-show="issueForm.priority.$valid"><span class="royal">Correct input</span></span>
 							<span ng-show="issueForm.priority.$error.required" class="err"><span
@@ -66,15 +66,16 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<tag-manager tags="tags" autocomplete="allTags"></tag-manager>
+						<tag-manager ></tag-manager>
 					</div>
 
 					<div class="form-group">
 						<div class="col-md-9 col-lg-offset-3">
 							<button type="submit" class="btn btn-primary"
 							        ng-disabled="issueForm.$invalid || !joinedLabels"
-							        ng-click="sumbitIssueForAdding(issue)">Add Issue
+							        ng-click="submitIssueForEditing(issue)">Edit Issue
 							</button>
+							<a href="#/issues/{{oldIssueId}}" class="btn btn-default ">Go To Issue</a>
 							<a href="#/projects/{{project.Id}}" class="btn btn-default ">Go To Project</a>
 						</div>
 					</div>

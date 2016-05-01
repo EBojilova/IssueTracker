@@ -29,21 +29,6 @@ app.config(function ($routeProvider) {
         }
     });
 
-    $routeProvider.when('/projects/:id', {
-        controller: 'ProjectController',
-        templateUrl: 'views/projectDetails/templates/project.html',
-        access: {
-            requiresLoggedUser: true
-        }
-    });
-
-    $routeProvider.when('/projects/edit/:id', {
-        controller: 'ProjectEditController',
-        templateUrl: 'views/editProject/project-edit.html',
-        access: {
-            requiresLoggedUser: true
-        }
-    });
 
     $routeProvider.when('/issues/:id', {
         controller: 'IssueController',
@@ -69,13 +54,29 @@ app.config(function ($routeProvider) {
         }
     });
 
-    $routeProvider.when('/projects/add', {
+    $routeProvider.when('/projects/add-project', {
         controller: 'AddProjectController',
         templateUrl: 'views/addProject/templates/add-project.html',
         access: {
             requiresAdmin: true
         }
     });
+
+    $routeProvider.when('/projects/:id', {
+        controller: 'ProjectController',
+        templateUrl: 'views/projectDetails/templates/project.html',
+        access: {
+            requiresLoggedUser: true
+        }
+    });
+
+    //$routeProvider.when('/projects/edit/:id', {
+    //    controller: 'ProjectEditController',
+    //    templateUrl: 'views/editProject/project-edit.html',
+    //    access: {
+    //        requiresLoggedUser: true
+    //    }
+    //});
 
     //TODO: remove old code
 

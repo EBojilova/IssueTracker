@@ -1,0 +1,60 @@
+<div class="row" ng-cloak>
+    <div class="col-md-10 col-md-offset-1">
+        <div class="box ">
+            <form name="projectForm" class="form-horizontal" ng-controller="AutocompleteController">
+                <fieldset>
+                    <div class="form-group">
+                        <label for="projectName" class="col-md-3 control-label">Name:</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" ng-model="project.Name" id="projectName"
+                                   required="required" placeholder="Name..." name="name">
+                            <span ng-show="projectForm.name.$valid"><span class="royal">Correct input</span></span>
+                            <span ng-show="projectForm.name.$error.required" class="err"><span class="snowflake">*</span>Required</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="projectDescription" class="col-md-3 control-label">Description:</label>
+                        <div class="col-md-9">
+							<textarea class="form-control" ng-minlength="2" ng-maxlength="1000"
+                                      ng-model="project.Description" id="projectDescription" required="required"
+                                      placeholder="Description..." name="description"></textarea>
+                            <span ng-show="projectForm.description.$valid"><span class="royal">Correct input</span></span>
+							<span ng-show="projectForm.description.$error.required" class="err"><span
+                                    class="snowflake">*</span>Required</span>
+							<span ng-show="projectForm.description.$error.minlength" class="err"><span
+                                    class="snowflake">*</span>Minimum 2 characters</span>
+							<span ng-show="projectForm.description.$error.maxlength" class="err"><span
+                                    class="snowflake">*</span>Maximum 1000 characters</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="assignee" class="col-md-3 control-label">Leader:</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" ng-model="project.LeadId" ng-keyup="autocompleteUsers()" id="assignee"
+                                   required="required" placeholder="Type part of  Leader email..." name="leader">
+                            <span ng-show="projectForm.leader.$valid"><span class="royal">Correct input</span></span>
+							<span ng-show="projectForm.leader.$error.required" class="err"><span
+                                    class="snowflake">*</span>Required</span>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-controller="PrioritiesController">
+                        <priority-manager ></priority-manager>
+                    </div>
+                    <div class="form-group">
+                        <tag-manager ></tag-manager>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-9 col-lg-offset-3">
+                            <button type="submit" class="btn btn-primary"
+                                    ng-disabled="projectForm.$invalid || !tags.length || !priorities.length"
+                                    ng-click="submitProjectForAdding(project)">Add Project
+                            </button>
+                            <a href="#/dashboard" class="btn btn-default ">Go To Dashboard</a>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>

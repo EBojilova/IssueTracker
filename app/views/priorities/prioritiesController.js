@@ -16,7 +16,7 @@ app.controller('PrioritiesController', ['$scope',
             if (index !== -1) {
                 $scope.priorities.splice(index, 1);
             }
-            $scope.joinedLabels = $scope.priorities.join();
+            $scope.joinedPriorities = $scope.priorities.join();
         };
     }
 ]);

@@ -278,23 +278,18 @@ textarea.form-control {
     margin: 0 5px;
 }
 
-/*Labels  autocomplete and priorities format*/
-.tags ,.priorities{
+/*Labels autocomplete*/
+.tags {
     margin-bottom: 5px;
 }
 
-.tags .tag ,.priorities .priority{
+.tags .tag {
     display: inline-block;
     margin-right: 5px;
     font-size: 13px;
 }
 
-.tag .close,.priority .add {
+.tag .close {
     font-size: 14px;
     margin-left: 5px;
-}
-
-.priority .add{
-    font-size: 14px;
-    margin-right: 5px;
 }
