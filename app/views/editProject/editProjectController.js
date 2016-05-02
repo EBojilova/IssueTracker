@@ -1,51 +1,67 @@
 app.controller('ProjectEditController', [
-    '$scope', '$routeParams', '$location', 'projectService', 'notifyService',
-    function ($scope, $routeParams, $location, projectService, notifyService) {
-        //TODO
-        //$scope.allUsers();
+    '$scope', '$rootScope', '$routeParams', '$location', 'projectService', 'editProjectService', 'notifyService', 'autocompleteService',
+    function ($scope, $rootScope, $routeParams, $location, projectService, editProjectService, notifyService, autocompleteService) {
+        $rootScope.pageTitle = "Edit Project";
 
-        $scope.editProject = function () {
-            if (typeof $scope.currentLabels === 'string') {
-                $scope.currentLabels = getArrayOfWords($scope.currentLabels);
-            }
-            if (typeof $scope.currentPriorities === 'string') {
-                $scope.currentPriorities = getArrayOfWords($scope.currentPriorities);
-            }
+        projectService.getProjectById($routeParams.id,
+            function success(data) {
 
-            var projectForEdit = {
-                Id: $scope.project.Id,
-                Description: $scope.project.Description,
-                Labels: $scope.currentLabels,
-                Priorities: $scope.currentPriorities,
-                Name: $scope.project.Name,
-                LeadId: $scope.project.Lead.Id
-            };
+                $scope.project = {
+                    Id: data.Id,
+                    Description: data.Description,
+                    Name: data.Name,
+                    LeadId: data.Lead.Username
+                };
 
-            projectService.editProject(projectForEdit,
-                function success() {
-                    notifyService.showInfo('Project successfully edited');
-                    $location.path('projects/' + $scope.project.Id);
+                //needed for autocompleete controller
+                $scope.tags = [];
+                data.Labels.forEach(function (label) {
+                    $scope.tags.push(label.Name);
                 });
+                $scope.joinedLabels = $scope.tags.join();
+
+                //needed for priorities controller
+                $scope.priorities = [];
+                data.Priorities.forEach(function (priority) {
+                    $scope.priorities.push(priority.Name);
+                });
+                $scope.joinedPriorities = $scope.priorities.join();
+            });
+
+        var convertToRequestData = function (project) {
+
+            //set Name property
+            project.labels = toObject($scope.tags);
+            project.priorities = toObject($scope.priorities);
+
+            function toObject(inputArray) {
+                var outputArrayAsJson = [];
+                inputArray.forEach(function (element) {
+                    outputArrayAsJson.push({Name: element});
+                });
+                return outputArrayAsJson;
+            }
+
+            return project
         };
 
-        function getProjectById(id) {
-            projectService.getProjectById(id,
-                function success(project) {
-                    $scope.project = project.data;
-                    $scope.currentLabels = [];
-                    $scope.currentPriorities = [];
-                    $scope.project.Labels.forEach(function (label) {
-                        $scope.currentLabels.push(label.Name);
-                    });
-                    $scope.project.Priorities.forEach(function (priority) {
-                        $scope.currentPriorities.push(priority.Name);
-                    })
+        $scope.submitProjectForEditing = function (project) {
+            // TODO: ng-model is not updating on autocomplete
+            autocompleteService.getUserByUserName($("#assignee").val(),
+                function success(data) {
+                    if (data[0]) {
+                        project = convertToRequestData(project);
+                        project.LeadId = data[0].Id;
+                        editProjectService.editProject(project,
+                            function (data) {
+                                notifyService.showInfo("Project successfully edited.");
+                                $location.path('projects/' + $scope.project.Id);
+                            });
+                    }
+                    else {
+                        notifyService.showError('Chosen Assigne does not exists! Please choose Assignee from the list provided.')
+                    }
                 })
-        }
 
-        function getArrayOfWords(str) {
-            return str.split(',');
-        }
-
-        getProjectById($routeParams.id);
+        };
     }]);

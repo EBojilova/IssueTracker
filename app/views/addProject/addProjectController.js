@@ -49,7 +49,7 @@ app.controller('AddProjectController', [
                         project.LeadId = data[0].Id;
                         addProjectService.addProject(project,
                             function (data) {
-                                notifyService.showInfo("Project added successful");
+                                notifyService.showInfo("Project successfully added.");
                                 $location.path('/projects');
                             });
                     }

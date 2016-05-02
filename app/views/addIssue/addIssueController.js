@@ -35,7 +35,7 @@ app.controller('AddIssueController', [
                         issue.AssigneeId = data[0].Id;
                         addIssueService.addIssue(issue,
                             function success() {
-                                notifyService.showInfo("Issue successful added!");
+                                notifyService.showInfo("Issue successfully added!");
                                 $location.path('/projects/' + $routeParams.id);
                             })
                     }

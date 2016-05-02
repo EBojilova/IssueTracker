@@ -52,7 +52,7 @@ app.controller('EditIssueController', [
                         issue.PriorityId=$("#priority").val();
                         editIssueService.editIssue(issue, $routeParams.id,
                             function success(data) {
-                                notifyService.showInfo("Issue successful edited!");
+                                notifyService.showInfo("Issue successfully edited!");
                                 $location.path('issues/' + data.Id);
                             })
                     }

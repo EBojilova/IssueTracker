@@ -48,8 +48,9 @@
                         <div class="col-md-9 col-lg-offset-3">
                             <button type="submit" class="btn btn-primary"
                                     ng-disabled="projectForm.$invalid || !tags.length || !priorities.length"
-                                    ng-click="submitProjectForAdding(project)">Add Project
+                                    ng-click="submitProjectForEditing(project)">Edit Project
                             </button>
+                            <a href="#/projects/{{project.Id}}" class="btn btn-default ">Go To Project</a>
                             <a href="#/dashboard" class="btn btn-default ">Go To Dashboard</a>
                         </div>
                     </div>
