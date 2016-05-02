@@ -1,6 +1,6 @@
 app.controller('EditIssueController', [
-    '$scope', '$rootScope', '$routeParams', '$location', 'editIssueService', 'issueService', 'projectService', 'notifyService','autocompleteService',
-    function ($scope, $rootScope, $routeParams, $location, editIssueService, issueService, projectService, notifyService,autocompleteService) {
+    '$scope', '$rootScope', '$routeParams', '$location', 'editIssueService', 'issueService', 'projectService', 'notifyService','autocompleteService','authService',
+    function ($scope, $rootScope, $routeParams, $location, editIssueService, issueService, projectService, notifyService,autocompleteService, authService) {
         $rootScope.pageTitle = "Edit Issue";
 
         issueService.getIssueById($routeParams.id, function success(issue) {
@@ -13,6 +13,7 @@ app.controller('EditIssueController', [
                 AssigneeId: issue.Assignee.Username,
                 PriorityId: issue.Priority.Id
             };
+            $scope.isAssignee = issue.Assignee.Id === authService.getCurrentUser().Id;
 
             $scope.today = new Date();
             $scope.maxDueDay = new Date().setMonth($scope.today.getMonth() + 12);
@@ -28,6 +29,7 @@ app.controller('EditIssueController', [
                 function success(data) {
                     $scope.project = data;
                     $scope.projectPriorities = data.Priorities;
+                    $scope.isProjectLeader = data.Lead.Id === authService.getCurrentUser().Id;
                 });
 
         });

@@ -6,9 +6,11 @@ Issue Tracker<span ng-if="pageTitle"> &ndash; <span class="royal">{{pageTitle}}<
 		<span class="royal" ng-if="authService.isAdmin()"> (is Admin)</span>
 	</span>
 
+	<span><a href="#/dashboard" class="link">Dashboard </a></span>
 	<span ng-if="authService.getCurrentUser().isAdmin">
-		<span><a href="#/dashboard" class="link">Dashboard </a></span>
 		<span><a href="#/projects" class="link">All projects </a></span>
+		<span><a href="#/issues" class="link">All issues </a></span>
+		<span><a href="#/users" class="link">All users </a></span>
 		<span><a href="#/projects/add-project" class="link">Add new project </a></span>
 	</span>
 	<a ng-click="logout()" class="link">Logout</a>

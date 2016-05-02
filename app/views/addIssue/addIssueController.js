@@ -1,6 +1,6 @@
 app.controller('AddIssueController', [
-    '$scope', '$rootScope', '$routeParams', '$location', 'addIssueService', 'projectService', 'autocompleteService', 'notifyService',
-    function ($scope, $rootScope, $routeParams, $location, addIssueService, projectService, autocompleteService, notifyService) {
+    '$scope', '$rootScope', '$routeParams', '$location', 'addIssueService', 'projectService', 'autocompleteService', 'notifyService','authService',
+    function ($scope, $rootScope, $routeParams, $location, addIssueService, projectService, autocompleteService, notifyService,authService) {
         $rootScope.pageTitle = "Add Issue";
 
         $scope.today = new Date();
@@ -10,6 +10,7 @@ app.controller('AddIssueController', [
             function success(data) {
                 $scope.project = data;
                 $scope.projectPriorities = data.Priorities;
+                $scope.isProjectLeader = data.Lead.Id === authService.getCurrentUser().Id;
                 // needed for autocomplete controller
                 $scope.tags = [];
                 $scope.joinedLabels = $scope.tags.join();

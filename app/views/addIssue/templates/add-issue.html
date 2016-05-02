@@ -1,4 +1,13 @@
-<div class="row" ng-cloak>
+<div class="row" ng-hide="authService.isAdmin()||isProjectLeader">
+	<div class="col-md-10 col-md-offset-1">
+		<div class="box no-data ">
+			You are not authorized to add issue. Only the Project Leader and Administrators can access it.
+			<a href="#/projects/{{project.Id}}" class="btn btn-default ">Go To Project</a>
+		</div>
+	</div>
+</div>
+
+<div class="row" ng-cloak ng-show="authService.isAdmin()||isProjectLeader">
 	<div class="col-md-10 col-md-offset-1">
 		<div class="box ">
 			<form name="issueForm" class="form-horizontal" ng-controller="AutocompleteController">

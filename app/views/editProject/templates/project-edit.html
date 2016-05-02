@@ -1,4 +1,13 @@
-<div class="row" ng-cloak>
+<div class="row" ng-hide="authService.isAdmin()||isProjectLeader">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="box no-data ">
+            You are not authorized to edit the Project. Only the Project Leader and Administrators can access it.
+            <a href="#/projects/{{project.Id}}" class="btn btn-default ">Go To Project</a>
+        </div>
+    </div>
+</div>
+
+<div class="row" ng-cloak ng-show="authService.isAdmin()||isProjectLeader">
     <div class="col-md-10 col-md-offset-1">
         <div class="box ">
             <form name="projectForm" class="form-horizontal" ng-controller="AutocompleteController">
@@ -27,7 +36,7 @@
                                     class="snowflake">*</span>Maximum 1000 characters</span>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" ng-show="authService.isAdmin()">
                         <label for="assignee" class="col-md-3 control-label">Leader:</label>
                         <div class="col-md-9">
                             <input type="text" class="form-control" ng-model="project.LeadId" ng-keyup="autocompleteUsers()" id="assignee"

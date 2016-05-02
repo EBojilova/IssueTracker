@@ -7,8 +7,8 @@
 			<h2>Comments:</h2>
 		</div>
 	</div>
-
-	<form name="addCommentForm" ng-if="isProjectLeader || isAssignee">
+	<!--TODO: to check is the Author of the project can also add comment-->
+	<form name="addCommentForm" ng-if="isProjectLeader || isAssignee || authService.isAdmin()">
 		<div class="form-group">
 			<label for="addComment">Add comment</label>
 			<textarea class="form-control" id="addComment" ng-model="issueComment.Text" required="required" name="message" placeholder="Write your message here..."></textarea>

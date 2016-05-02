@@ -79,22 +79,6 @@ app.config(function ($routeProvider) {
     });
 
     //TODO: remove old code
-
-    $routeProvider.when('/user/ads/publish', {
-        templateUrl: 'views/User/publish-new-ad/publish-new-ad.html',
-        controller: 'UserPublishNewAdController'
-    });
-
-    $routeProvider.when('/user/ads', {
-        templateUrl: 'views/User/user-ads/user-ads.html',
-        controller: 'UserAdsController'
-    });
-
-    $routeProvider.when('/user/ads/edit/:id', {
-        templateUrl: 'views/User/edit-ad/edit-ad.html',
-        controller: 'UserEditAdController'
-    });
-
     $routeProvider.when('/user/ads/delete/:id', {
         templateUrl: 'views/User/delete-ad/delete-ad.html',
         controller: 'UserDeleteAdController'
@@ -127,14 +111,6 @@ app.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpPr
     }]);
 }]);
 
-app.run(function ($rootScope, $location, authService) {
-    $rootScope.$on('$locationChangeStart', function (event) {
-        if ($location.path().indexOf("/user/") != -1 && !authService.isLoggedIn()) {
-            // Authorization check: anonymous site visitors cannot access user routes
-            $location.path("/");
-        }
-    });
-});
 app.run(['$rootScope', '$location', 'authService',
     function ($rootScope, $location, authService) {
         $rootScope.$on('$routeChangeStart', function (event, route, prev) {
