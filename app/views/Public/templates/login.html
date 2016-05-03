@@ -10,7 +10,7 @@
 				<label for="email" class="col-md-3 control-label">Email:</label>
 				<div class="col-md-9">
 					<input type="email" class="form-control" ng-model="user.username" id="email"
-					       required="required" placeholder="Email" name="email">
+					       required="required" placeholder="Email..." name="email">
 				</div>
 				<div class="col-md-9 col-md-offset-3">
 					<span ng-show="loginForm.email.$valid"><span class="royal">Correct input</span></span>
@@ -23,7 +23,7 @@
 				<div class="col-md-9">
 					<input type="password" class="form-control" ng-minlength="6" ng-maxlength="100"
 					       ng-model="user.password" id="loginPassword" required="required"
-					       placeholder="Password" name="pass">
+					       placeholder="Password..." name="pass">
 				</div>
 				<div class="col-md-9 col-md-offset-3">
 					<span ng-show="loginForm.pass.$valid"><span class="royal">Correct input</span></span>

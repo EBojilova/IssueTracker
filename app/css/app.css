@@ -34,13 +34,16 @@ body {
     padding: 5px;
     margin-top:11px;
     border-radius: 0;
-    min-width: 115px;
+    /*min-width: 115px;*/
 }
 
 /* Links inside the dropdown */
 .dropdown-menu a {
-    display: block;
+    /*display: block;*/
+    float:right;
+    clear:right;
     margin-top: 9px;
+    text-align: left;
 }
 
 #app-footer {
@@ -151,7 +154,6 @@ ul.sidebar-menu li a, ul.sidebar-menu li a:focus {
 /*login/register validations css*/
 span.err {
     color: royalblue;
-    /*font-weight: bold;*/
 }
 
 /*select menus in inputs*/
@@ -178,6 +180,10 @@ td {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+.columnTitle{
+    width:25%;
 }
 
 /*alingn content to header and footer at sides*/
@@ -225,7 +231,7 @@ table#filter tr {
 
 table#filter {
     /*Select the height of the table*/
-    height: 380px;
+    height: 410px;
     /*Firefox Bad Effect*/
     display: -moz-groupbox;
 }
@@ -233,7 +239,7 @@ table#filter {
 table#filter tbody {
     overflow-y: scroll;
     /*Select the height of the body*/
-    height: 350px;
+    height: 391px;
     width: 98%;
     position: absolute;
 }

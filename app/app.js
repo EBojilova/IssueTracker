@@ -78,16 +78,13 @@ app.config(function ($routeProvider) {
         }
     });
 
-    //TODO: remove old code
-    $routeProvider.when('/user/ads/delete/:id', {
-        templateUrl: 'views/User/delete-ad/delete-ad.html',
-        controller: 'UserDeleteAdController'
-    });
-
-    $routeProvider.when('/user/profile', {
-        templateUrl: 'views/User/edit-profile/edit-profile.html',
-        controller: 'UserEditProfileController'
-    });
+    $routeProvider.when('/profile/password', {
+        templateUrl: 'views/changePassword/templates/change-password.html',
+        controller: 'ChangePasswordCtrl',
+        access: {
+            requiresLoggedUser: true
+        }
+    })
 
     $routeProvider.otherwise(
         {redirectTo: '/'}

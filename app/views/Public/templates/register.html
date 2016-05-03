@@ -10,7 +10,7 @@
 				<label for="registerUsername" class="col-md-3 control-label">Name:</label>
 				<div class="col-md-9">
 					<input type="text" class="form-control" ng-model="user.name" id="registerUsername"
-					       required="required" placeholder="Username" name="name">
+					       required="required" placeholder="Username..." name="name">
 				</div>
 				<div class="col-md-9 col-md-offset-3">
 					<span ng-show="registerForm.name.$valid"><span class="royal">Correct input</span></span>
@@ -22,7 +22,7 @@
 				<div class="col-md-9">
 					<input type="password" class="form-control" ng-minlength="6" ng-maxlength="100"
 					       ng-model="user.password" id="registerPassword" required="required"
-					       placeholder="Password" name="pass">
+					       placeholder="Password..." name="pass">
 				</div>
 				<div class="col-md-9 col-md-offset-3">
 					<span ng-show="registerForm.pass.$valid"><span class="royal">Correct input</span></span>
@@ -36,7 +36,7 @@
 				<div class="col-md-9">
 					<input type="password" class="form-control" ng-minlength="4" ng-maxlength="100"
 					       ng-model="user.confirmPassword" id="confirmPas" required="required"
-					       placeholder="Confirm password" name="confirmPass">
+					       placeholder="Confirm password..." name="confirmPass">
 				</div>
 				<div class="col-md-9 col-md-offset-3">
 					<span ng-show="registerForm.confirmPass.$valid&&user.password == user.confirmPassword"><span class="royal">Correct input</span></span>
@@ -48,7 +48,7 @@
 				<label for="email" class="col-md-3 control-label">Email:</label>
 				<div class="col-md-9">
 					<input type="email" class="form-control" ng-model="user.email" id="email"
-					       required="required" placeholder="Email" name="email">
+					       required="required" placeholder="Email..." name="email">
 				</div>
 				<div class="col-md-9 col-md-offset-3">
 					<span ng-show="registerForm.email.$valid"><span class="royal">Correct input</span></span>

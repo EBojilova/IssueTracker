@@ -4,7 +4,7 @@
 	<table class="table table-hover">
 		<thead>
 		<tr>
-			<th class="columnA">Title</th>
+			<th class="columnTitle">Title</th>
 			<th>Author</th>
 			<th>Assignee</th>
 			<th>For project</th>
@@ -14,7 +14,7 @@
 
 		<tbody>
 		<tr ng-repeat="issue in issues.Issues">
-			<td class="columnA"><a href="#/issues/{{issue.Id}}" class="link">{{issue.Title}}</a></td>
+			<td class="columnTitle"><a href="#/issues/{{issue.Id}}" class="link">{{issue.Title}}</a></td>
 			<td>{{issue.Assignee.Username}}</td>
 			<td>{{issue.Author.Username}}</td>
 			<td><a href="#/projects/{{issue.Project.Id}}" class="link">{{issue.Project.Name}}</a></td>
