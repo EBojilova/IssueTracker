@@ -6,7 +6,6 @@ body {
 #app-header {
     background-color: #A9D18E;
     border: #507E32 1px solid;
-    /*text-align: center;*/
     padding: 5px;
     font-size: 16pt;
     font-weight: bold;
@@ -35,6 +34,7 @@ body {
     padding: 5px;
     margin-top:11px;
     border-radius: 0;
+    min-width: 115px;
 }
 
 /* Links inside the dropdown */

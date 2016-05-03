@@ -1,0 +1,29 @@
+Issue Tracker<span ng-if="pageTitle"> &ndash; <span class="royal">{{pageTitle}}</span></span>
+
+<div ng-if="authService.isLoggedIn()" class="user-area">
+	<span class="separate">
+		<strong>Username: </strong>{{authService.getCurrentUser().Username}}
+		<span class="royal" ng-if="authService.isAdmin()"> (is Admin)</span>
+	</span>
+
+	<span class="separate"><a href="#/dashboard" class="link">Dashboard </a></span>
+	<span class="dropdown separate" ng-if="authService.getCurrentUser().isAdmin">
+		<span class="dropdown-toggle link" data-toggle="dropdown" role="button" aria-haspopup="true"
+		      aria-expanded="false"><strong>Administrator</strong><span class="caret"></span></span>
+		<span class="dropdown-menu pull-right">
+			<a href="#/projects" class="link ">All projects </a>
+			<a href="#/projects/add-project" class="link">Add new project </a>
+			<a href="#/issues" class="link">All issues </a>
+			<a href="#/users" class="link">All users </a>
+		</span>
+	</span>
+	<span class="dropdown separate">
+		<span class="dropdown-toggle link" data-toggle="dropdown" role="button" aria-haspopup="true"
+		      aria-expanded="false"><span class="glyphicon glyphicon-user" aria-hidden="true"></span><span
+				class="caret"></span></span>
+		<span class="dropdown-menu pull-right">
+			<a ng-click="logout()" class="link">Logout</a>
+			<a href="#/users/change-password" class="link">Change Password </a>
+		</span>
+	</span>
+</div>
