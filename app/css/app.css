@@ -6,7 +6,7 @@ body {
 #app-header {
     background-color: #A9D18E;
     border: #507E32 1px solid;
-    text-align: center;
+    /*text-align: center;*/
     padding: 5px;
     font-size: 16pt;
     font-weight: bold;
@@ -22,8 +22,25 @@ body {
     margin: 5px 5px 0 0;
 }
 
-#app-header .user-area span {
-    margin-right: 15px;
+/*separate spans in the header*/
+.separate {
+    margin-left: 15px;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-menu {
+    background-color: #A9D18E;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.4);
+    border: #507E32 1px solid;
+    padding: 5px;
+    margin-top:11px;
+    border-radius: 0;
+}
+
+/* Links inside the dropdown */
+.dropdown-menu a {
+    display: block;
+    margin-top: 9px;
 }
 
 #app-footer {
@@ -143,7 +160,7 @@ input.ng-invalid, textarea.ng-invalid, select.ng-invalid {
     border: #507E32 1px solid;
 }
 
-option{
+option {
     background-color: #E2F0D9;
 }
 
@@ -295,12 +312,12 @@ textarea.form-control {
 }
 
 .tag .add {
-    color:white;
+    color: white;
     opacity: 0.7;
 }
 
 .tag .add:hover {
-    color:white;
+    color: white;
     opacity: 1.0;
     text-decoration: none;
 }
