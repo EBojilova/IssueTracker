@@ -9,9 +9,13 @@ app.controller('HomeController', ['$scope', '$rootScope', 'homeService', 'notify
         // Params, triabva da sadarjat 3 parametara:  ?pageSize={pageSize}&pageNumber={pageNumber}&filter=Lead.Id={id}
         // promeniat se v taga pagination v htmla
         // default parameters
+        // TODO: rest servise do not support OrderBy with pegination
         var userId = authService.getCurrentUser().Id;
+        $scope.secondFilter = {};
+        $scope.secondFilter.Name ='';
         $scope.projectsParams = {
-            'filter': 'Lead.Id="' + userId + '"',
+            'filter': 'Lead.Id="' + userId + '"' + ' and Name.Contains("' + $scope.secondFilter.Name + '")',
+            'orderBy': 'Name',
             'pageNumber': 1,
             'pageSize': pageSize
         };
@@ -19,11 +23,13 @@ app.controller('HomeController', ['$scope', '$rootScope', 'homeService', 'notify
         $scope.reloadProjects = function () {
             // $scope.projectsLoaded is used for loading circle in home.html
             $scope.projectsLoaded = false;
+            $scope.projectsParams.filter = 'Lead.Id="' + userId + '"' + ' and Name.Contains("' + $scope.secondFilter.Name + '")';
             homeService.getUserProjects(
                 $scope.projectsParams,
                 function success(data) {
                     $scope.projects = data;
                     $scope.projectsLoaded = true;
+                    $scope.secondFilter.Name ='';
                     //{
                     //    "TotalPages": 86,
                     //    "Projects": [],
@@ -41,8 +47,10 @@ app.controller('HomeController', ['$scope', '$rootScope', 'homeService', 'notify
         // Params, moje da sadarjat 3 parametara:  ?pageSize={pageSize}&pageNumber={pageNumber}&orderBy={by}
         // promeniat se v taga pagination v htmla
         // default parameters
+        //TODO: filter is not supported from Rest, and I can not choose filter with pegination
         $scope.issuesParams = {
-            'orderBy':'DueDate desc',
+            'filter': '',
+            'orderBy': 'DueDate desc',
             'pageNumber': 1,
             'pageSize': pageSize
         };

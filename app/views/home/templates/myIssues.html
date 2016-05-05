@@ -1,4 +1,5 @@
 <div class="box box-tabs">
+	<div ng-include="'views/home/templates/issuesOrderBy.html'"></div>
 
 	<h2>My Issues</h2>
 	<table class="table table-hover">
@@ -6,7 +7,7 @@
 		<tr>
 			<th class="columnTitle">Title</th>
 			<th>Due Date</th>
-			<th>Author</th>
+			<th>Description</th>
 			<th>Assignee</th>
 			<th>For project</th>
 			<th>Status</th>
@@ -17,8 +18,8 @@
 		<tr ng-repeat="issue in issues.Issues">
 			<td class="columnTitle"><a href="#/issues/{{issue.Id}}" class="link">{{issue.Title}}</a></td>
 			<td>{{issue.DueDate|date}}</td>
+			<td>{{issue.Description}}</td>
 			<td>{{issue.Assignee.Username}}</td>
-			<td>{{issue.Author.Username}}</td>
 			<td><a href="#/projects/{{issue.Project.Id}}" class="link">{{issue.Project.Name}}</a></td>
 			<td>{{issue.Status.Name}}</td>
 		</tr>

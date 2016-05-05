@@ -1,0 +1,27 @@
+<div class="pull-right">
+	<form class="form-inline">
+		<!--//TODO: orderyBy is not supported from Rest with pegination-->
+		<!--//TODO: filter by Description is not supported from Rest with pegination-->
+		<!--<div class="form-group">-->
+		<!--<label for="filterDesc">Filter by Description:</label>-->
+		<!--<div class="input-group">-->
+		<!--<input type="text" class="form-control" placeholder="Search..."-->
+		<!--ng-model="secondFilter.Description" id="filterDesc" ng-disabled="nameSelect">-->
+		<!--</div>-->
+		<!--</div>-->
+		<div class="form-group">
+			<div class="form-group">
+				<label for="sortDesc">Filter by Name:</label>
+				<input type="text" class="form-control" placeholder="Search..."
+				       ng-model="secondFilter.Name" id="sortDesc">
+			</div>
+		</div>
+		<button type="submit" class="btn btn-primary"
+		        ng-click="reloadProjects()">Filter
+		</button>
+		<button type="submit" class="btn btn-default"
+		        ng-click="reloadProjects()">Show All
+		</button>
+	</form>
+	<h6>Showing <strong class="royal">{{projects.Projects.length}}&#47{{projects.TotalCount}}</strong> issues</h6>
+</div>

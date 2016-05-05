@@ -1,0 +1,24 @@
+<div class="pull-right">
+	<form class="form-inline">
+		<!--//TODO: filter is not supported from Rest, but I can not choose status from all issues, because there is pegination-->
+		<!--<div class="form-group">-->
+			<!--<label for="status">Filter By: </label>-->
+			<!--<select class="form-control" ng-model="issuesParams.filter"  ng-change="reloadIssues()" id="status">-->
+				<!--<option value='' selected="selected">Select Status</option>-->
+				<!--<option value='"Status.Name="Open"' >Open</option>-->
+				<!--<option value='"Status.Name="Closed"' >Closed</option>-->
+			<!--</select>-->
+		<!--</div>-->
+		<div class="form-group">
+			<label for="sort">Sort by: </label>
+			<select class="form-control" ng-model="issuesParams.orderBy"  ng-change="reloadIssues()" id="sort">
+				<option value="DueDate desc" selected="selected">Due Date</option>
+				<option value="Title" >Title</option>
+				<option value="Project.Name" >For Project</option>
+				<option value="Description" >Description</option>
+				<option value="Status.Name" >Status</option>
+			</select>
+		</div>
+		<h6>Showing <strong class="royal">{{issues.Issues.length}}&#47{{issues.TotalCount}}</strong> issues</h6>
+	</form>
+</div>
