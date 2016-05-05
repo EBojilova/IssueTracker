@@ -9,7 +9,6 @@ app.controller('IssueController', [
             issueService.getIssueById($routeParams.id,
                 function success(data) {
                     $scope.issue = data;
-                    $scope.isAssignee = $scope.issue.Assignee.Id === authService.getCurrentUser().Id;
                     //{
                     //    "Id": 9,
                     //    "Title": "issue problem 6",
@@ -30,32 +29,50 @@ app.controller('IssueController', [
                     //    "Labels": [],
                     //    "AvailableStatuses": []
                     //}
-                    projectService.getProjectById($scope.issue.Project.Id,
-                        function success(data) {
-                            $scope.project = data;
-                            // TODO: check parse JSON for ===
-                            $scope.isProjectLeader = $scope.project.Lead.Id === authService.getCurrentUser().Id;
-                            //{
-                            //    "Id": 2,
-                            //    "Name": "new",
-                            //    "ProjectKey": "1",
-                            //    "Description": "new",
-                            //    "Lead": {
-                            //        "Id": "6f621bc0-dbad-4e1d-bc3b-c4e5b973ec1c",
-                            //        "Username": "pesho_peshev@abv.bg",
-                            //        "isAdmin": false
-                            //},
-                            //    "TransitionSchemeId": 1,
-                            //    "Labels": [
-                            //    {
-                            //        "Id": 526, "Name": "pesho"
-                            //    }
-                            //],
-                            //    "Priorities": [
-                            //    {
-                            //        "Id": 1, "Name": "Low"
-                            //    }]}
-                        })
+                    if (!authService.isAdmin()) {
+                        $scope.isAssignee = $scope.issue.Assignee.Id === authService.getCurrentUser().Id;
+                        if (!$scope.isAssignee) {
+                            projectService.getProjectById($scope.issue.Project.Id,
+                                function success(data) {
+                                    $scope.project = data;
+                                    $scope.isProjectLeader = $scope.project.Lead.Id === authService.getCurrentUser().Id;
+                                    //{
+                                    //    "Id": 2,
+                                    //    "Name": "new",
+                                    //    "ProjectKey": "1",
+                                    //    "Description": "new",
+                                    //    "Lead": {
+                                    //        "Id": "6f621bc0-dbad-4e1d-bc3b-c4e5b973ec1c",
+                                    //        "Username": "pesho_peshev@abv.bg",
+                                    //        "isAdmin": false
+                                    //},
+                                    //    "TransitionSchemeId": 1,
+                                    //    "Labels": [
+                                    //    {
+                                    //        "Id": 526, "Name": "pesho"
+                                    //    }
+                                    //],
+                                    //    "Priorities": [
+                                    //    {
+                                    //        "Id": 1, "Name": "Low"
+                                    //    }]}
+                                    if (!$scope.isProjectLeader) {
+                                        // proveriavam dali ima usera pone edno issue v proekta
+                                        var issuesParams = {
+                                            'filter': 'Assignee.Username== "' + authService.getCurrentUser().Username + '" and Project.Name=="' + $scope.project.Name + '"',
+                                            'pageNumber': 1,
+                                            'pageSize': 1
+                                        };
+                                        issueService.getIssuesWithParams(issuesParams,
+                                            function success(data) {
+                                                $scope.hasAnyIssueInProject = data.Issues.length > 0;
+                                                console.log('anyIssue');
+                                                console.log($scope.hasAnyIssueInProject);
+                                            })
+                                    }
+                                });
+                        }
+                    }
                 }
             );
         }

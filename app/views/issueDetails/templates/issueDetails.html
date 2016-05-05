@@ -4,7 +4,7 @@
 		<a class="btn btn-primary" href="#issues/edit/{{issue.Id}}">Edit Issue</a>
 	</div>
 
-	<h2>Issue <a href="#/dashboard" class="btn btn-default btn-sm">Go To Dashboard</a></h2>
+	<h2>Issue</h2>
 
 	<strong>Title:</strong>
 	<p class="overflow">{{issue.Title}}</p>
@@ -23,7 +23,7 @@
 	<strong>Author:</strong>
 	<p class="overflow">{{issue.Author.Username}}<span class="royal" ng-if="issue.Author.isAdmin"> (is Admin)</span></p>
 
-	<strong>From project:</strong> <a href="#/projects/{{issue.Project.Id}}" class="btn btn-default btn-sm">Go To Project</a>
+	<strong>From project:</strong>
 	<p class="overflow">{{issue.Project.Name}}</p>
 
 	<strong>Labels:</strong>
@@ -34,6 +34,8 @@
 	<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal">Show Full
 		Description
 	</button>
+	<a href="#/projects/{{issue.Project.Id}}" class="btn btn-default btn-sm">Go To Project</a>
+	<a href="#/dashboard" class="btn btn-default btn-sm">Go To Dashboard</a>
 
 
 	<!-- Modal -->

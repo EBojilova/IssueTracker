@@ -7,11 +7,11 @@
 			<h2>Comments:</h2>
 		</div>
 	</div>
-	<!--TODO: to check is the Author of the project can also add comment-->
-	<form name="addCommentForm" ng-if="isProjectLeader || isAssignee || authService.isAdmin()">
+	<!--TODO: to check is the user assignee to any of the issues in the project-->
+	<form name="addCommentForm" ng-if="authService.isAdmin()||isAssignee||isProjectLeader||hasAnyIssueInProject">
 		<div class="form-group">
 			<label for="addComment">Add comment</label>
-			<textarea class="form-control" id="addComment" ng-model="issueComment.Text" required="required" name="message" placeholder="Write your message here..."></textarea>
+			<textarea class="form-control" id="addComment" ng-minlength="2" ng-maxlength="1000" ng-model="issueComment.Text" required="required" name="message" placeholder="Write your message here..."></textarea>
 			<span ng-show="addCommentForm.$valid">&nbsp</span>
 			<span ng-show="addCommentForm.message.$error.required" class="err"><span class="snowflake">*</span>Required</span>
 			<span ng-show="addCommentForm.message.$error.minlength" class="err"><span class="snowflake">*</span>Minimum 2 characters</span>

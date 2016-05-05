@@ -1,10 +1,11 @@
-<div class="box">
+<div class="box box-tabs">
 
 	<h2>My Issues</h2>
 	<table class="table table-hover">
 		<thead>
 		<tr>
 			<th class="columnTitle">Title</th>
+			<th>Due Date</th>
 			<th>Author</th>
 			<th>Assignee</th>
 			<th>For project</th>
@@ -15,6 +16,7 @@
 		<tbody>
 		<tr ng-repeat="issue in issues.Issues">
 			<td class="columnTitle"><a href="#/issues/{{issue.Id}}" class="link">{{issue.Title}}</a></td>
+			<td>{{issue.DueDate|date}}</td>
 			<td>{{issue.Assignee.Username}}</td>
 			<td>{{issue.Author.Username}}</td>
 			<td><a href="#/projects/{{issue.Project.Id}}" class="link">{{issue.Project.Name}}</a></td>
@@ -32,13 +34,13 @@
 	<!--ng-model="issuesParams.startPage promenia StartPage v HomeController-->
 	<!--issuesParams.pageSize- default constatn, zadadena v app.js i izpolzvana v HomeController-->
 	<!--ng-change="reloadIssues(), pravi se zaiavka ot HomeController s novite issuesParams-->
-	<pagination total-items="issuesCount"
+	<uib-pagination total-items="issuesCount"
 	            ng-model="issuesParams.pageNumber"
 	            items-per-page="issuesParams.pageSize"
 	            ng-change="reloadIssues()"
 	            max-size="8"
 	            boundary-links="true">
-	</pagination>
+	</uib-pagination>
 </div>
 
 

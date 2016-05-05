@@ -2,11 +2,15 @@
 
 
 <div class="row" ng-cloak>
-	<div class="col-md-5">
-		<div ng-include="'views/home/templates/myProjects.html'"></div>
-	</div>
-
-	<div class="col-md-7">
-		<div ng-include="'views/home/templates/myIssues.html'"></div>
+	<div class="col-md-10 col-md-offset-1">
+		<uib-tabset>
+			<uib-tab index="0" heading="Projects Led">
+				<div ng-include="'views/home/templates/myProjectsLead.html'"></div>
+			</uib-tab>
+			<uib-tab index="1" heading="Assigned Issues">
+				<div ng-include="'views/home/templates/myIssues.html'"></div>
+			</uib-tab>
+		</uib-tabset>
 	</div>
 </div>
+

@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap.pagination']);
+var app = angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap.pagination','ui.bootstrap']);
 
 app.constant('baseServiceUrl', 'http://softuni-issue-tracker.azurewebsites.net/');
 app.constant('pageSize', 8);

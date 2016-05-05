@@ -11,6 +11,16 @@ app.factory('issueService', ['$http', 'baseServiceUrl', 'authService',
                 $http(request).success(success);
             },
 
+            getIssuesWithParams: function getIssueById(params, success) {
+                var request = {
+                    method: 'GET',
+                    url: baseServiceUrl + 'Issues',
+                    headers: authService.getAuthHeaders(),
+                    params: params
+                };
+                $http(request).success(success);
+            },
+
             changeIssueStatus: function changeIssueStatus(issueId, statusId, success) {
                 var request = {
                     method: 'PUT',

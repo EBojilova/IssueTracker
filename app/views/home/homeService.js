@@ -4,10 +4,10 @@ app.factory('homeService', ['$http', 'baseServiceUrl', 'authService',
     function ($http, baseServiceUrl, authService) {
         return {
             //[GET] Issues/me?pageSize={pageSize}&pageNumber={pageNumber}&orderBy={by}
-            getUserIssues: function (params, success, error) {
+            getUserIssues: function (params, success) {
                 var request = {
                     method: 'GET',
-                    url: baseServiceUrl + 'issues/me?orderBy=DueDate desc',
+                    url: baseServiceUrl + 'issues/me',
                     headers: authService.getAuthHeaders(),
                     params: params
                 };
@@ -21,11 +21,11 @@ app.factory('homeService', ['$http', 'baseServiceUrl', 'authService',
             },
 
             //[GET] projects?pageSize={pageSize}&pageNumber={pageNumber}&filter=Lead.Id={id}
-            getUserProjects: function (params, success, error) {
+            getUserProjects: function (params, success) {
                 var id = authService.getCurrentUser().Id;
                 var request = {
                     method: 'GET',
-                    url: baseServiceUrl + 'projects?filter=Lead.Id="' + id + '"',
+                    url: baseServiceUrl + 'projects',
                     headers: authService.getAuthHeaders(),
                     params: params
                 };

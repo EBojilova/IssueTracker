@@ -1,0 +1,48 @@
+<div class="box box-tabs">
+	<h2>My Projects</h2>
+	<table class="table table-hover">
+		<thead>
+		<tr>
+			<th class="columnTitle">Name</th>
+			<th class="columnTitle">Lead</th>
+			<th>Description</th>
+			<th>Labels</th>
+			<th>Priorities</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr ng-repeat="project in projects.Projects">
+			<td class="columnTitle"><a href="#/projects/{{project.Id}}" class="link">{{ project.Name }}</a></td>
+			<td class="columnTitle">{{ project.Lead.Username }}<span class="royal" ng-if="project.Lead.isAdmin"> (is Admin)</span></td>
+			<td>{{ project.Description }}</td>
+			<td><span ng-repeat="label in project.Labels">{{label.Name}}{{$last ? '' : ', '}} </span></td>
+			<td><span ng-repeat="priority in project.Priorities">{{priority.Name}}{{$last ? '' : ', '}} </span></td>
+		</tr>
+		</tbody>
+	</table>
+
+	<!--NO DATA FOUND-->
+	<div ng-if="projects.Projects.length==0" class="box no-data">
+		No Projects found.
+	</div>
+
+	<!--projects.TotalCount e parviat obekt v masiva koito izvikva zaiavkata Get All Projects-->
+	<!--ng-model="projectsParams.startPage promenia StartPage v HomeController-->
+	<!--projectsParams.pageSize- default constatn, zadadena v app.js i izpolzvana v HomeController-->
+	<!--ng-change="reloadProjects(), pravi se zaiavka ot HomeController s novite projectsParams-->
+	<uib-pagination total-items="projects.TotalCount"
+	            ng-model="projectsParams.pageNumber"
+	            items-per-page="projectsParams.pageSize"
+	            ng-change="reloadProjects()"
+	            max-size="5"
+	            boundary-links="true">
+	</uib-pagination>
+</div>
+<!--<uib-pagination total-items="totalProjectsIssues" ng-model="projectsParams3.startPage"-->
+                <!--max-size="maxSize" class="pagination-sm"-->
+                <!--boundary-links="true" rotate="false" items-per-page="itemsPerPage"-->
+                <!--ng-change="getProjectsWithAssignedIssues(projectsParams3.startPage)"-->
+                <!--ng-if="totalProjectsIssues > itemsPerPage">-->
+<!--</uib-pagination>-->
+
+
