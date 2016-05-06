@@ -1,0 +1,26 @@
+<div class="pull-right">
+	<form class="form-inline">
+		<!--//TODO: orderBy is not supported from Rest with pagination-->
+		<div class="form-group">
+			<div class="form-group">
+				<label for="sortDesc">Filter by Description:</label>
+				<input type="text" class="form-control" placeholder="Search..."
+				       ng-model="secondFilter.Description" id="sortDesc" ng-disabled="secondFilter.Name">
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="form-group">
+				<label for="sortName">Filter by Name:</label>
+				<input type="text" class="form-control" placeholder="Search..."
+				       ng-model="secondFilter.Name" id="sortName" ng-disabled="secondFilter.Description">
+			</div>
+		</div>
+		<button type="submit" class="btn btn-primary"
+		        ng-click="reloadProjects()">Filter
+		</button>
+		<button type="submit" class="btn btn-default"
+		        ng-click="showAllProjects()">Show All
+		</button>
+	</form>
+	<h6>Showing <strong class="royal">{{projects.Projects.length}}&#47{{projects.TotalCount}}</strong> issues</h6>
+</div>

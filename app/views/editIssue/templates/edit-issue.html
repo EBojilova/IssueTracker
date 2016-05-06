@@ -46,7 +46,7 @@
 						</div>
 						<div class="col-md-9 col-md-offset-3">
 							<span ng-show="issueForm.timeAndDate.$valid"><span class="royal">Correct input</span></span>
-							<span ng-show="issueForm.timeAndDate.$error.required" class="err">
+							<span ng-show="issueForm.timeAndDate.$error.required||issueForm.timeAndDate.$invalid" class="err">
 								<span class="snowflake">*</span>Allowed 12 months period from today
 								<span class="snowflake">*</span>Example for valid input: 04/30/2016 06:53 PM
 							</span>
