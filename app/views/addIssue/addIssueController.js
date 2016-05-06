@@ -1,7 +1,7 @@
 app.controller('AddIssueController', [
     '$scope', '$rootScope', '$routeParams', '$location', 'addIssueService', 'projectService', 'autocompleteService', 'notifyService','authService',
     function ($scope, $rootScope, $routeParams, $location, addIssueService, projectService, autocompleteService, notifyService,authService) {
-        $rootScope.pageTitle = "Add Issue";
+        $rootScope.pageTitle = {title:"Add Issue"};
 
         $scope.today = new Date();
         $scope.maxDueDay = new Date().setMonth($scope.today.getMonth() + 12);

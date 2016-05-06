@@ -1,3 +1,13 @@
 <img src="images/ajax_loader_blue_512.gif" alt="Loading..." ng-hide="issuesLoaded" class="loading">
 
-<div ng-include="'views/allIssues/templates/allIssuesTable.html'"></div>
+<div class="row" ng-cloak>
+	<div class="col-md-2">
+		<div ng-include="'views/allIssues/templates/allIssuesFilter.html'"></div>
+	</div>
+
+	<div class="col-md-10">
+		<div ng-include="'views/allIssues/templates/allIssuesTable.html'"></div>
+	</div>
+</div>
+
+

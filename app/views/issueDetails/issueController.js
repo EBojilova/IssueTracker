@@ -1,7 +1,7 @@
 app.controller('IssueController', [
     '$scope', '$rootScope', '$routeParams', '$location', 'issueService', 'authService', 'projectService',
     function ($scope, $rootScope, $routeParams, $location, issueService, authService, projectService) {
-        $rootScope.pageTitle = "Issues's Details";
+        $rootScope.pageTitle = {title:"Issues's Details"};
 
         $scope.issueComment = {};
 

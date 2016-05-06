@@ -2,7 +2,7 @@
 
 app.controller('PublicController', ['$scope', '$rootScope', '$location', 'authService', 'notifyService',
     function ($scope, $rootScope, $location, authService, notifyService) {
-        $rootScope.pageTitle = "Register/Login";
+        $rootScope.pageTitle = {title: "Register/Login"};
 
         $scope.register = function (user) {
             authService.register(user,

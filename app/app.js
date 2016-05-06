@@ -8,26 +8,9 @@ app.constant('pageSize', 8);
 app.config(function ($routeProvider) {
     // paths are given from index.html path, not from app.js path
     $routeProvider.when('/', {
-        templateUrl: 'views/home/home.html',
-        controller: 'PublicController'
+        templateUrl: 'views/home/home.html'
     });
-
-    $routeProvider.when('/all-users', {
-        templateUrl: 'views/allUsers/templates/all-users.html',
-        controller: 'AllUsersController',
-        access: {
-            requiresAdmin: true
-        }
-    });
-
-    $routeProvider.when('/all-issues', {
-        templateUrl: 'views/allIssues/templates/all-issues.html',
-        controller: 'AllIssuesController',
-        access: {
-            requiresAdmin: true
-        }
-    });
-
+    
     $routeProvider.when('/projects', {
         templateUrl: 'views/allProjects/templates/all-projects.html',
         controller: 'AllProjectsController',
@@ -89,6 +72,22 @@ app.config(function ($routeProvider) {
         controller: 'ChangePasswordCtrl',
         access: {
             requiresLoggedUser: true
+        }
+    });
+
+    $routeProvider.when('/all-users', {
+        templateUrl: 'views/allUsers/templates/all-users.html',
+        controller: 'AllUsersController',
+        access: {
+            requiresAdmin: true
+        }
+    });
+
+    $routeProvider.when('/all-issues', {
+        templateUrl: 'views/allIssues/templates/all-issues.html',
+        controller: 'AllIssuesController',
+        access: {
+            requiresAdmin: true
         }
     });
 

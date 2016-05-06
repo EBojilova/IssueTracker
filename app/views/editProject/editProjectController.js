@@ -1,7 +1,7 @@
 app.controller('ProjectEditController', [
     '$scope', '$rootScope', '$routeParams', '$location', 'projectService', 'editProjectService', 'notifyService', 'autocompleteService','authService',
     function ($scope, $rootScope, $routeParams, $location, projectService, editProjectService, notifyService, autocompleteService,authService) {
-        $rootScope.pageTitle = "Edit Project";
+        $rootScope.pageTitle = {title:"Edit Project"};
 
         projectService.getProjectById($routeParams.id,
             function success(data) {

@@ -2,7 +2,7 @@
 
 app.controller('HomeController', ['$scope', '$rootScope', 'homeService', 'notifyService', 'pageSize', 'authService',
     function ($scope, $rootScope, homeService, notifyService, pageSize, authService) {
-        $rootScope.pageTitle = "Dashboard";
+        $rootScope.pageTitle = {title: "Dashboard"};
 
 
         //PROJECTS, I am Lead
@@ -12,8 +12,8 @@ app.controller('HomeController', ['$scope', '$rootScope', 'homeService', 'notify
         // TODO: rest service do not support OrderBy with pagination
         var userId = authService.getCurrentUser().Id;
         $scope.secondFilter = {};
-        $scope.secondFilter.Name ='';
-        $scope.secondFilter.Description ='';
+        $scope.secondFilter.Name = '';
+        $scope.secondFilter.Description = '';
         $scope.projectsParams = {
             'filter': 'Lead.Id="' + userId + '"',
             'orderBy': 'Name',
@@ -24,10 +24,10 @@ app.controller('HomeController', ['$scope', '$rootScope', 'homeService', 'notify
         $scope.reloadProjects = function () {
             // $scope.projectsLoaded is used for loading circle in home.html
             $scope.projectsLoaded = false;
-            if($scope.secondFilter.Name){
+            if ($scope.secondFilter.Name) {
                 $scope.projectsParams.filter = 'Lead.Id="' + userId + '"' + ' and Name.Contains("' + $scope.secondFilter.Name + '")';
             }
-            else if($scope.secondFilter.Description){
+            else if ($scope.secondFilter.Description) {
                 $scope.projectsParams.filter = 'Lead.Id="' + userId + '"' + ' and Description.Contains("' + $scope.secondFilter.Description + '")';
             }
             homeService.getUserProjects(
@@ -42,9 +42,9 @@ app.controller('HomeController', ['$scope', '$rootScope', 'homeService', 'notify
                 }
             );
 
-            $scope.showAllProjects=function(){
-                $scope.secondFilter.Name ='';
-                $scope.secondFilter.Description ='';
+            $scope.showAllProjects = function () {
+                $scope.secondFilter.Name = '';
+                $scope.secondFilter.Description = '';
                 $scope.projectsParams.filter = 'Lead.Id="' + userId + '"';
                 $scope.reloadProjects();
             }

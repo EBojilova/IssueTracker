@@ -1,13 +1,54 @@
-<div class="pull-right">
-	<form class="form-inline">
+<div class="box">
+	<form>
 		<!--//TODO: orderBy is not supported from Rest with pagination-->
-
 		<div class="form-group">
-			<div class="form-group">
-				<label for="sortName">Filter:</label>
-				<input type="text" class="form-control" placeholder="Search..."
-				       ng-model="multipleFilter.Search" id="sortName">
-			</div>
+			<label for="Title">Filter by Title:</label>
+			<input type="text" class="form-control" placeholder="Search..."
+			       ng-model="multipleFilter.Title" id="Title">
+		</div>
+		<div class="form-group">
+			<label for="Description">Filter by Description:</label>
+			<input type="text" class="form-control" placeholder="Search..."
+			       ng-model="multipleFilter.Description" id="Description">
+		</div>
+		<div class="form-group">
+			<label for="Project">Filter by Project:</label>
+			<input type="text" class="form-control" placeholder="Search..."
+			       ng-model="multipleFilter.Project" id="Project">
+		</div>
+		<div class="form-group">
+			<label for="Assignee">Filter by Assignee:</label>
+			<input type="text" class="form-control" placeholder="Search..."
+			       ng-model="multipleFilter.Assignee" id="Assignee">
+		</div>
+		<div class="form-group">
+			<label for="Author">Filter by Author:</label>
+			<input type="text" class="form-control" placeholder="Search..."
+			       ng-model="multipleFilter.Author" id="Author">
+		</div>
+		<div class="form-group">
+			<label for="Priority">Filter by Priority:</label>
+			<select class="form-control" id="Priority" ng-model="multipleFilter.Priority">
+				<option value="" selected>Select priority</option>
+				<option value="Low">Low</option>
+				<option value="Normal">Normal</option>
+				<option value="High">High</option>
+				<option value="Urgent">Urgent</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="selectStatus">Filter by Status:</label>
+			<select class="form-control" id="selectStatus" ng-model="multipleFilter.Status">
+				<option value="" selected>Select status</option>
+				<option value="Closed">Closed</option>
+				<option value="Open">Open</option>
+				<option value="InProgress">In progress</option>
+				<option value="StoppedProgress">Stoped progress</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="DueDate">Filter by DueDate:</label>
+			<input type="date" id="DueDate" class="form-control" ng-model="multipleFilter.DueDate">
 		</div>
 		<button type="submit" class="btn btn-primary"
 		        ng-click="reloadIssues()">Filter
@@ -16,5 +57,4 @@
 		        ng-click="showAllIssues()">Show All
 		</button>
 	</form>
-	<h6>Showing <strong class="royal">{{issues.Issues.length}}&#47{{issues.TotalCount}}</strong> issues</h6>
 </div>

@@ -1,7 +1,7 @@
 app.controller('EditIssueController', [
     '$scope', '$rootScope', '$routeParams', '$location', 'editIssueService', 'issueService', 'projectService', 'notifyService','autocompleteService','authService',
     function ($scope, $rootScope, $routeParams, $location, editIssueService, issueService, projectService, notifyService,autocompleteService, authService) {
-        $rootScope.pageTitle = "Edit Issue";
+        $rootScope.pageTitle = {title:"Edit Issue"};
 
         issueService.getIssueById($routeParams.id, function success(issue) {
             $scope.oldIssueId=issue.Id;

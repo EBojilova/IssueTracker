@@ -1,6 +1,6 @@
 app.controller('ChangePasswordCtrl', ['$scope', '$rootScope', 'changePasswordService', 'notifyService',
     function ($scope, $rootScope, changePasswordService, notifyService) {
-        $rootScope.pageTitle = "Change Password";
+        $rootScope.pageTitle = {title:"Change Password"};
 
         $scope.submitChanges = function (user) {
             changePasswordService.changePassword(user, function success() {

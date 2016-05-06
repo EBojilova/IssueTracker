@@ -1,11 +1,11 @@
 <div class="box">
-
-	<!--FILTERS-->
-	<div ng-projects-filters></div>
-
+	<div class="pull-right">
+		<h6>Showing <strong class="royal">{{projects.Projects.length}}&#47{{projects.TotalCount}}</strong> projects</h6>
+	</div>
+	
 	<h2>All Projects <a class="btn btn-primary" href="#/projects/add-project">Add Project</a> <a href="#/all-issues" class="btn btn-default btn-sm">All Issues</a> <a href="#/all-users" class="btn btn-default btn-sm">All Users</a></h2>
 
-	<table class="table table-hover" id="filter">
+	<table class="table table-hover">
 		<thead>
 		<tr>
 			<th>Name</th>
@@ -16,7 +16,7 @@
 		</tr>
 		</thead>
 		<tbody>
-		<tr ng-repeat="project in filtered =(projects | orderBy: sort | filter:search)">
+		<tr ng-repeat="project in filtered =(projects.Projects)">
 			<td><a href="#/projects/{{project.Id}}" class="link">{{ project.Name }}</a></td>
 			<td >{{ project.Lead.Username }}<span class="royal" ng-if="project.Lead.isAdmin"> (is Admin)</span>
 			</td>
@@ -31,4 +31,16 @@
 	<div ng-if="projects.Projects.length==0" class="box no-data">
 		No Projects found.
 	</div>
+
+	<!--projects.TotalCount e parviat obekt v masiva koito izvikva zaiavkata Get All Projects-->
+	<!--ng-model="projectsParams.startPage promenia StartPage v HomeController-->
+	<!--projectsParams.pageSize- default constatn, zadadena v app.js i izpolzvana v HomeController-->
+	<!--ng-change="reloadProjects(), pravi se zaiavka ot HomeController s novite projectsParams-->
+	<uib-pagination total-items="projects.TotalCount"
+	                ng-model="projectsParams.pageNumber"
+	                items-per-page="projectsParams.pageSize"
+	                ng-change="reloadProjects()"
+	                max-size="8"
+	                boundary-links="true">
+	</uib-pagination>
 </div>

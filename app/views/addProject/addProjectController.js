@@ -1,7 +1,7 @@
 app.controller('AddProjectController', [
     '$scope', '$rootScope', '$location', 'addProjectService', 'notifyService', 'autocompleteService',
     function ($scope, $rootScope, $location, addProjectService, notifyService, autocompleteService) {
-        $rootScope.pageTitle = "Add Project";
+        $rootScope.pageTitle = {title:"Add Project"};
 
         // needed for autocomplete controller
         $scope.tags = [];

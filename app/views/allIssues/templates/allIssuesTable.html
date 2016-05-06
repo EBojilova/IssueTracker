@@ -1,11 +1,13 @@
-<div class="box box-tabs">
-	<div ng-include="'views/allIssues/templates/allIssuesFilter.html'"></div>
+<div class="box">
+	<div class="pull-right">
+		<h6>Showing <strong class="royal">{{issues.Issues.length}}&#47{{issues.TotalCount}}</strong> issues</h6>
+	</div>
 
-	<h2>All Issues</h2>
+	<h2>All Issues <a href="#/all-projects" class="btn btn-default btn-sm">All Projects</a> <a href="#/all-users" class="btn btn-default btn-sm">All Users</a></h2>
 	<table class="table table-hover">
 		<thead>
 		<tr>
-			<th class="columnTitle">Title</th>
+			<th>Title</th>
 			<th>Due Date</th>
 			<th>Description</th>
 			<th>Author</th>
@@ -18,7 +20,7 @@
 
 		<tbody>
 		<tr ng-repeat="issue in issues.Issues">
-			<td class="columnTitle"><a href="#/issues/{{issue.Id}}" class="link">{{issue.Title}}</a></td>
+			<td><a href="#/issues/{{issue.Id}}" class="link">{{issue.Title}}</a></td>
 			<td>{{issue.DueDate|date}}</td>
 			<td>{{issue.Description}}</td>
 			<td>{{issue.Author.Username}}</td>
