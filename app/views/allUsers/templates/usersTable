@@ -1,0 +1,32 @@
+<div class="box">
+	<!--FILTERS-->
+	<div ng-users-filters></div>
+
+	<h2>All Users  <a href="#/projects" class="btn btn-default btn-sm">Go To All Projects</a> <a href="#/all-issues" class="btn btn-default btn-sm">Go To All Issues</a> </h2>
+
+	<table class="table table-hover" id="filter">
+		<thead>
+		<tr>
+			<th>Username</th>
+			<th>Id</th>
+			<th>Make Admin</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr ng-repeat="user in filtered =(users | orderBy: sort | filter:search)">
+			<td >{{ user.Username }}<span class="royal" ng-if="user.Lead.isAdmin"> (is Admin)</span>
+			</td>
+			<td>{{ user.Id }}</td>
+			<td><button type="submit" class="btn btn-default"
+                		        ng-click="reloadProjects(user.Id)">Make Admin
+                </button>
+            </td>
+		</tr>
+		</tbody>
+	</table>
+
+	<!--NO DATA FOUND-->
+	<div ng-if="filtered.length==0" class="box no-data">
+		No Projects found.
+	</div>
+</div>

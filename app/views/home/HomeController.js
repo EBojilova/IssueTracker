@@ -9,7 +9,7 @@ app.controller('HomeController', ['$scope', '$rootScope', 'homeService', 'notify
         // Params, triabva da sadarjat 3 parametara:  ?pageSize={pageSize}&pageNumber={pageNumber}&filter=Lead.Id={id}
         // promeniat se v taga pagination v htmla
         // default parameters
-        // TODO: rest servise do not support OrderBy with pegination
+        // TODO: rest servise do not support OrderBy with pagination
         var userId = authService.getCurrentUser().Id;
         $scope.secondFilter = {};
         $scope.secondFilter.Name ='';
@@ -47,7 +47,7 @@ app.controller('HomeController', ['$scope', '$rootScope', 'homeService', 'notify
         // Params, moje da sadarjat 3 parametara:  ?pageSize={pageSize}&pageNumber={pageNumber}&orderBy={by}
         // promeniat se v taga pagination v htmla
         // default parameters
-        //TODO: filter is not supported from Rest, and I can not choose filter with pegination
+        //TODO: filter is not supported from Rest, and I can not choose filter with pagination
         $scope.issuesParams = {
             'filter': '',
             'orderBy': 'DueDate desc',
