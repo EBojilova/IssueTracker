@@ -12,6 +12,22 @@ app.config(function ($routeProvider) {
         controller: 'PublicController'
     });
 
+    $routeProvider.when('/all-users', {
+        templateUrl: 'views/allUsers/templates/all-users.html',
+        controller: 'AllUsersController',
+        access: {
+            requiresAdmin: true
+        }
+    });
+
+    $routeProvider.when('/all-issues', {
+        templateUrl: 'views/allIssues/templates/all-issues.html',
+        controller: 'AllIssuesController',
+        access: {
+            requiresAdmin: true
+        }
+    });
+
     $routeProvider.when('/projects', {
         templateUrl: 'views/allProjects/templates/all-projects.html',
         controller: 'AllProjectsController',
@@ -73,14 +89,6 @@ app.config(function ($routeProvider) {
         controller: 'ChangePasswordCtrl',
         access: {
             requiresLoggedUser: true
-        }
-    });
-
-    $routeProvider.when('/all-users', {
-        templateUrl: 'views/allUsers/templates/all-users.html',
-        controller: 'AllUsersController',
-        access: {
-            requiresAdmin: true
         }
     });
 

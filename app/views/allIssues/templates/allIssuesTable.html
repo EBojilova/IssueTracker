@@ -1,0 +1,52 @@
+<div class="box box-tabs">
+	<div ng-include="'views/allIssues/templates/allIssuesFilter.html'"></div>
+
+	<h2>All Issues</h2>
+	<table class="table table-hover">
+		<thead>
+		<tr>
+			<th class="columnTitle">Title</th>
+			<th>Due Date</th>
+			<th>Description</th>
+			<th>Author</th>
+			<th>Assignee</th>
+			<th>For project</th>
+			<th>Status</th>
+			<th>Priority</th>
+		</tr>
+		</thead>
+
+		<tbody>
+		<tr ng-repeat="issue in issues.Issues">
+			<td class="columnTitle"><a href="#/issues/{{issue.Id}}" class="link">{{issue.Title}}</a></td>
+			<td>{{issue.DueDate|date}}</td>
+			<td>{{issue.Description}}</td>
+			<td>{{issue.Author.Username}}</td>
+			<td>{{issue.Assignee.Username}}</td>
+			<td><a href="#/projects/{{issue.Project.Id}}" class="link">{{issue.Project.Name}}</a></td>
+			<td>{{issue.Status.Name}}</td>
+			<td>{{issue.Priority.Name}}</td>
+		</tr>
+		</tbody>
+	</table>
+
+	<!--NO DATA FOUND-->
+	<div ng-if="issues.Issues.length==0" class="box no-data">
+		No Issues found.
+	</div>
+
+	<!--issues.TotalCount e parviat obekt v masiva koito izvikva zaiavkata Get All Issues-->
+	<!--ng-model="issuesParams.startPage promenia StartPage v HomeController-->
+	<!--issuesParams.pageSize- default constatn, zadadena v app.js i izpolzvana v HomeController-->
+	<!--ng-change="reloadIssues(), pravi se zaiavka ot HomeController s novite issuesParams-->
+	<uib-pagination total-items="issues.TotalCount"
+	            ng-model="issuesParams.pageNumber"
+	            items-per-page="issuesParams.pageSize"
+	            ng-change="reloadIssues()"
+	            max-size="8"
+	            boundary-links="true">
+	</uib-pagination>
+</div>
+
+
+

@@ -1,7 +1,7 @@
 'use strict';
 
-app.controller('AllIssuesController', ['$scope', '$rootScope', 'homeService', 'notifyService', 'pageSize', 'authService',
-    function ($scope, $rootScope, homeService, notifyService, pageSize, authService) {
+app.controller('AllIssuesController', ['$scope', '$rootScope', 'allIssuesService', 'notifyService', 'pageSize', 'authService',
+    function ($scope, $rootScope, allIssuesService, notifyService, pageSize, authService) {
         $rootScope.pageTitle = "All Issues";
 
         //[GET] /issues/?filter=Priority.Title == "In Progress" or DueDate.Day == 21&pageSize=2&pageNumber=1
@@ -24,23 +24,25 @@ app.controller('AllIssuesController', ['$scope', '$rootScope', 'homeService', 'n
         $scope.reloadIssues = function () {
             // $scope.issuesLoaded is used for loading circle in home.html
             $scope.issuesLoaded = false;
-            console.log($scope.multipleFilter);
             if($scope.multipleFilter.Search){
                 var filterComponents=[
                     'Title.Contains("' + $scope.multipleFilter.Search + '")',
                     'Description.Contains("' + $scope.multipleFilter.Search + '")',
                     'Project.Name.Contains("' + $scope.multipleFilter.Search + '")',
                     'Author.Username.Contains("' + $scope.multipleFilter.Search + '")',
-                    'Assignee.Username.Contains("' + $scope.multipleFilter.Search + '")'
+                    'Assignee.Username.Contains("' + $scope.multipleFilter.Search + '")',
+                    'Priority.Name.Contains("' + $scope.multipleFilter.Search + '")',
+                    'Status.Name.Contains("' + $scope.multipleFilter.Search + '")'
                 ];
-                $scope.issuesParams.filter = filterComponents.join(' and ');
+                $scope.issuesParams.filter = filterComponents.join(' or ');
             }
             //if($scope.multipleFilter.Description){
             //    $scope.issuesParams.filter = 'Assignee.Id="' + userId + '"' + ' and Description.Contains("' + $scope.multipleFilter.Description + '")';
             //}
-            homeService.getUserIssues(
+            allIssuesService.getIssues(
                 $scope.issuesParams,
                 function success(data) {
+                    $scope.issuesLoaded = true;
                     $scope.issues = data;
                     //{
                     //    "TotalPages": 86,
@@ -51,10 +53,8 @@ app.controller('AllIssuesController', ['$scope', '$rootScope', 'homeService', 'n
             );
 
             $scope.showAllIssues=function(){
-                $scope.issuesLoaded = true;
-                $scope.multipleFilter.Title ='';
-                $scope.multipleFilter.Description ='';
-                $scope.issuesParams.filter = 'Assignee.Id="' + userId + '"';
+                $scope.multipleFilter.Search ='';
+                $scope.issuesParams.filter = '';
                 $scope.reloadIssues();
             }
         };

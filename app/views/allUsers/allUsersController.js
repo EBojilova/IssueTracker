@@ -1,7 +1,8 @@
-app.controller('AllUsersController', ['$scope', 'autocompleteService', 'allUsersService', 'notifyService', '$rootScope',
+app.controller('AllUsersController', ['$scope','$rootScope', 'autocompleteService', 'allUsersService', 'notifyService',
     function ($scope, $rootScope, autocompleteService, allUsersService, notifyService) {
         $rootScope.pageTitle = "All Users";
-
+        
+        console.log(autocompleteService);
         $scope.usersLoaded = false;
         autocompleteService.getAllUsers(function success(data) {
             $scope.users = data;
