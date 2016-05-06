@@ -14,19 +14,19 @@
 		</thead>
 		<tbody>
 		<tr ng-repeat="user in filtered =(users | orderBy: sort | filter:search)">
-			<td >{{ user.Username }}<span class="royal" ng-if="user.Lead.isAdmin"> (is Admin)</span>
+			<td >{{ user.Username }}<span class="royal" ng-if="user.isAdmin"> (is Admin)</span>
 			</td>
 			<td>{{ user.Id }}</td>
 			<td><button type="submit" class="btn btn-default"
-                		        ng-click="reloadProjects(user.Id)">Make Admin
-                </button>
-            </td>
+			            ng-click="submitUserToMakeAdmin(user)">Make Admin
+			</button>
+			</td>
 		</tr>
 		</tbody>
 	</table>
 
 	<!--NO DATA FOUND-->
-	<div ng-if="filtered.length==0" class="box no-data">
+	<div ng-if="users.length==0" class="box no-data">
 		No Projects found.
 	</div>
 </div>

@@ -1,15 +1,16 @@
-app.controller('AllUsersController', ['$scope', 'autocompleteService', 'allUsersService',
-    function ($scope, autocompleteService, allUsersService) {
+app.controller('AllUsersController', ['$scope', 'autocompleteService', 'allUsersService', 'notifyService',
+    function ($scope, autocompleteService, allUsersService, notifyService) {
 
-        $scope.usersLoaded=false;
+        $scope.usersLoaded = false;
         autocompleteService.getAllUsers(function success(data) {
-            $scope.usersLoaded=true;
+            $scope.usersLoaded = true;
             $scope.users = data;
         });
 
-        $scope.makeAdmin = function makeAdmin(id) {
-            allUsersService.makeAdmin(id, function (data) {
-                    notifyService.showInfo("User was made as admin!", data);
+        $scope.submitUserToMakeAdmin = function makeAdmin(user) {
+            allUsersService.makeAdmin(user.Id, function (data) {
+                    user.isAdmin=true;
+                notifyService.showInfo("User was made as admin!", data);
                 }
             );
             //   [ {

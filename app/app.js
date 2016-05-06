@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap.pagination','ui.bootstrap']);
+var app = angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap.pagination', 'ui.bootstrap']);
 
 app.constant('baseServiceUrl', 'http://softuni-issue-tracker.azurewebsites.net/');
 app.constant('pageSize', 8);
@@ -24,11 +24,9 @@ app.config(function ($routeProvider) {
         templateUrl: 'views/allProjects/templates/all-projects.html',
         controller: 'AllProjectsController',
         access: {
-            requiresLoggedUser: true,
             requiresAdmin: true
         }
     });
-
 
     $routeProvider.when('/issues/:id', {
         controller: 'IssueController',
@@ -84,7 +82,15 @@ app.config(function ($routeProvider) {
         access: {
             requiresLoggedUser: true
         }
-    })
+    });
+
+    $routeProvider.when('/all-users', {
+        templateUrl: 'views/allUsers/templates/all-users.html',
+        controller: 'AllUsersController',
+        access: {
+            requiresAdmin: true
+        }
+    });
 
     $routeProvider.otherwise(
         {redirectTo: '/'}
