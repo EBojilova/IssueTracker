@@ -8,7 +8,7 @@ app.controller('AppController',['$scope','$rootScope','$location','authService',
 
         $scope.logout = function() {
             authService.logout();
-            //$rootScope.pageTitle = {title: "Register/Login"};
+            $rootScope.pageTitle = {title: "Register/Login"};
             notifyService.showInfo("Logout successful");
             $location.path('/');
         };
