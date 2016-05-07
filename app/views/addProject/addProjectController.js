@@ -1,7 +1,7 @@
 app.controller('AddProjectController', [
     '$scope', '$rootScope', '$location', 'addProjectService', 'notifyService', 'autocompleteService',
     function ($scope, $rootScope, $location, addProjectService, notifyService, autocompleteService) {
-        $rootScope.pageTitle = {title:"Add Project"};
+        $rootScope.pageTitle = {title: "Add Project"};
 
         // needed for autocomplete controller
         $scope.tags = [];
@@ -15,13 +15,17 @@ app.controller('AddProjectController', [
 
             //produce projectKey
             var str = project.Name;
-            var matches = str.match(/\b(\w)/g);
-            var acronym;
-            if (matches < 2) {
+            var words = str.split(' ').filter(function (n) {
+                return n;
+            });
+            var acronym = '';
+            if (words.length < 2) {
                 acronym = str.slice(0, 2)
             }
             else {
-                acronym = matches.join('')
+                words.forEach(function (word) {
+                    acronym += word.charAt(0);
+                });
             }
             project.ProjectKey = acronym.toUpperCase();
 
