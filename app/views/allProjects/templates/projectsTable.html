@@ -10,7 +10,7 @@
 		<tr>
 			<th>Name</th>
 			<th class="columnKey">Project Key</th>
-			<th >Lead</th>
+			<th class="columnTitle">Lead</th>
 			<th>Description</th>
 			<th>Labels</th>
 			<th>Priorities</th>
@@ -20,7 +20,7 @@
 		<tr ng-repeat="project in filtered =(projects.Projects)">
 			<td><a href="#/projects/{{project.Id}}" class="link">{{ project.Name }}</a></td>
 			<td class="columnKey">{{ project.ProjectKey }}</td>
-			<td >{{ project.Lead.Username }}<span class="royal" ng-if="project.Lead.isAdmin"> (is Admin)</span>
+			<td class="columnTitle">{{ project.Lead.Username }}<span class="royal" ng-if="project.Lead.isAdmin"> (is Admin)</span>
 			</td>
 			<td>{{ project.Description }}</td>
 			<td><span ng-repeat="label in project.Labels">{{label.Name}}{{$last ? '' : ', '}} </span></td>

@@ -330,10 +330,11 @@ textarea.form-control {
 /*Labels autocomplete*/
 .tags {
     margin-bottom: 5px;
+    display: flex;
 }
 
 .tags .tag {
-    display: inline-block;
+    justify-content: flex-start;
     margin-right: 5px;
     font-size: 13px;
 }
