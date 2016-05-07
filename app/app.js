@@ -8,7 +8,8 @@ app.constant('pageSize', 8);
 app.config(function ($routeProvider) {
     // paths are given from index.html path, not from app.js path
     $routeProvider.when('/', {
-        templateUrl: 'views/home/home.html'
+        templateUrl: 'views/home/home.html',
+        controller:'PublicController'
     });
     
     $routeProvider.when('/projects', {

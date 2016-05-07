@@ -21,7 +21,7 @@ app.factory('homeService', ['$http', 'baseServiceUrl', 'authService',
             },
 
             //[GET] projects?pageSize={pageSize}&pageNumber={pageNumber}&filter=Lead.Id={id}
-            getUserProjects: function (params, success) {
+            getProjectsWithParams: function (params, success) {
                 var id = authService.getCurrentUser().Id;
                 var request = {
                     method: 'GET',

@@ -113,35 +113,6 @@ app.factory('authService',
             isAdmin: function () {
                 var currentUser = this.getCurrentUser();
                 return (currentUser != undefined) && (currentUser.isAdmin);
-            },
-
-            //TODO:
-            // PUT api/user/Profile
-            editUserProfile: function (user, success) {
-                var request = {
-                    method: 'PUT',
-                    url: baseServiceUrl + '/api/user/Profile',
-                    headers: this.getAuthHeaders(),
-                    data: user
-                };
-                //{
-                //    "message": "User profile edited successfully."
-                //}
-                $http(request).success(success);
-            },
-
-            // PUT api/user/ChangePassword
-            changeUserPassword: function (user, success) {
-                var request = {
-                    method: 'PUT',
-                    url: baseServiceUrl + '/api/user/ChangePassword',
-                    headers: this.getAuthHeaders(),
-                    data: user
-                };
-                //{
-                //    "message": "Password changed successfully."
-                //}
-                $http(request).success(success);
             }
         }
     }

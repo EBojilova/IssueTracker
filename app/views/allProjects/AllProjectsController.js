@@ -1,7 +1,7 @@
 'use strict';
 
-app.controller('AllProjectsController', ['$scope', '$rootScope', 'allProjectsService', 'notifyService', 'pageSize',
-    function ($scope, $rootScope, allProjectsService, notifyService, pageSize) {
+app.controller('AllProjectsController', ['$scope', '$rootScope', 'allProjectsService', 'homeService', 'pageSize',
+    function ($scope, $rootScope, allProjectsService, homeService, pageSize) {
         $rootScope.pageTitle = {title:"All Projects"};
 
         $scope.multipleFilter = {};
@@ -36,7 +36,7 @@ app.controller('AllProjectsController', ['$scope', '$rootScope', 'allProjectsSer
                 $scope.projectsParams.filter = filterComponents.join(' and ');
             }
 
-            allProjectsService.getProjectsWithParams($scope.projectsParams,
+            homeService.getProjectsWithParams($scope.projectsParams,
                 function success(data) {
                     $scope.projects = data;
                     $scope.projectsLoaded = true;

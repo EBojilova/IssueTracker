@@ -2,7 +2,8 @@
 
 app.controller('HomeController', ['$scope', '$rootScope', 'homeService', 'notifyService', 'pageSize', 'authService',
     function ($scope, $rootScope, homeService, notifyService, pageSize, authService) {
-        $rootScope.pageTitle = {title: "Dashboard"};
+        //definirame go v PublicController, tai kato toi e parrent na tozi kontroler
+        //$rootScope.pageTitle = {title: "Dashboard"};
 
 
         //PROJECTS, I am Lead
@@ -11,9 +12,9 @@ app.controller('HomeController', ['$scope', '$rootScope', 'homeService', 'notify
         // default parameters
         // TODO: rest service do not support OrderBy with pagination
         var userId = authService.getCurrentUser().Id;
-        $scope.secondFilter = {};
-        $scope.secondFilter.Name = '';
-        $scope.secondFilter.Description = '';
+        $scope.multipleFilter = {};
+        $scope.multipleFilter.Name = '';
+        $scope.multipleFilter.Description = '';
         $scope.projectsParams = {
             'filter': 'Lead.Id="' + userId + '"',
             'orderBy': 'Name',
@@ -24,16 +25,25 @@ app.controller('HomeController', ['$scope', '$rootScope', 'homeService', 'notify
         $scope.reloadProjects = function () {
             // $scope.projectsLoaded is used for loading circle in home.html
             $scope.projectsLoaded = false;
-            if ($scope.secondFilter.Name) {
-                $scope.projectsParams.filter = 'Lead.Id="' + userId + '"' + ' and Name.Contains("' + $scope.secondFilter.Name + '")';
+
+            // FILTERS
+            var filterComponents = ['Lead.Id="' + userId + '"'];
+            if ($scope.multipleFilter.Name) {
+                filterComponents.push('Name.Contains("' + $scope.multipleFilter.Name + '")')
             }
-            else if ($scope.secondFilter.Description) {
-                $scope.projectsParams.filter = 'Lead.Id="' + userId + '"' + ' and Description.Contains("' + $scope.secondFilter.Description + '")';
+            if ($scope.multipleFilter.Description) {
+                filterComponents.push('Description.Contains("' + $scope.multipleFilter.Description + '")')
             }
-            homeService.getUserProjects(
+
+            if (filterComponents.length > 1) {
+                $scope.projectsParams.filter = filterComponents.join(' and ');
+            }
+
+            homeService.getProjectsWithParams(
                 $scope.projectsParams,
                 function success(data) {
                     $scope.projects = data;
+                    $scope.projectsLoaded = true;
                     //{
                     //    "TotalPages": 86,
                     //    "Projects": [],
@@ -41,17 +51,17 @@ app.controller('HomeController', ['$scope', '$rootScope', 'homeService', 'notify
                     //}
                 }
             );
-
-            $scope.showAllProjects = function () {
-                $scope.secondFilter.Name = '';
-                $scope.secondFilter.Description = '';
-                $scope.projectsParams.filter = 'Lead.Id="' + userId + '"';
-                $scope.reloadProjects();
-            }
         };
 
         //parvia pat ste se izpalni samo s default parameters
         $scope.reloadProjects();
+
+        $scope.showAll = function () {
+            $scope.multipleFilter.Name = '';
+            $scope.multipleFilter.Description = '';
+            $scope.projectsParams.filter = 'Lead.Id="' + userId + '"';
+            $scope.reloadProjects();
+        };
 
 
         //ISSUES
