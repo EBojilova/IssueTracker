@@ -9,16 +9,20 @@ app.factory('autocompleteService', ['$http', 'baseServiceUrl', 'authService',
                     url: baseServiceUrl + 'Users/',
                     headers: authService.getAuthHeaders()
                 };
-                $http(request).success(success);
+                $http(request).then(function (response) {
+                    success(response.data);
+                })
             },
             //?filter=Username=="admin@softuni.bg"
-            getUserByUserName: function getAllUsers(username,success) {
+            getUserByUserName: function getAllUsers(username, success) {
                 var request = {
                     method: 'GET',
-                    url: baseServiceUrl + 'Users/?filter=Username==("'+username+'")',
+                    url: baseServiceUrl + 'Users/?filter=Username==("' + username + '")',
                     headers: authService.getAuthHeaders()
                 };
-                $http(request).success(success);
+                $http(request).then(function (response) {
+                    success(response.data);
+                })
             },
 
             getAvailableLabels: function (success) {
@@ -29,7 +33,9 @@ app.factory('autocompleteService', ['$http', 'baseServiceUrl', 'authService',
                     headers: authService.getAuthHeaders()
                 };
 
-                $http(request).success(success);
+                $http(request).then(function (response) {
+                    success(response.data);
+                })
             }
         }
     }

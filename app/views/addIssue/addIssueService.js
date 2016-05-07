@@ -12,7 +12,9 @@ app.factory('addIssueService', ['$http', 'baseServiceUrl', 'authService',
                     data: issue
                 };
 
-                $http(request).success(success);
+                $http(request).then(function (response) {
+                    success(response.data);
+                })
             }
         }
     }

@@ -11,7 +11,7 @@ app.factory('editProjectService', ['$http', 'baseServiceUrl','authService',
                     headers: authService.getAuthHeaders(),
                     data: project
                 };
-                $http(request).success(success);
+                $http(request).then(function(response){success(response.data);})
             }
         }
     }

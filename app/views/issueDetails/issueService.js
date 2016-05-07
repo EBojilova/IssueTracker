@@ -8,7 +8,7 @@ app.factory('issueService', ['$http', 'baseServiceUrl', 'authService',
                     url: baseServiceUrl + 'Issues/' + issueId,
                     headers: authService.getAuthHeaders()
                 };
-                $http(request).success(success);
+                $http(request).then(function(response){success(response.data);})
             },
 
             getIssuesWithParams: function getIssueById(params, success) {
@@ -18,7 +18,7 @@ app.factory('issueService', ['$http', 'baseServiceUrl', 'authService',
                     headers: authService.getAuthHeaders(),
                     params: params
                 };
-                $http(request).success(success);
+                $http(request).then(function(response){success(response.data);})
             },
 
             changeIssueStatus: function changeIssueStatus(issueId, statusId, success) {
@@ -27,7 +27,7 @@ app.factory('issueService', ['$http', 'baseServiceUrl', 'authService',
                     url: baseServiceUrl + 'Issues/' + issueId + '/changestatus?statusid=' + statusId,
                     headers: authService.getAuthHeaders()
                 };
-                $http(request).success(success);
+                $http(request).then(function(response){success(response.data);})
             },
 
             getIssueComments: function getIssueComments(issueId, success) {
@@ -36,7 +36,7 @@ app.factory('issueService', ['$http', 'baseServiceUrl', 'authService',
                     url: baseServiceUrl + 'Issues/' + issueId + '/comments',
                     headers: authService.getAuthHeaders()
                 };
-                $http(request).success(success);
+                $http(request).then(function(response){success(response.data);})
             },
 
             addCommentToIssue: function addComment(comment, issueId, success) {
@@ -46,7 +46,7 @@ app.factory('issueService', ['$http', 'baseServiceUrl', 'authService',
                     headers: authService.getAuthHeaders(),
                     data: comment
                 };
-                $http(request).success(success);
+                $http(request).then(function(response){success(response.data);})
             }
         }
     }

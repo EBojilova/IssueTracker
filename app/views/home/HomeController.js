@@ -22,7 +22,6 @@ app.controller('HomeController', ['$scope', '$rootScope', 'homeService', 'notify
             )
         };
 
-        var userId='';
         $scope.multipleFilter = {};
         $scope.multipleFilter.Name = '';
         $scope.multipleFilter.Description = '';
@@ -44,8 +43,6 @@ app.controller('HomeController', ['$scope', '$rootScope', 'homeService', 'notify
                         // default parameters
                         // TODO: rest service do not support OrderBy with pagination
                         $rootScope.pageTitle = {title: "Dashboard"};
-                        userId = authService.getCurrentUser().Id;
-                        $scope.projectsParams.filter = 'Lead.Id="' + userId + '"';
                         //parvia pat ste se izpalni samo s default parameters
                         $scope.reloadProjects();
                         //parvia pat ste se izpalni samo s default parameters
@@ -62,6 +59,8 @@ app.controller('HomeController', ['$scope', '$rootScope', 'homeService', 'notify
         $scope.reloadProjects = function () {
             // $scope.projectsLoaded is used for loading circle in home.html
             $scope.projectsLoaded = false;
+            var userId = authService.getCurrentUser().Id;
+            $scope.projectsParams.filter = 'Lead.Id="' + userId + '"';
 
             // FILTERS
             var filterComponents = ['Lead.Id="' + userId + '"'];
@@ -93,7 +92,6 @@ app.controller('HomeController', ['$scope', '$rootScope', 'homeService', 'notify
         $scope.showAll = function () {
             $scope.multipleFilter.Name = '';
             $scope.multipleFilter.Description = '';
-            $scope.projectsParams.filter = 'Lead.Id="' + userId + '"';
             $scope.reloadProjects();
         };
 
@@ -129,7 +127,7 @@ app.controller('HomeController', ['$scope', '$rootScope', 'homeService', 'notify
             );
         };
 
-        if(authService.getCurrentUser()){
+        if (authService.getCurrentUser()) {
             //parvia pat ste se izpalni samo s default parameters
             $scope.reloadProjects();
             //parvia pat ste se izpalni samo s default parameters

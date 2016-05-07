@@ -19,9 +19,9 @@ app.factory('authService', ['$http', 'baseServiceUrl',
                     }
                 };
                 // 200 OK
-                $http(request).success(function (data) {
-                    sessionStorage['access_token'] = JSON.stringify(data);
-                    success(data);
+                $http(request).then(function (response) {
+                    sessionStorage['access_token'] = JSON.stringify(response.data);
+                    success(response.data);
                 });
             },
 
@@ -42,9 +42,9 @@ app.factory('authService', ['$http', 'baseServiceUrl',
                 //    ".issued": "Sat, 16 Apr 2016 17:36:04 GMT",
                 //    ".expires": "Sun, 16 Apr 2017 17:36:04 GMT"
                 //}
-                $http(request).success(function (data) {
-                    sessionStorage['access_token'] = data.access_token;
-                    success(data);
+                $http(request).then(function (response) {
+                    sessionStorage['access_token'] = response.data.access_token;
+                    success(response.data);
                 });
             },
 
@@ -76,9 +76,9 @@ app.factory('authService', ['$http', 'baseServiceUrl',
                 //    "Username": "admin@softuni.bg",
                 //    "isAdmin": true
                 //}
-                $http(request).success(function (data) {
-                    sessionStorage['current_user'] = JSON.stringify(data);
-                    success(data);
+                $http(request).then(function (response) {
+                    sessionStorage['current_user'] = JSON.stringify(response.data);
+                    success(response.data);
                 });
             },
 

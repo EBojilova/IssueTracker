@@ -5,9 +5,9 @@ app.factory('allIssuesService', ['$http', 'baseServiceUrl', 'authService',
         return {
             //[GET] /issues/?filter=Priority.Name == "In Progress" or DueDate.Day == 21&pageSize=2&pageNumber=1
             //[GET] issues/?filter=Assignee.Username.contains("helen")&pageSize=4&pageNumber=1
-                        //?filter=Project.Id == 2
-                        //?filter=DueDate.Day >= 20
-                        //?filter=Project.Name == “SIT”
+            //?filter=Project.Id == 2
+            //?filter=DueDate.Day >= 20
+            //?filter=Project.Name == “SIT”
             getIssues: function (params, success) {
                 var request = {
                     method: 'GET',
@@ -21,7 +21,9 @@ app.factory('allIssuesService', ['$http', 'baseServiceUrl', 'authService',
                 //    "TotalCount": 0
                 //}
 
-                $http(request).success(success);
+                $http(request).then(function (response) {
+                    success(response.data);
+                })
             }
         }
     }]

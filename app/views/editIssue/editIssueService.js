@@ -11,7 +11,7 @@ app.factory('editIssueService', ['$http', 'baseServiceUrl', 'authService',
                     headers: authService.getAuthHeaders()
                 };
 
-                $http(request).success(success);
+                $http(request).then(function(response){success(response.data);})
             }
         }
     }

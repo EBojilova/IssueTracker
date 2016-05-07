@@ -3,17 +3,19 @@ app.factory('allUsersService', ['$http', 'baseServiceUrl', 'authService',
 
         return {
 
-            makeAdmin: function getAllUsers(id,success) {
+            makeAdmin: function getAllUsers(id, success) {
                 var request = {
                     method: 'PUT',
                     url: baseServiceUrl + 'Users/makeadmin',
-                    data : {
-                        'UserId' : id
+                    data: {
+                        'UserId': id
                     },
                     headers: authService.getAuthHeaders()
                 };
 
-                $http(request).success(success);
+                $http(request).then(function (response) {
+                    success(response.data);
+                })
             }
         }
     }
