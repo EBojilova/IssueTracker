@@ -9,6 +9,7 @@
 		<thead>
 		<tr>
 			<th>Name</th>
+			<th class="columnKey">Project Key</th>
 			<th >Lead</th>
 			<th>Description</th>
 			<th>Labels</th>
@@ -18,6 +19,7 @@
 		<tbody>
 		<tr ng-repeat="project in filtered =(projects.Projects)">
 			<td><a href="#/projects/{{project.Id}}" class="link">{{ project.Name }}</a></td>
+			<td class="columnKey">{{ project.ProjectKey }}</td>
 			<td >{{ project.Lead.Username }}<span class="royal" ng-if="project.Lead.isAdmin"> (is Admin)</span>
 			</td>
 			<td>{{ project.Description }}</td>

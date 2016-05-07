@@ -9,9 +9,13 @@ app.config(function ($routeProvider) {
     // paths are given from index.html path, not from app.js path
     $routeProvider.when('/', {
         templateUrl: 'views/home/home.html',
-        controller:'PublicController'
+        controller:'HomeController',
+        access: {
+            requiresLoggedUser: true
+        }
+
     });
-    
+
     $routeProvider.when('/projects', {
         templateUrl: 'views/allProjects/templates/all-projects.html',
         controller: 'AllProjectsController',
@@ -119,10 +123,10 @@ app.run(['$rootScope', '$location', 'authService',
         $rootScope.$on('$routeChangeStart', function (event, route, prev) {
             if (route.access) {
                 if (route.access.requiresLoggedUser && !authService.isLoggedIn()) {
-                    $location.path(prev.$$route.originalPath);
+                    $location.path('/');
                 }
                 if (route.access.requiresAdmin && !authService.isAdmin()) {
-                    $location.path(prev.$$route.originalPath);
+                    $location.path('/');
                 }
             } else {
                 $location.path('/');

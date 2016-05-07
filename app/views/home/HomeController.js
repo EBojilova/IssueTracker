@@ -2,25 +2,62 @@
 
 app.controller('HomeController', ['$scope', '$rootScope', 'homeService', 'notifyService', 'pageSize', 'authService',
     function ($scope, $rootScope, homeService, notifyService, pageSize, authService) {
-        //definirame go v PublicController, tai kato toi e parrent na tozi kontroler
-        //$rootScope.pageTitle = {title: "Dashboard"};
+        //tozi kontroler e parent za HomeController i zatova tuka definirame pageTitle
+        if (authService.isAnonymous()) {
+            $rootScope.pageTitle = {title: "Register/Login"};
+        }
+        else if (authService.isLoggedIn()) {
+            $rootScope.pageTitle = {title: "Dashboard"};
+        }
 
+        $scope.register = function (user) {
+            authService.register(user,
+                function success() {
+                    notifyService.showInfo("User registered successfully.");
+                    //After registration, the user is automatically logged in and is redirected to the dashboard.
+                    var userLoginData = {'username': user.email, 'password': user.password};
+                    $scope.login(userLoginData);
+                }
+                // we have global error handling in app.js
+            )
+        };
 
-        //PROJECTS, I am Lead
-        // Params, triabva da sadarjat 3 parametara:  ?pageSize={pageSize}&pageNumber={pageNumber}&filter=Lead.Id={id}
-        // promeniat se v taga pagination v htmla
-        // default parameters
-        // TODO: rest service do not support OrderBy with pagination
-        var userId = authService.getCurrentUser().Id;
+        var userId='';
         $scope.multipleFilter = {};
         $scope.multipleFilter.Name = '';
         $scope.multipleFilter.Description = '';
         $scope.projectsParams = {
-            'filter': 'Lead.Id="' + userId + '"',
+            'filter': '',
             'orderBy': 'Name',
             'pageNumber': 1,
             'pageSize': pageSize
         };
+
+        $scope.login = function (user) {
+            authService.login(user,
+                function success() {
+                    //notifyService.showInfo("Login successful");
+                    authService.setCurrentUser(function success() {
+                        //PROJECTS, I am Lead
+                        // Params, triabva da sadarjat 3 parametara:  ?pageSize={pageSize}&pageNumber={pageNumber}&filter=Lead.Id={id}
+                        // promeniat se v taga pagination v htmla
+                        // default parameters
+                        // TODO: rest service do not support OrderBy with pagination
+                        $rootScope.pageTitle = {title: "Dashboard"};
+                        userId = authService.getCurrentUser().Id;
+                        $scope.projectsParams.filter = 'Lead.Id="' + userId + '"';
+                        //parvia pat ste se izpalni samo s default parameters
+                        $scope.reloadProjects();
+                        //parvia pat ste se izpalni samo s default parameters
+                        $scope.reloadIssues();
+                        notifyService.showInfo("Login successful");
+                        //notifyService.showInfo("Current user saved");
+                    });
+                }
+                // we have global error handling in app.js
+            );
+        };
+
 
         $scope.reloadProjects = function () {
             // $scope.projectsLoaded is used for loading circle in home.html
@@ -52,9 +89,6 @@ app.controller('HomeController', ['$scope', '$rootScope', 'homeService', 'notify
                 }
             );
         };
-
-        //parvia pat ste se izpalni samo s default parameters
-        $scope.reloadProjects();
 
         $scope.showAll = function () {
             $scope.multipleFilter.Name = '';
@@ -95,7 +129,11 @@ app.controller('HomeController', ['$scope', '$rootScope', 'homeService', 'notify
             );
         };
 
-        //parvia pat ste se izpalni samo s default parameters
-        $scope.reloadIssues();
+        if(authService.getCurrentUser()){
+            //parvia pat ste se izpalni samo s default parameters
+            $scope.reloadProjects();
+            //parvia pat ste se izpalni samo s default parameters
+            $scope.reloadIssues();
+        }
     }]
 );

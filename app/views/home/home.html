@@ -1,4 +1,4 @@
-<div ng-include="'views/home/public/templates/public.html'" ng-show="authService.isAnonymous()"></div>
+<div ng-include="'views/home/public/templates/public.html'" ng-if="authService.isAnonymous()" ></div>
 
 
-<div ng-include="'views/home/dashboard/templates/dashboard.html'" ng-show="authService.isLoggedIn()" ng-controller="HomeController"></div>
+<div ng-include="'views/home/dashboard/templates/dashboard.html'" ng-if="authService.isLoggedIn()" ></div>

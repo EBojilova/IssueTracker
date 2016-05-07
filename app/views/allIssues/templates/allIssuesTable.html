@@ -15,6 +15,7 @@
 			<th>For project</th>
 			<th>Status</th>
 			<th>Priority</th>
+			<th>Labels</th>
 		</tr>
 		</thead>
 
@@ -28,6 +29,7 @@
 			<td><a href="#/projects/{{issue.Project.Id}}" class="link">{{issue.Project.Name}}</a></td>
 			<td>{{issue.Status.Name}}</td>
 			<td>{{issue.Priority.Name}}</td>
+			<td><span ng-repeat="label in issue.Labels">{{label.Name}}{{$last ? '' : ', '}} </span></td>
 		</tr>
 		</tbody>
 	</table>

@@ -184,6 +184,7 @@ span.err {
 
 /*select menus in inputs*/
 input.ng-invalid, textarea.ng-invalid, select.ng-invalid {
+    /*background-color: rgba(255, 160, 122, 0.8);*/
     background: lightsalmon;
     border: #507E32 1px solid;
 }
@@ -210,6 +211,10 @@ td {
 
 .columnTitle {
     width: 25%;
+}
+
+.columnKey {
+    width: 10%;
 }
 
 /*alingn content to header and footer at sides*/

@@ -1,6 +1,6 @@
 'use strict';
 
-app.factory('authService',
+app.factory('authService', ['$http', 'baseServiceUrl',
     function ($http, baseServiceUrl) {
         return {
             //POST api/Account/Register
@@ -115,5 +115,5 @@ app.factory('authService',
                 return (currentUser != undefined) && (currentUser.isAdmin);
             }
         }
-    }
+    }]
 );
